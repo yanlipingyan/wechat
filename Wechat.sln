@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-UserInterface", "03-UserInterface", "{C6614163-44ED-4232-9407-1510DCF06333}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-DataAccess", "01-DataAccess", "{5BCBEFDD-DC94-42D6-A762-450CF17CA317}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-BusinessLogic", "02-BusinessLogic", "{2FCDB12D-3B08-473A-8FDF-611E5928C371}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-Framework", "04-Framework", "{87DFD12A-3D43-404F-ACB2-0AE967D7F6AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wechat.WebUI", "Wechat.WebUI\Wechat.WebUI.csproj", "{5ABE5E7C-A3B8-4A3F-A828-3E275D60AC6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wechat.API", "Wechat.API\Wechat.API.csproj", "{8BB43531-38D6-41AF-8FDF-C69802110D8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wechat.Toolkit", "Wechat.Toolkit\Wechat.Toolkit.csproj", "{F5D4F925-1EDB-4973-BF7B-FE10C020FD94}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5ABE5E7C-A3B8-4A3F-A828-3E275D60AC6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ABE5E7C-A3B8-4A3F-A828-3E275D60AC6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ABE5E7C-A3B8-4A3F-A828-3E275D60AC6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ABE5E7C-A3B8-4A3F-A828-3E275D60AC6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BB43531-38D6-41AF-8FDF-C69802110D8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB43531-38D6-41AF-8FDF-C69802110D8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB43531-38D6-41AF-8FDF-C69802110D8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB43531-38D6-41AF-8FDF-C69802110D8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5D4F925-1EDB-4973-BF7B-FE10C020FD94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5D4F925-1EDB-4973-BF7B-FE10C020FD94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5D4F925-1EDB-4973-BF7B-FE10C020FD94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5D4F925-1EDB-4973-BF7B-FE10C020FD94}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5ABE5E7C-A3B8-4A3F-A828-3E275D60AC6D} = {C6614163-44ED-4232-9407-1510DCF06333}
+		{8BB43531-38D6-41AF-8FDF-C69802110D8A} = {87DFD12A-3D43-404F-ACB2-0AE967D7F6AB}
+		{F5D4F925-1EDB-4973-BF7B-FE10C020FD94} = {87DFD12A-3D43-404F-ACB2-0AE967D7F6AB}
+	EndGlobalSection
+EndGlobal

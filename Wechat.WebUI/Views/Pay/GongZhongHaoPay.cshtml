@@ -1,0 +1,108 @@
+﻿@model Wechat.WebUI.Models.Product
+@{
+    ViewBag.Title = "公众号支付";
+    Layout = "~/Views/Shared/_LayoutTest.cshtml";
+}
+
+<div data-role="page">
+    <div data-role="content">
+        <form method="post" action="">
+            <label class="ui-input-text margin-bottom">商品名称：@Model.Title</label>
+            <label class="ui-input-text margin-bottom">商品描述：@Model.Description</label>
+            <label class="ui-input-text margin-bottom">商品价格：@(Model.Price)分</label>
+            <label class="ui-input-text margin-bottom">收获地址：<span id="address" class="color-red">点击获取收货地址</span></label>
+            <input id="pay" type="button" data-inline="true" value="提交">
+        </form>
+    </div>
+</div>
+
+@section styles{
+    <style type="text/css">
+        .margin-bottom {
+            margin-bottom: 10px;
+        }
+
+        .color-red {
+            color: red;
+        }
+    </style>
+}
+
+@section scripts{
+
+    <script src="~/Content/lib/google/google.sha1.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            var timeStamp = new Date().getTime().toString().substr(0, 10),
+                nonceStr = 'wechat';
+
+            //起调共享收获地址
+            $('#address').on('click', function () {
+                alert('开始起调微信共享收获地址...');
+                if (typeof WeixinJSBridge == "undefined") {
+                    if (document.addEventListener) {
+                        document.addEventListener('WeixinJSBridgeReady', editAddress, false);
+                    }
+                    else if (document.attachEvent) {
+                        document.attachEvent('WeixinJSBridgeReady', editAddress);
+                        document.attachEvent('onWeixinJSBridgeReady', editAddress);
+                    }
+                }
+                else {
+                    editAddress();
+                }
+            })
+
+            function editAddress() {
+                var signStr = "";
+                signStr += "accesstoken=@ViewBag.Oauth2Token";
+                signStr += "&appid=@ViewBag.AppId";
+                signStr += "&noncestr=" + nonceStr;
+                signStr += "&timestamp=" + timeStamp;
+                signStr += "&url=" + window.location.href;
+
+                var addrSign = CryptoJS.SHA1(signStr, { asString: true });
+                addrSign = addrSign.toString();
+
+                WeixinJSBridge.invoke('editAddress', {
+                    "appId": "@ViewBag.AppId",
+                    "scope": "jsapi_address",
+                    "signType": "sha1",
+                    "addrSign": addrSign,
+                    "timeStamp": timeStamp,
+                    "nonceStr": nonceStr
+                }, function (res) {
+                    if (res.err_msg == 'edit_address:ok') {
+                        var addressStr = '<p>' + res.userName + res.telNumber + '</p>' + '<p>' + res.proviceFirstStageName + res.addressCitySecondStageName + res.addressCountiesThirdStageName + res.addressDetailInfo + '</p>';
+                        $('#address').text(addressStr);
+                    }
+                });
+            }
+
+            $('#pay').on('click', function () {
+                alert('开始起调JSAPI支付接口...');
+                $.post('/pay/jspay', { title: '测试商品', description: '优惠大酬宾，赶紧的~', price: '1' }, function (jsonData) {
+                    if (typeof WeixinJSBridge == "undefined") {
+                        if (document.addEventListener) {
+                            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                        }
+                        else if (document.attachEvent) {
+                            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                        }
+                    }
+                    else {
+                        WeixinJSBridge.invoke('getBrandWCPayRequest', jsonData, function (res) {
+                            alert(JSON.stringify(res));
+                            if (res.err_msg == "get_brand_wcpay_request：ok") { }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
+                        });
+                    }
+                }, 'json')
+            })
+        })
+
+
+    </script>
+}
+

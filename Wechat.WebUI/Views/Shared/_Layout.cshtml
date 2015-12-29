@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - WechatManager</title>
+    <meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap教程,Bootstrap中文" />
+    <meta name="description" content="站长素材提供Bootstrap模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+    <link href="~/Content/ace/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/ace/assets/css/font-awesome.min.css" />
+
+    <!--[if IE 7]>
+		  <link rel="stylesheet" href="~/Content/ace/assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+
+    <!-- page specific plugin styles -->
+    @RenderSection("styles", required: false)
+
+    <!-- fonts -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="~/Content/ace/assets/css/ace.min.css" />
+    <link rel="stylesheet" href="~/Content/ace/assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="~/Content/ace/assets/css/ace-skins.min.css" />
+
+    <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="~/Content/ace/assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+    <!-- inline styles related to this page -->
+
+    <!-- ace settings handler -->
+    <script src="~/Content/ace/assets/js/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+		<script src="~/Content/ace/assets/js/html5shiv.js"></script>
+		<script src="~/Content/ace/assets/js/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+    @Html.Partial("_PartialNavbar")
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="main-container-inner">
+            <a class="menu-toggler" id="menu-toggler" href="#">
+                <span class="menu-text"></span>
+            </a>
+            @Html.Partial("_PartialSidebar")
+            <div class="main-content">
+                @Html.Partial("_PartialBreadcrums")
+
+                @RenderBody()
+
+            </div>
+            @Html.Partial("_PartialSetting");
+        </div>
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="icon-double-angle-up icon-only bigger-110"></i>
+        </a>
+    </div>
+
+    <!-- basic scripts -->
+
+    <!--[if !IE]> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <![endif]-->
+
+    <!--[if !IE]> -->
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='/Content/ace/assets/js/jquery-2.0.3.min.js'>" + "<" + "script>");
+    </script>
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='/Content/ace/assets/js/jquery-1.10.2.min.js'>"+"<"+"script>");
+    </script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='/Content/ace/assets/js/jquery.mobile.custom.min.js'>" + "<" + "script>");
+    </script>
+    <script src="~/Content/ace/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/ace/assets/js/typeahead-bs2.min.js"></script>
+
+
+    <!-- page specific plugin scripts -->
+
+    <!--[if lte IE 8]>
+		  <script src="~/Content/ace/assets/js/excanvas.min.js"></script>
+	<![endif]-->
+
+    <script src="~/Content/ace/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Content/ace/assets/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="~/Content/ace/assets/js/jquery.slimscroll.min.js"></script>
+    <script src="~/Content/ace/assets/js/jquery.easy-pie-chart.min.js"></script>
+    <script src="~/Content/ace/assets/js/jquery.sparkline.min.js"></script>
+    <script src="~/Content/ace/assets/js/flot/jquery.flot.min.js"></script>
+    <script src="~/Content/ace/assets/js/flot/jquery.flot.pie.min.js"></script>
+    <script src="~/Content/ace/assets/js/flot/jquery.flot.resize.min.js"></script>
+
+    <!-- ace scripts -->
+    <script src="~/Content/ace/assets/js/ace-elements.min.js"></script>
+    <script src="~/Content/ace/assets/js/ace.min.js"></script>
+
+    <!-- inline scripts related to this page -->
+    @RenderSection("scripts", required: false)
+
+    <div style="display: none">
+        <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
+    </div>
+</body>
+</html>
