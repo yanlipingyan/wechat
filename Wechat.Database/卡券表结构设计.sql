@@ -28,7 +28,7 @@ create table card
 	FixedBeginTerm int not null default 0 comment 'type为2时专用，表示自领取后多少天开始生效。（单位为天）',
 	
 	UseCustomCode int not null default 0 comment '是否自定义Code码。1(true)或0(false)，默认为0。通常自有优惠码系统的开发者选择自定义Code码，在卡券投放时带入。',
-	BindOpenid int not null default 0 comment '是否指定用户领取。1(true)或0(false)，默认为0。',
+	BindOpenId int not null default 0 comment '是否指定用户领取。1(true)或0(false)，默认为0。',
 	ServicePhone varchar(24) default null comment '客服电话',
 	LocationIdList text default null comment '门店位置ID。调用POI门店管理接口获取门店位置ID。例：1234，2312',
 	Source varchar(36) default null comment '第三方来源名，例如同程旅游、大众点评。',
