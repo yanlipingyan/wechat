@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Web;
 using System.Xml.Serialization;
 
 namespace Wechat.API.Model
@@ -18,31 +20,38 @@ namespace Wechat.API.Model
         private static string mchAPISecret;
 
 
-        public ApiModel()
+        static ApiModel()
         {
-            var result = Helper.XMLSerializerHelper.DeSerialize<dynamic>("~/Config/WechatSetting.config");
-
-            if (!string.IsNullOrEmpty(result))
+            string file = string.Format(@"{0}Config\WechatSetting.config", AppDomain.CurrentDomain.BaseDirectory);
+            if (File.Exists(file.Replace("\\", "/")))
             {
-                appID = string.IsNullOrEmpty(result["AppID"]) ? "" : result["AppID"];
-                appSecret = string.IsNullOrEmpty(result["AppSecret"]) ? "" : result["AppSecret"];
-                token = string.IsNullOrEmpty(result["Token"]) ? "" : result["Token"];
-                encodingAESKey = string.IsNullOrEmpty(result["EncodingAESKey"]) ? "" : result["EncodingAESKey"];
-                mchID = string.IsNullOrEmpty(result["MchID"]) ? "" : result["MchID"];
-                mchAPISecret = string.IsNullOrEmpty(result["MchAPISecret"]) ? "" : result["MchAPISecret"];
+                var result = Helper.XMLSerializerHelper.DeSerialize<dynamic>(file);
+
+                if (result != null)
+                {
+                    appID = string.IsNullOrEmpty(result.AppID) ? "" : result.AppID;
+                    appSecret = string.IsNullOrEmpty(result.AppSecret) ? "" : result.AppSecret;
+                    token = string.IsNullOrEmpty(result.Token) ? "" : result.Token;
+                    encodingAESKey = string.IsNullOrEmpty(result.EncodingAESKey) ? "" : result.EncodingAESKey;
+                    mchID = string.IsNullOrEmpty(result.MchID) ? "" : result.MchID;
+                    mchAPISecret = string.IsNullOrEmpty(result.MchAPISecret) ? "" : result.MchAPISecret;
+                }
             }
         }
 
         /// <summary>
         /// 开发者ID
         /// </summary>
-        [XmlElement]
         public static string AppID
         {
             get
             {
                 if (string.IsNullOrEmpty(appID))
+                {
+                    if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["AppID"]))
+                        throw new WechatException("没有对AppID进行配置");
                     return ConfigurationManager.AppSettings["AppID"].ToString();
+                }
                 return appID;
             }
             set { appID = value; }
@@ -51,13 +60,16 @@ namespace Wechat.API.Model
         /// <summary>
         /// 开发者应用密钥
         /// </summary>
-        [XmlElement]
         public static string AppSecret
         {
             get
             {
                 if (string.IsNullOrEmpty(appSecret))
+                {
+                    if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["AppSecret"]))
+                        throw new WechatException("没有对AppSecret进行配置");
                     return ConfigurationManager.AppSettings["AppSecret"].ToString();
+                }
                 return appSecret;
             }
             set { appSecret = value; }
@@ -66,13 +78,16 @@ namespace Wechat.API.Model
         /// <summary>
         /// 服务器令牌
         /// </summary>
-        [XmlElement]
         public static string Token
         {
             get
             {
                 if (string.IsNullOrEmpty(token))
+                {
+                    if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["Token"]))
+                        throw new WechatException("没有对Token进行配置");
                     return ConfigurationManager.AppSettings["Token"].ToString();
+                }
                 return token;
             }
             set { token = value; }
@@ -81,13 +96,16 @@ namespace Wechat.API.Model
         /// <summary>
         /// 消息加解密密钥
         /// </summary>
-        [XmlElement]
         public static string EncodingAESKey
         {
             get
             {
                 if (string.IsNullOrEmpty(encodingAESKey))
+                {
+                    if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["EncodingAESKey"]))
+                        throw new WechatException("没有对EncodingAESKey进行配置");
                     return ConfigurationManager.AppSettings["EncodingAESKey"].ToString();
+                }
                 return encodingAESKey;
             }
             set { encodingAESKey = value; }
@@ -96,13 +114,16 @@ namespace Wechat.API.Model
         /// <summary>
         /// 微信支付商户号
         /// </summary>
-        [XmlElement]
         public static string MchID
         {
             get
             {
                 if (string.IsNullOrEmpty(mchID))
+                {
+                    if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["MchID"]))
+                        throw new WechatException("没有对MchID进行配置");
                     return ConfigurationManager.AppSettings["MchID"].ToString();
+                }
                 return mchID;
             }
             set { mchID = value; }
@@ -112,13 +133,16 @@ namespace Wechat.API.Model
         /// <summary>
         /// 微信支付商户API密钥
         /// </summary>
-        [XmlElement]
         public static string MchAPISecret
         {
             get
             {
                 if (string.IsNullOrEmpty(mchAPISecret))
+                {
+                    if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["MchAPISecret"]))
+                        throw new WechatException("没有对MchAPISecret进行配置");
                     return ConfigurationManager.AppSettings["MchAPISecret"].ToString();
+                }
                 return mchAPISecret;
             }
             set { mchAPISecret = value; }

@@ -56,6 +56,9 @@
     <Compile Include="JsSdk.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Model\AccessTokenModel.cs" />
+    <Compile Include="Model\ApiConfigModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Model\ApiModel.cs" />
     <Compile Include="Model\CardModel.cs" />
     <Compile Include="Model\EventModel.cs" />

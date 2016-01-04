@@ -38,7 +38,7 @@
       <HintPath>..\Wechat.Reference\NHibernate\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>..\..\..\..\NHibernate\CSharp\..\Common\NHibernate\3.0.0.Alpha3\log4net.dll</HintPath>
+      <HintPath>..\Wechat.Reference\log4net\1.2.10.0\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=6.9.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
