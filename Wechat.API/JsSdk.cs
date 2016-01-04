@@ -23,13 +23,13 @@ namespace Wechat.API
         //
         public static string GetTicket(string appId, string appSecret)
         {
-            string url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=jsapi";
+            string url = string.Format("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=jsapi", AccessToken.GetToken(appId, appSecret));
 
             var model = Helper.JsApiTicketHelper.Get("jsapi");
 
             if (model == null || string.IsNullOrEmpty(model.Ticket) || Common.IsExprie(model.DateTime))
             {
-                string result = WebHttpClient.Get(string.Format(url, AccessToken.GetToken(appId, appSecret)));
+                string result = WebHttpClient.Get(url);
 
                 model.Ticket = JsonConvert.DeserializeObject<dynamic>(result)["ticket"];
                 model.DateTime = DateTime.Now;

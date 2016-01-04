@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Wechat.Data.BusinessObjects" assembly="Wechat.Data">
+	<class name="Wechat.Data.BusinessObjects.Card, Wechat.Data" table="card" lazy="true">
+		<id name="Id" column="Id">
+		 	<generator class="native" />
+		</id>
+		<property name="Guid" column="Guid" />
+		<property name="CardId" column="CardId" />
+		<property name="CardType" column="CardType" />
+		<property name="LogoUrl" column="LogoUrl" />
+		<property name="CodeType" column="CodeType" />
+		<property name="BrandName" column="BrandName" />
+		<property name="Title" column="Title" />
+		<property name="SubTitle" column="SubTitle" />
+		<property name="Color" column="Color" />
+		<property name="Notice" column="Notice" />
+		<property name="Description" column="Description" />
+		<property name="Quantity" column="Quantity" />
+		<property name="Type" column="Type" />
+		<property name="BeginTimestamp" column="BeginTimestamp" />
+		<property name="EndTimestamp" column="EndTimestamp" />
+		<property name="FixedTerm" column="FixedTerm" />
+		<property name="FixedBeginTerm" column="FixedBeginTerm" />
+		<property name="UseCustomCode" column="UseCustomCode" />
+		<property name="BindOpenid" column="BindOpenid" />
+		<property name="ServicePhone" column="ServicePhone" />
+		<property name="LocationIdList" column="LocationIdList" />
+		<property name="Source" column="Source" />
+		<property name="CustomUrlName" column="CustomUrlName" />
+		<property name="CustomUrl" column="CustomUrl" />
+		<property name="CustomUrlSubTitle" column="CustomUrlSubTitle" />
+		<property name="PromotionUrlName" column="PromotionUrlName" />
+		<property name="PromotionUrl" column="PromotionUrl" />
+		<property name="PromotionUrlSubTitle" column="PromotionUrlSubTitle" />
+		<property name="GetLimit" column="GetLimit" />
+		<property name="CanShare" column="CanShare" />
+		<property name="CanGiveFriend" column="CanGiveFriend" />
+		<property name="State" column="State" />
+		<property name="DateTime" column="DateTime" />
+	</class>
+</hibernate-mapping>
+

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Wechat.Data.BusinessObjects" assembly="Wechat.Data">
+	<class name="Wechat.Data.BusinessObjects.CashCard, Wechat.Data" table="cash_card" lazy="true">
+		<id name="Id" column="CardGuid">
+		 	<generator class="assigned" />
+		</id>
+		<property name="LeastCost" column="LeastCost" />
+		<property name="ReduceCost" column="ReduceCost" />
+	</class>
+</hibernate-mapping>
+

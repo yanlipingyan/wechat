@@ -41,6 +41,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.9.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Wechat.Reference\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -123,6 +127,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Config\Nhibernate\HttpReadNHibernate.cfgl.xml" />
+    <Content Include="Config\Nhibernate\HttpWriteNHibernate.cfgl.xml" />
     <Content Include="Content\ace\assets\avatars\avatar.png" />
     <Content Include="Content\ace\assets\avatars\avatar1.png" />
     <Content Include="Content\ace\assets\avatars\avatar2.png" />
@@ -276,6 +282,10 @@
     <ProjectReference Include="..\Wechat.API\Wechat.API.csproj">
       <Project>{8bb43531-38d6-41af-8fdf-c69802110d8a}</Project>
       <Name>Wechat.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wechat.Data\Wechat.Data.csproj">
+      <Project>{20356207-a933-4725-8370-4454c222a7a3}</Project>
+      <Name>Wechat.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Wechat.Toolkit\Wechat.Toolkit.csproj">
       <Project>{f5d4f925-1edb-4973-bf7b-fe10c020fd94}</Project>

@@ -32,7 +32,7 @@ namespace Wechat.API
         //
         public static string ShowTemporaryQrcode(string appId, string appSecret, int scene_id)
         {
-            string url = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token={0}";
+            string url = string.Format("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new
             {
@@ -47,7 +47,7 @@ namespace Wechat.API
                 }
             };
 
-            var result = WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), JsonConvert.SerializeObject(obj));
+            var result = WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
 
             var ticket = JsonConvert.DeserializeObject<dynamic>(result)["ticket"].ToString();
 
@@ -75,7 +75,7 @@ namespace Wechat.API
         //
         public static string ShowPermanentQrcode(string appId, string appSecret, int scene_id)
         {
-            string url = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token={0}";
+            string url = string.Format("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token={0}", AccessToken.GetToken(appId, appSecret));
             var obj = new
             {
                 action_name = "QR_LIMIT_SCENE",
@@ -88,7 +88,7 @@ namespace Wechat.API
                 }
             };
 
-            var result = WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), JsonConvert.SerializeObject(obj));
+            var result = WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
 
             var ticket = JsonConvert.DeserializeObject<dynamic>(result)["ticket"].ToString();
 

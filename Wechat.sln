@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wechat.API", "Wechat.API\We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wechat.Toolkit", "Wechat.Toolkit\Wechat.Toolkit.csproj", "{F5D4F925-1EDB-4973-BF7B-FE10C020FD94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wechat.Data", "Wechat.Data\Wechat.Data.csproj", "{20356207-A933-4725-8370-4454C222A7A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,12 +35,17 @@ Global
 		{F5D4F925-1EDB-4973-BF7B-FE10C020FD94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5D4F925-1EDB-4973-BF7B-FE10C020FD94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5D4F925-1EDB-4973-BF7B-FE10C020FD94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20356207-A933-4725-8370-4454C222A7A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20356207-A933-4725-8370-4454C222A7A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20356207-A933-4725-8370-4454C222A7A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20356207-A933-4725-8370-4454C222A7A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5ABE5E7C-A3B8-4A3F-A828-3E275D60AC6D} = {C6614163-44ED-4232-9407-1510DCF06333}
+		{20356207-A933-4725-8370-4454C222A7A3} = {5BCBEFDD-DC94-42D6-A762-450CF17CA317}
 		{8BB43531-38D6-41AF-8FDF-C69802110D8A} = {87DFD12A-3D43-404F-ACB2-0AE967D7F6AB}
 		{F5D4F925-1EDB-4973-BF7B-FE10C020FD94} = {87DFD12A-3D43-404F-ACB2-0AE967D7F6AB}
 	EndGlobalSection

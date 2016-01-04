@@ -9,6 +9,10 @@ namespace Wechat.Toolkit.Helper
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        /// <summary>
+        /// 加载log4net配置文件
+        /// </summary>
+        /// <param name="path">log4net配置文件路径</param>
         public static void LoadConfig(string path)
         {
             log4net.Config.XmlConfigurator.Configure(new System.IO.FileInfo(path));

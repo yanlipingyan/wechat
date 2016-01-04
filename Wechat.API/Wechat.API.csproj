@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Wechat.Reference\Newtonsoft.Json\4.5\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -55,6 +52,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="Helper\AccessTokenHelper.cs" />
     <Compile Include="Helper\JsApiTicketHelper.cs" />
+    <Compile Include="Helper\XMLSerializerHelper.cs" />
     <Compile Include="JsSdk.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Model\AccessTokenModel.cs" />
@@ -68,6 +66,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Qrcode.cs" />
     <Compile Include="WebHttpClient.cs" />
+    <Compile Include="WechatException.cs" />
+    <Compile Include="WechatLog.cs" />
     <Compile Include="WechatServer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<codeSmith xmlns="http://www.codesmithtools.com/schema/csp.xsd">
+  <variables>
+    <add key="ConnectionString1" value="server=localhost;database=wechat;user Id=admin;password=admin;" />
+  </variables>
+  <propertySets>
+    <propertySet name="NHibernateMaster" template="D:\NHibernate\CSharp\NHibernateMaster.cst">
+      <property name="VersionColumn">^((R|r)ow)?(V|v)ersion$</property>
+      <property name="NHibernateVersion">v3_Alpha3</property>
+      <property name="VsVersion">VS_2008</property>
+      <property name="AssemblyName">Wechat.Data</property>
+      <property name="ManagerNamespace">Wechat.Data.ManagerObjects</property>
+      <property name="BusinessNamespace">Wechat.Data.BusinessObjects</property>
+      <property name="BaseNamespace">Wechat.Data.Base</property>
+      <property name="UnitTestNamespace">Wechat.Data.UnitTests</property>
+      <property name="SourceDatabase">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+      </property>
+    </propertySet>
+  </propertySets>
+</codeSmith>

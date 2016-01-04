@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Wechat.Data.BusinessObjects" assembly="Wechat.Data">
+	<class name="Wechat.Data.BusinessObjects.Getcard, Wechat.Data" table="getcard" lazy="true">
+		<id name="Id" column="Id">
+		 	<generator class="native" />
+		</id>
+		<property name="Guid" column="Guid" />
+		<property name="CardId" column="CardId" />
+		<property name="CardCode" column="CardCode" />
+		<property name="OpenId" column="OpenId" />
+		<property name="IsGiveByFriend" column="IsGiveByFriend" />
+		<property name="FriendUserOpenId" column="FriendUserOpenId" />
+		<property name="OuterId" column="OuterId" />
+		<property name="IsConsume" column="IsConsume" />
+		<property name="DateTime" column="DateTime" />
+	</class>
+</hibernate-mapping>
+

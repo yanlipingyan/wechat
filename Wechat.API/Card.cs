@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,7 +14,7 @@ namespace Wechat.API
     //
     public static class Card
     {
-        #region 卡券JsSDK
+        #region 卡券JsSdk
         // 摘要: 
         //     获取卡券jsapiTicket。
         //
@@ -28,13 +29,13 @@ namespace Wechat.API
         //
         public static string GetTicket(string appId, string appSecret)
         {
-            string url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=wx_card";
+            string url = string.Format("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=wx_card", AccessToken.GetToken(appId, appSecret));
 
             var model = Helper.JsApiTicketHelper.Get("wx_card");
 
             if (model == null || string.IsNullOrEmpty(model.Ticket) || Common.IsExprie(model.DateTime))
             {
-                string result = WebHttpClient.Get(string.Format(url, AccessToken.GetToken(appId, appSecret)));
+                string result = WebHttpClient.Get(url);
 
                 model.Ticket = JsonConvert.DeserializeObject<dynamic>(result)["ticket"];
                 model.DateTime = DateTime.Now;
@@ -162,7 +163,7 @@ namespace Wechat.API
 
         #region 卡券操作
 
-        #region 上传卡券Logo
+        #region 创建卡券
         // 摘要: 
         //     上传卡券Logo。
         //
@@ -186,9 +187,7 @@ namespace Wechat.API
 
             return WebHttpClient.Post(url, data);
         }
-        #endregion
 
-        #region 创建卡券
         // 摘要: 
         //     创建卡券。
         //
@@ -230,6 +229,12 @@ namespace Wechat.API
         //
         public static string CreateGrouponCard(string appId, string appSecret, Model.GrouponCardModel model)
         {
+            object date_info = null;
+            if (model.Type == 1)
+                date_info = new { type = "DATE_TYPE_FIX_TIME_RANGE", begin_timestamp = model.BeginTimestamp, end_timestamp = model.EndTimestamp };
+            else if (model.Type == 2)
+                date_info = new { type = "DATE_TYPE_FIX_TERM", fixed_term = model.FixedTerm, fixed_begin_term = model.FixedBeginTerm };
+
             var obj = new
             {
                 card = new
@@ -239,36 +244,37 @@ namespace Wechat.API
                     {
                         base_info = new
                         {
-                            logo_url = model.logo_url,//卡券的商户logo
-                            code_type = model.code_type,//code展示类
-                            brand_name = model.brand_name,
-                            title = model.title,
-                            sub_title = model.sub_title,
-                            color = model.color,
-                            notice = model.notice,
-                            description = model.description,
+                            logo_url = model.LogoUrl,//卡券的商户logo
+                            code_type = model.CodeType,//code展示类
+                            brand_name = model.BrandName,
+                            title = model.Title,
+                            sub_title = model.SubTitle,
+                            color = model.Color,
+                            notice = model.Notice,
+                            description = model.Description,
                             sku = new
                             {
-                                quantity = model.quantity
+                                quantity = model.Quantity
                             },
-                            date_info = model.date_info,
+                            date_info = date_info,
 
                             //以下是不必填信息
-                            use_custom_code = model.use_custom_code,//是否自定义Code码。填写true或false，默认为false。通常自有优惠码系统的开发者选择自定义Code码，并在卡券投放时带入Code码，详情见是否自定义Code码。
-                            bind_openid = model.bind_openid,//是否指定用户领取，填写true或false。默认为false。通常指定特殊用户群体投放卡券或防止刷券时选择指定用户领取。
-                            service_phone = model.service_phone,//客服电话。
-                            location_id_list = model.location_id_list,//门店位置poiid。调用POI门店管理接口获取门店位置poiid。具备线下门店的商户为必填。
-                            source = model.source,//第三方来源名，例如同程旅游、大众点评。
-                            custom_url_name = model.custom_url_name,//自定义跳转外链的入口名字。
-                            custom_url = model.custom_url,//自定义跳转的URL。
-                            custom_url_sub_title = model.custom_url_sub_title,//显示在入口右侧的提示语。
-                            promotion_url_name = model.promotion_url_name,//营销场景的自定义入口名称。
-                            promotion_url = model.promotion_url,//入口跳转外链的地址链接。
-                            get_limit = model.get_limit,//每人可领券的数量限制,不填写默认为50。
-                            can_share = model.can_share,//卡券领取页面是否可分享。
-                            can_give_friend = model.can_give_friend,//卡券是否可转赠。
+                            use_custom_code = model.UseCustomCode,//是否自定义Code码。填写true或false，默认为false。通常自有优惠码系统的开发者选择自定义Code码，并在卡券投放时带入Code码，详情见是否自定义Code码。
+                            bind_openid = model.BindOpenId,//是否指定用户领取，填写true或false。默认为false。通常指定特殊用户群体投放卡券或防止刷券时选择指定用户领取。
+                            service_phone = model.ServicePhone,//客服电话。
+                            location_id_list = model.LocationIdList,//门店位置poiid。调用POI门店管理接口获取门店位置poiid。具备线下门店的商户为必填。
+                            source = model.Source,//第三方来源名，例如同程旅游、大众点评。
+                            custom_url_name = model.CustomUrlName,//自定义跳转外链的入口名字。
+                            custom_url = model.CustomUrl,//自定义跳转的URL。
+                            custom_url_sub_title = model.CustomUrlSubTitle,//显示在入口右侧的提示语。
+                            promotion_url_name = model.PromotionUrlName,//营销场景的自定义入口名称。
+                            promotion_url = model.PromotionUrl,//入口跳转外链的地址链接。
+                            promotion_url_sub_title = model.PromotionUrlSubTitle,//显示在营销入口右侧的提示语
+                            get_limit = model.GetLimit,//每人可领券的数量限制,不填写默认为50。
+                            can_share = model.CanShare,//卡券领取页面是否可分享。
+                            can_give_friend = model.CanGiveFriend,//卡券是否可转赠。
                         },
-                        deal_detail = model.deal_detail
+                        deal_detail = model.DealDetail
                     }
                 }
             };
@@ -293,6 +299,12 @@ namespace Wechat.API
         //
         public static string CreateCashCard(string appId, string appSecret, Model.CashCardModel model)
         {
+            object date_info = null;
+            if (model.Type == 1)
+                date_info = new { type = "DATE_TYPE_FIX_TIME_RANGE", begin_timestamp = model.BeginTimestamp, end_timestamp = model.EndTimestamp };
+            else if (model.Type == 2)
+                date_info = new { type = "DATE_TYPE_FIX_TERM", fixed_term = model.FixedTerm, fixed_begin_term = model.FixedBeginTerm };
+
             var obj = new
             {
                 card = new
@@ -302,37 +314,38 @@ namespace Wechat.API
                     {
                         base_info = new
                         {
-                            logo_url = model.logo_url,//卡券的商户logo
-                            code_type = model.code_type,//code展示类
-                            brand_name = model.brand_name,
-                            title = model.title,
-                            sub_title = model.sub_title,
-                            color = model.color,
-                            notice = model.notice,
-                            description = model.description,
+                            logo_url = model.LogoUrl,//卡券的商户logo
+                            code_type = model.CodeType,//code展示类
+                            brand_name = model.BrandName,
+                            title = model.Title,
+                            sub_title = model.SubTitle,
+                            color = model.Color,
+                            notice = model.Notice,
+                            description = model.Description,
                             sku = new
                             {
-                                quantity = model.quantity
+                                quantity = model.Quantity
                             },
-                            date_info = model.date_info,
+                            date_info = date_info,
 
                             //以下是不必填信息
-                            use_custom_code = model.use_custom_code,//是否自定义Code码。填写true或false，默认为false。通常自有优惠码系统的开发者选择自定义Code码，并在卡券投放时带入Code码，详情见是否自定义Code码。
-                            bind_openid = model.bind_openid,//是否指定用户领取，填写true或false。默认为false。通常指定特殊用户群体投放卡券或防止刷券时选择指定用户领取。
-                            service_phone = model.service_phone,//客服电话。
-                            location_id_list = model.location_id_list,//门店位置poiid。调用POI门店管理接口获取门店位置poiid。具备线下门店的商户为必填。
-                            source = model.source,//第三方来源名，例如同程旅游、大众点评。
-                            custom_url_name = model.custom_url_name,//自定义跳转外链的入口名字。
-                            custom_url = model.custom_url,//自定义跳转的URL。
-                            custom_url_sub_title = model.custom_url_sub_title,//显示在入口右侧的提示语。
-                            promotion_url_name = model.promotion_url_name,//营销场景的自定义入口名称。
-                            promotion_url = model.promotion_url,//入口跳转外链的地址链接。
-                            get_limit = model.get_limit,//每人可领券的数量限制,不填写默认为50。
-                            can_share = model.can_share,//卡券领取页面是否可分享。
-                            can_give_friend = model.can_give_friend,//卡券是否可转赠。
+                            use_custom_code = model.UseCustomCode,//是否自定义Code码。填写true或false，默认为false。通常自有优惠码系统的开发者选择自定义Code码，并在卡券投放时带入Code码，详情见是否自定义Code码。
+                            bind_openid = model.BindOpenId,//是否指定用户领取，填写true或false。默认为false。通常指定特殊用户群体投放卡券或防止刷券时选择指定用户领取。
+                            service_phone = model.ServicePhone,//客服电话。
+                            location_id_list = model.LocationIdList,//门店位置poiid。调用POI门店管理接口获取门店位置poiid。具备线下门店的商户为必填。
+                            source = model.Source,//第三方来源名，例如同程旅游、大众点评。
+                            custom_url_name = model.CustomUrlName,//自定义跳转外链的入口名字。
+                            custom_url = model.CustomUrl,//自定义跳转的URL。
+                            custom_url_sub_title = model.CustomUrlSubTitle,//显示在入口右侧的提示语。
+                            promotion_url_name = model.PromotionUrlName,//营销场景的自定义入口名称。
+                            promotion_url = model.PromotionUrl,//入口跳转外链的地址链接。
+                            promotion_url_sub_title = model.PromotionUrlSubTitle,//显示在营销入口右侧的提示语
+                            get_limit = model.GetLimit,//每人可领券的数量限制,不填写默认为50。
+                            can_share = model.CanShare,//卡券领取页面是否可分享。
+                            can_give_friend = model.CanGiveFriend,//卡券是否可转赠。
                         },
-                        least_cost = model.least_cost,
-                        reduce_cost = model.reduce_cost
+                        least_cost = model.LeastCost,
+                        reduce_cost = model.ReduceCost
                     }
                 }
             };
@@ -357,6 +370,12 @@ namespace Wechat.API
         //
         public static string CreateDiscountCard(string appId, string appSecret, Model.DiscountCardModel model)
         {
+            object date_info = null;
+            if (model.Type == 1)
+                date_info = new { type = "DATE_TYPE_FIX_TIME_RANGE", begin_timestamp = model.BeginTimestamp, end_timestamp = model.EndTimestamp };
+            else if (model.Type == 2)
+                date_info = new { type = "DATE_TYPE_FIX_TERM", fixed_term = model.FixedTerm, fixed_begin_term = model.FixedBeginTerm };
+
             var obj = new
             {
                 card = new
@@ -366,36 +385,37 @@ namespace Wechat.API
                     {
                         base_info = new
                         {
-                            logo_url = model.logo_url,//卡券的商户logo
-                            code_type = model.code_type,//code展示类
-                            brand_name = model.brand_name,
-                            title = model.title,
-                            sub_title = model.sub_title,
-                            color = model.color,
-                            notice = model.notice,
-                            description = model.description,
+                            logo_url = model.LogoUrl,//卡券的商户logo
+                            code_type = model.CodeType,//code展示类
+                            brand_name = model.BrandName,
+                            title = model.Title,
+                            sub_title = model.SubTitle,
+                            color = model.Color,
+                            notice = model.Notice,
+                            description = model.Description,
                             sku = new
                             {
-                                quantity = model.quantity
+                                quantity = model.Quantity
                             },
-                            date_info = model.date_info,
+                            date_info = date_info,
 
                             //以下是不必填信息
-                            use_custom_code = model.use_custom_code,//是否自定义Code码。填写true或false，默认为false。通常自有优惠码系统的开发者选择自定义Code码，并在卡券投放时带入Code码，详情见是否自定义Code码。
-                            bind_openid = model.bind_openid,//是否指定用户领取，填写true或false。默认为false。通常指定特殊用户群体投放卡券或防止刷券时选择指定用户领取。
-                            service_phone = model.service_phone,//客服电话。
-                            location_id_list = model.location_id_list,//门店位置poiid。调用POI门店管理接口获取门店位置poiid。具备线下门店的商户为必填。
-                            source = model.source,//第三方来源名，例如同程旅游、大众点评。
-                            custom_url_name = model.custom_url_name,//自定义跳转外链的入口名字。
-                            custom_url = model.custom_url,//自定义跳转的URL。
-                            custom_url_sub_title = model.custom_url_sub_title,//显示在入口右侧的提示语。
-                            promotion_url_name = model.promotion_url_name,//营销场景的自定义入口名称。
-                            promotion_url = model.promotion_url,//入口跳转外链的地址链接。
-                            get_limit = model.get_limit,//每人可领券的数量限制,不填写默认为50。
-                            can_share = model.can_share,//卡券领取页面是否可分享。
-                            can_give_friend = model.can_give_friend,//卡券是否可转赠。
+                            use_custom_code = model.UseCustomCode,//是否自定义Code码。填写true或false，默认为false。通常自有优惠码系统的开发者选择自定义Code码，并在卡券投放时带入Code码，详情见是否自定义Code码。
+                            bind_openid = model.BindOpenId,//是否指定用户领取，填写true或false。默认为false。通常指定特殊用户群体投放卡券或防止刷券时选择指定用户领取。
+                            service_phone = model.ServicePhone,//客服电话。
+                            location_id_list = model.LocationIdList,//门店位置poiid。调用POI门店管理接口获取门店位置poiid。具备线下门店的商户为必填。
+                            source = model.Source,//第三方来源名，例如同程旅游、大众点评。
+                            custom_url_name = model.CustomUrlName,//自定义跳转外链的入口名字。
+                            custom_url = model.CustomUrl,//自定义跳转的URL。
+                            custom_url_sub_title = model.CustomUrlSubTitle,//显示在入口右侧的提示语。
+                            promotion_url_name = model.PromotionUrlName,//营销场景的自定义入口名称。
+                            promotion_url = model.PromotionUrl,//入口跳转外链的地址链接。
+                            promotion_url_sub_title = model.PromotionUrlSubTitle,//显示在营销入口右侧的提示语
+                            get_limit = model.GetLimit,//每人可领券的数量限制,不填写默认为50。
+                            can_share = model.CanShare,//卡券领取页面是否可分享。
+                            can_give_friend = model.CanGiveFriend,//卡券是否可转赠。
                         },
-                        discount = model.discount
+                        discount = model.Discount
                     }
                 }
             };
@@ -420,6 +440,12 @@ namespace Wechat.API
         //
         public static string CreateGiftCard(string appId, string appSecret, Model.GiftCardModel model)
         {
+            object date_info = null;
+            if (model.Type == 1)
+                date_info = new { type = "DATE_TYPE_FIX_TIME_RANGE", begin_timestamp = model.BeginTimestamp, end_timestamp = model.EndTimestamp };
+            else if (model.Type == 2)
+                date_info = new { type = "DATE_TYPE_FIX_TERM", fixed_term = model.FixedTerm, fixed_begin_term = model.FixedBeginTerm };
+
             var obj = new
             {
                 card = new
@@ -429,36 +455,37 @@ namespace Wechat.API
                     {
                         base_info = new
                         {
-                            logo_url = model.logo_url,//卡券的商户logo
-                            code_type = model.code_type,//code展示类
-                            brand_name = model.brand_name,
-                            title = model.title,
-                            sub_title = model.sub_title,
-                            color = model.color,
-                            notice = model.notice,
-                            description = model.description,
+                            logo_url = model.LogoUrl,//卡券的商户logo
+                            code_type = model.CodeType,//code展示类
+                            brand_name = model.BrandName,
+                            title = model.Title,
+                            sub_title = model.SubTitle,
+                            color = model.Color,
+                            notice = model.Notice,
+                            description = model.Description,
                             sku = new
                             {
-                                quantity = model.quantity
+                                quantity = model.Quantity
                             },
-                            date_info = model.date_info,
+                            date_info = date_info,
 
                             //以下是不必填信息
-                            use_custom_code = model.use_custom_code,//是否自定义Code码。填写true或false，默认为false。通常自有优惠码系统的开发者选择自定义Code码，并在卡券投放时带入Code码，详情见是否自定义Code码。
-                            bind_openid = model.bind_openid,//是否指定用户领取，填写true或false。默认为false。通常指定特殊用户群体投放卡券或防止刷券时选择指定用户领取。
-                            service_phone = model.service_phone,//客服电话。
-                            location_id_list = model.location_id_list,//门店位置poiid。调用POI门店管理接口获取门店位置poiid。具备线下门店的商户为必填。
-                            source = model.source,//第三方来源名，例如同程旅游、大众点评。
-                            custom_url_name = model.custom_url_name,//自定义跳转外链的入口名字。
-                            custom_url = model.custom_url,//自定义跳转的URL。
-                            custom_url_sub_title = model.custom_url_sub_title,//显示在入口右侧的提示语。
-                            promotion_url_name = model.promotion_url_name,//营销场景的自定义入口名称。
-                            promotion_url = model.promotion_url,//入口跳转外链的地址链接。
-                            get_limit = model.get_limit,//每人可领券的数量限制,不填写默认为50。
-                            can_share = model.can_share,//卡券领取页面是否可分享。
-                            can_give_friend = model.can_give_friend,//卡券是否可转赠。
+                            use_custom_code = model.UseCustomCode,//是否自定义Code码。填写true或false，默认为false。通常自有优惠码系统的开发者选择自定义Code码，并在卡券投放时带入Code码，详情见是否自定义Code码。
+                            bind_openid = model.BindOpenId,//是否指定用户领取，填写true或false。默认为false。通常指定特殊用户群体投放卡券或防止刷券时选择指定用户领取。
+                            service_phone = model.ServicePhone,//客服电话。
+                            location_id_list = model.LocationIdList,//门店位置poiid。调用POI门店管理接口获取门店位置poiid。具备线下门店的商户为必填。
+                            source = model.Source,//第三方来源名，例如同程旅游、大众点评。
+                            custom_url_name = model.CustomUrlName,//自定义跳转外链的入口名字。
+                            custom_url = model.CustomUrl,//自定义跳转的URL。
+                            custom_url_sub_title = model.CustomUrlSubTitle,//显示在入口右侧的提示语。
+                            promotion_url_name = model.PromotionUrlName,//营销场景的自定义入口名称。
+                            promotion_url = model.PromotionUrl,//入口跳转外链的地址链接。
+                            promotion_url_sub_title = model.PromotionUrlSubTitle,//显示在营销入口右侧的提示语
+                            get_limit = model.GetLimit,//每人可领券的数量限制,不填写默认为50。
+                            can_share = model.CanShare,//卡券领取页面是否可分享。
+                            can_give_friend = model.CanGiveFriend,//卡券是否可转赠。
                         },
-                        gift = model.gift
+                        gift = model.Gift
                     }
                 }
             };
@@ -483,6 +510,13 @@ namespace Wechat.API
         //
         public static string CreateGeneralCouponCard(string appId, string appSecret, Model.GeneralCouponCardModel model)
         {
+            object date_info = null;
+            if (model.Type == 1)
+                date_info = new { type = "DATE_TYPE_FIX_TIME_RANGE", begin_timestamp = model.BeginTimestamp, end_timestamp = model.EndTimestamp };
+            else if (model.Type == 2)
+                date_info = new { type = "DATE_TYPE_FIX_TERM", fixed_term = model.FixedTerm, fixed_begin_term = model.FixedBeginTerm };
+
+
             var obj = new
             {
                 card = new
@@ -492,36 +526,37 @@ namespace Wechat.API
                     {
                         base_info = new
                         {
-                            logo_url = model.logo_url,//卡券的商户logo
-                            code_type = model.code_type,//code展示类
-                            brand_name = model.brand_name,
-                            title = model.title,
-                            sub_title = model.sub_title,
-                            color = model.color,
-                            notice = model.notice,
-                            description = model.description,
+                            logo_url = model.LogoUrl,//卡券的商户logo
+                            code_type = model.CodeType,//code展示类
+                            brand_name = model.BrandName,
+                            title = model.Title,
+                            sub_title = model.SubTitle,
+                            color = model.Color,
+                            notice = model.Notice,
+                            description = model.Description,
                             sku = new
                             {
-                                quantity = model.quantity
+                                quantity = model.Quantity
                             },
-                            date_info = model.date_info,
+                            date_info = date_info,
 
                             //以下是不必填信息
-                            use_custom_code = model.use_custom_code,//是否自定义Code码。填写true或false，默认为false。通常自有优惠码系统的开发者选择自定义Code码，并在卡券投放时带入Code码，详情见是否自定义Code码。
-                            bind_openid = model.bind_openid,//是否指定用户领取，填写true或false。默认为false。通常指定特殊用户群体投放卡券或防止刷券时选择指定用户领取。
-                            service_phone = model.service_phone,//客服电话。
-                            location_id_list = model.location_id_list,//门店位置poiid。调用POI门店管理接口获取门店位置poiid。具备线下门店的商户为必填。
-                            source = model.source,//第三方来源名，例如同程旅游、大众点评。
-                            custom_url_name = model.custom_url_name,//自定义跳转外链的入口名字。
-                            custom_url = model.custom_url,//自定义跳转的URL。
-                            custom_url_sub_title = model.custom_url_sub_title,//显示在入口右侧的提示语。
-                            promotion_url_name = model.promotion_url_name,//营销场景的自定义入口名称。
-                            promotion_url = model.promotion_url,//入口跳转外链的地址链接。
-                            get_limit = model.get_limit,//每人可领券的数量限制,不填写默认为50。
-                            can_share = model.can_share,//卡券领取页面是否可分享。
-                            can_give_friend = model.can_give_friend,//卡券是否可转赠。
+                            use_custom_code = model.UseCustomCode,//是否自定义Code码。填写true或false，默认为false。通常自有优惠码系统的开发者选择自定义Code码，并在卡券投放时带入Code码，详情见是否自定义Code码。
+                            bind_openid = model.BindOpenId,//是否指定用户领取，填写true或false。默认为false。通常指定特殊用户群体投放卡券或防止刷券时选择指定用户领取。
+                            service_phone = model.ServicePhone,//客服电话。
+                            location_id_list = model.LocationIdList,//门店位置poiid。调用POI门店管理接口获取门店位置poiid。具备线下门店的商户为必填。
+                            source = model.Source,//第三方来源名，例如同程旅游、大众点评。
+                            custom_url_name = model.CustomUrlName,//自定义跳转外链的入口名字。
+                            custom_url = model.CustomUrl,//自定义跳转的URL。
+                            custom_url_sub_title = model.CustomUrlSubTitle,//显示在入口右侧的提示语。
+                            promotion_url_name = model.PromotionUrlName,//营销场景的自定义入口名称。
+                            promotion_url = model.PromotionUrl,//入口跳转外链的地址链接。
+                            promotion_url_sub_title = model.PromotionUrlSubTitle,//显示在营销入口右侧的提示语
+                            get_limit = model.GetLimit,//每人可领券的数量限制,不填写默认为50。
+                            can_share = model.CanShare,//卡券领取页面是否可分享。
+                            can_give_friend = model.CanGiveFriend,//卡券是否可转赠。
                         },
-                        default_detail = model.default_detail
+                        default_detail = model.DefaultDetail
                     }
                 }
             };
@@ -529,7 +564,124 @@ namespace Wechat.API
         }
         #endregion
 
-        #region 查询卡券code
+        #region 投放卡券
+        // 摘要: 
+        //     创建卡券二维码图片。
+        //
+        //  注释：
+        //     这里返回的直接是一张图片，可以直接展示和下载
+        //
+        // 参数: 
+        //   appId:
+        //     公众号appID。
+        //
+        //   appSecret:
+        //     公众号appSecret。
+        //
+        //   cardId:
+        //     卡券id。
+        //
+        //   openId:
+        //     指定领取者的openid，只有该用户能领取。bind_openid字段为true的卡券必须填写，非指定openid不必填写。
+        //
+        //   code:
+        //     卡券Code码,use_custom_code字段为true的卡券必须填写，非自定义code不必填写。
+        //
+        //   isNeverExpires:
+        //     是否绝不过期，True：是；False：会过期。
+        //
+        //   validTime:
+        //     当isNeverExpires为False时需要指定有效时间。
+        //
+        // 返回结果: 
+        //      二维码图片
+        //
+        public static string ShowCardQrcode(string appId, string appSecret, string cardId, string openId = "", string code = "", bool isNeverExpires = true, int validTime = 1800)
+        {
+            if (validTime < 60 || validTime > 1800)
+                validTime = 1800;
+
+            string url = string.Format("https://api.weixin.qq.com/card/qrcode/create?access_token={0}", AccessToken.GetToken(appId, appSecret));
+
+            var result = "";
+
+            if (isNeverExpires)
+            {
+                var obj = new
+                {
+                    action_name = "QR_CARD",
+                    action_info = new
+                    {
+                        card = new
+                        {
+                            card_id = cardId,
+                            code = code,
+                            openid = openId,
+                            is_unique_code = false,
+                            outer_id = 1
+                        }
+                    }
+                };
+
+                result = WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+            }
+            else
+            {
+                var obj = new
+                {
+                    action_name = "QR_CARD",
+                    expire_seconds = validTime,
+                    action_info = new
+                    {
+                        card = new
+                        {
+                            card_id = cardId,
+                            code = code,
+                            openid = openId,
+                            is_unique_code = false,
+                            outer_id = 1
+                        }
+                    }
+                };
+
+                result = WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+            }
+
+            var ticket = JsonConvert.DeserializeObject<dynamic>(result)["ticket"].ToString();
+
+            return string.Format("https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={0}", Uri.EscapeDataString(ticket));
+        }
+
+        // 摘要: 
+        //     创建货架接口。
+        //
+        // 参数: 
+        //   appId:
+        //     公众号appID。
+        //
+        //   appSecret:
+        //     公众号appSecret。
+        //
+        //   data:
+        //     post内容（json字符串）。
+        //
+        // 返回结果: 
+        //{
+        //     "errcode":0,
+        //     "errmsg":"ok",
+        //     "url":"www.test.url",
+        //     "page_id":1
+        // }
+        //
+        public static string CreateShelves(string appId, string appSecret, string data)
+        {
+            string url = string.Format("https://api.weixin.qq.com/card/landingpage/create?access_token={0}", AccessToken.GetToken(appId, appSecret));
+
+            return WebHttpClient.Post(url, data);
+        }
+        #endregion
+
+        #region 管理卡券
         // 摘要: 
         //     查询卡券信息。
         //
@@ -590,7 +742,7 @@ namespace Wechat.API
         //
         public static string QueryCode(string appId, string appSecret, string cardId, string code, bool check_consume = false)
         {
-            string url = "https://api.weixin.qq.com/card/code/get?access_token={0}";
+            string url = string.Format("https://api.weixin.qq.com/card/code/get?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new
             {
@@ -599,13 +751,11 @@ namespace Wechat.API
                 check_consume = check_consume
             };
 
-            return WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), JsonConvert.SerializeObject(obj));
+            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
         }
-        #endregion
 
-        #region 更新卡券code
         // 摘要: 
-        //     更改Code接口。
+        //     查询该用户卡包里属于该appid下的卡券。
         //
         // 参数: 
         //   appId:
@@ -614,37 +764,35 @@ namespace Wechat.API
         //   appSecret:
         //     公众号appSecret。
         //
-        //   code:
-        //     需变更的Code码。
-        //
-        //   newCode:
-        //     变更后的有效Code码。
+        //   openID:
+        //     卡券状态。
         //
         //   cardId:
-        //     卡券id，自定义Code码卡券为必填。
+        //     卡券状态，不填写时默认查询当前appid下的卡券。。
         //
         // 返回结果: 
-        //       {
+        //      {
         //          "errcode":0,
         //          "errmsg":"ok",
+        //          "card_list": [
+        //              {"code": "xxx1434079154", "card_id": "xxxxxxxxxx"},
+        //              {"code": "xxx1434079155", "card_id": "xxxxxxxxxx"}
+        //           ]
         //       }
         //
-        public static string UpdateCode(string appId, string appSecret, string code, string newCode, string cardId = "")
+        public static string QueryCardListForUser(string appId, string appSecret, string openID, string cardId = "")
         {
-            string url = "https://api.weixin.qq.com/card/code/update?access_token={0}";
+            string url = string.Format("https://api.weixin.qq.com/card/user/getcardlist?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new
             {
-                code = code,
-                card_id = cardId,
-                new_code = newCode
+                openid = openID,
+                card_id = cardId
             };
 
-            return WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), JsonConvert.SerializeObject(obj));
+            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
         }
-        #endregion
 
-        #region 查询卡券
         // 摘要: 
         //     查询卡券详情。
         //
@@ -703,14 +851,14 @@ namespace Wechat.API
         //
         public static string QueryCardDetail(string appId, string appSecret, string cardId)
         {
-            string url = "https://api.weixin.qq.com/card/get?access_token={0}";
+            string url = string.Format("https://api.weixin.qq.com/card/get?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new
             {
                 card_id = cardId,
             };
 
-            return WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), JsonConvert.SerializeObject(obj));
+            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
         }
 
         // 摘要: 
@@ -736,9 +884,9 @@ namespace Wechat.API
         //
         public static string QueryCardList(string appId, string appSecret, string data)
         {
-            string url = "https://api.weixin.qq.com/card/batchget?access_token={0}";
+            string url = string.Format("https://api.weixin.qq.com/card/batchget?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), data);
+            return WebHttpClient.Post(url, data);
         }
 
         // 摘要: 
@@ -781,47 +929,6 @@ namespace Wechat.API
         }
 
         // 摘要: 
-        //     查询该用户卡包里属于该appid下的卡券。
-        //
-        // 参数: 
-        //   appId:
-        //     公众号appID。
-        //
-        //   appSecret:
-        //     公众号appSecret。
-        //
-        //   openID:
-        //     卡券状态。
-        //
-        //   cardId:
-        //     卡券状态，不填写时默认查询当前appid下的卡券。。
-        //
-        // 返回结果: 
-        //      {
-        //          "errcode":0,
-        //          "errmsg":"ok",
-        //          "card_list": [
-        //              {"code": "xxx1434079154", "card_id": "xxxxxxxxxx"},
-        //              {"code": "xxx1434079155", "card_id": "xxxxxxxxxx"}
-        //           ]
-        //       }
-        //
-        public static string QueryCardListForUser(string appId, string appSecret, string openID, string cardId = "")
-        {
-            string url = "https://api.weixin.qq.com/card/user/getcardlist?access_token={0}";
-
-            var obj = new
-            {
-                openid = openID,
-                card_id = cardId
-            };
-
-            return WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), JsonConvert.SerializeObject(obj));
-        }
-        #endregion
-
-        #region 更新卡券
-        // 摘要: 
         //     更新卡券。
         //
         // 参数: 
@@ -843,177 +950,11 @@ namespace Wechat.API
         //
         public static string UpdateCard(string appId, string appSecret, string data)
         {
-            string url = "https://api.weixin.qq.com/card/update?access_token={0}";
+            string url = string.Format("https://api.weixin.qq.com/card/update?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), data);
+            return WebHttpClient.Post(url, data);
         }
 
-        // 摘要: 
-        //     修改库存接口。
-        //
-        // 参数: 
-        //   appId:
-        //     公众号appID。
-        //
-        //   appSecret:
-        //     公众号appSecret。
-        //
-        //   cardId:
-        //     卡券id。
-        //
-        //   increase_stock_value:
-        //     增加多少库存，支持不填或填0。
-        //
-        //   reduce_stock_value:
-        //     减少多少库存，可以不填或填0。
-        //
-        // 返回结果: 
-        //      {
-        //          "errcode":0,
-        //          "errmsg":"ok"
-        //      }
-        //
-        public static string UpdateCardStock(string appId, string appSecret, string cardId, int increase_stock_value = 0, int reduce_stock_value = 0)
-        {
-            string url = "https://api.weixin.qq.com/card/modifystock?access_token={0}";
-
-            var obj = new
-            {
-                card_id = cardId,
-                increase_stock_value = increase_stock_value,
-                reduce_stock_value = reduce_stock_value,
-            };
-
-            return WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), JsonConvert.SerializeObject(obj));
-        }
-        #endregion
-
-        #region 删除卡券
-        // 摘要: 
-        //     删除卡券。
-        //
-        // 注释：
-        //     删除卡券不能删除已被用户领取，保存在微信客户端中的卡券。
-        //
-        // 参数: 
-        //   appId:
-        //     公众号appID。
-        //
-        //   appSecret:
-        //     公众号appSecret。
-        //
-        //   cardId:
-        //     卡券id。
-        //
-        // 返回结果: 
-        //      {
-        //          "errcode":0,
-        //          "errmsg":"ok"
-        //      }  
-        //
-        public static string DeleteCard(string appId, string appSecret, string cardId)
-        {
-            string url = "https://api.weixin.qq.com/card/delete?access_token={0}";
-
-            var obj = new
-            {
-                card_id = cardId
-            };
-
-            return WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), JsonConvert.SerializeObject(obj));
-        }
-        #endregion
-
-        #region 卡券二维码
-        // 摘要: 
-        //     创建卡券二维码图片。
-        //
-        //  注释：
-        //     这里返回的直接是一张图片，可以直接展示和下载
-        //
-        // 参数: 
-        //   appId:
-        //     公众号appID。
-        //
-        //   appSecret:
-        //     公众号appSecret。
-        //
-        //   cardId:
-        //     卡券id。
-        //
-        //   openId:
-        //     指定领取者的openid，只有该用户能领取。bind_openid字段为true的卡券必须填写，非指定openid不必填写。
-        //
-        //   code:
-        //     卡券Code码,use_custom_code字段为true的卡券必须填写，非自定义code不必填写。
-        //
-        //   isNeverExpires:
-        //     是否绝不过期，True：是；False：会过期。
-        //
-        //   validTime:
-        //     当isNeverExpires为False时需要指定有效时间。
-        //
-        // 返回结果: 
-        //      二维码图片
-        //
-        public static string ShowCardQrcode(string appId, string appSecret, string cardId, string openId = "", string code = "", bool isNeverExpires = true, int validTime = 1800)
-        {
-            if (validTime < 60 || validTime > 1800)
-                validTime = 1800;
-
-            string url = "https://api.weixin.qq.com/card/qrcode/create?access_token={0}";
-
-            var result = "";
-
-            if (isNeverExpires)
-            {
-                var obj = new
-                {
-                    action_name = "QR_CARD",
-                    action_info = new
-                    {
-                        card = new
-                        {
-                            card_id = cardId,
-                            code = code,
-                            openid = openId,
-                            is_unique_code = false,
-                            outer_id = 1
-                        }
-                    }
-                };
-
-                result = WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), JsonConvert.SerializeObject(obj));
-            }
-            else
-            {
-                var obj = new
-                {
-                    action_name = "QR_CARD",
-                    expire_seconds = validTime,
-                    action_info = new
-                    {
-                        card = new
-                        {
-                            card_id = cardId,
-                            code = code,
-                            openid = openId,
-                            is_unique_code = false,
-                            outer_id = 1
-                        }
-                    }
-                };
-
-                result = WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), JsonConvert.SerializeObject(obj));
-            }
-
-            var ticket = JsonConvert.DeserializeObject<dynamic>(result)["ticket"].ToString();
-
-            return string.Format("https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={0}", Uri.EscapeDataString(ticket));
-        }
-        #endregion
-
-        #region 设置卡券
         // 摘要: 
         //     设置卡券买单接口。
         //
@@ -1048,7 +989,7 @@ namespace Wechat.API
 
             if (ja != null && ja.Count() != 0)
             {
-                string url = "https://api.weixin.qq.com/card/paycell/set?access_token={0}";
+                string url = string.Format("https://api.weixin.qq.com/card/paycell/set?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
                 var obj = new
                 {
@@ -1056,10 +997,122 @@ namespace Wechat.API
                     is_open = isOpen
                 };
 
-                return WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), JsonConvert.SerializeObject(obj));
+                return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
             }
 
             return "该卡券未设置门店，不可设置买单";
+        }
+
+        // 摘要: 
+        //     修改库存接口。
+        //
+        // 参数: 
+        //   appId:
+        //     公众号appID。
+        //
+        //   appSecret:
+        //     公众号appSecret。
+        //
+        //   cardId:
+        //     卡券id。
+        //
+        //   increase_stock_value:
+        //     增加多少库存，支持不填或填0。
+        //
+        //   reduce_stock_value:
+        //     减少多少库存，可以不填或填0。
+        //
+        // 返回结果: 
+        //      {
+        //          "errcode":0,
+        //          "errmsg":"ok"
+        //      }
+        //
+        public static string UpdateCardStock(string appId, string appSecret, string cardId, int increase_stock_value = 0, int reduce_stock_value = 0)
+        {
+            string url = string.Format("https://api.weixin.qq.com/card/modifystock?access_token={0}", AccessToken.GetToken(appId, appSecret));
+
+            var obj = new
+            {
+                card_id = cardId,
+                increase_stock_value = increase_stock_value,
+                reduce_stock_value = reduce_stock_value,
+            };
+
+            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+        }
+
+        // 摘要: 
+        //     更改Code接口。
+        //
+        // 参数: 
+        //   appId:
+        //     公众号appID。
+        //
+        //   appSecret:
+        //     公众号appSecret。
+        //
+        //   code:
+        //     需变更的Code码。
+        //
+        //   newCode:
+        //     变更后的有效Code码。
+        //
+        //   cardId:
+        //     卡券id，自定义Code码卡券为必填。
+        //
+        // 返回结果: 
+        //       {
+        //          "errcode":0,
+        //          "errmsg":"ok",
+        //       }
+        //
+        public static string UpdateCode(string appId, string appSecret, string code, string newCode, string cardId = "")
+        {
+            string url = string.Format("https://api.weixin.qq.com/card/code/update?access_token={0}", AccessToken.GetToken(appId, appSecret));
+
+            var obj = new
+            {
+                code = code,
+                card_id = cardId,
+                new_code = newCode
+            };
+
+            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+        }
+
+        // 摘要: 
+        //     删除卡券。
+        //
+        // 注释：
+        //     删除卡券不能删除已被用户领取，保存在微信客户端中的卡券。
+        //
+        // 参数: 
+        //   appId:
+        //     公众号appID。
+        //
+        //   appSecret:
+        //     公众号appSecret。
+        //
+        //   cardId:
+        //     卡券id。
+        //
+        // 返回结果: 
+        //      {
+        //          "errcode":0,
+        //          "errmsg":"ok"
+        //      }  
+        //
+        public static string DeleteCard(string appId, string appSecret, string cardId)
+        {
+            string url = string.Format("https://api.weixin.qq.com/card/delete?access_token={0}", AccessToken.GetToken(appId, appSecret));
+
+            var obj = new
+            {
+                card_id = cardId
+            };
+
+            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
         }
 
         // 摘要: 
@@ -1086,7 +1139,7 @@ namespace Wechat.API
         //
         public static string SetCardUnavailable(string appId, string appSecret, string code, string cardId = "")
         {
-            string url = "https://api.weixin.qq.com/card/code/unavailable?access_token={0}";
+            string url = string.Format("https://api.weixin.qq.com/card/code/unavailable?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new
             {
@@ -1094,7 +1147,7 @@ namespace Wechat.API
                 card_id = cardId
             };
 
-            return WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), JsonConvert.SerializeObject(obj));
+            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
         }
         #endregion
 
@@ -1143,7 +1196,7 @@ namespace Wechat.API
 
             endDate = interval > 62 ? beginDate.AddDays(62) : endDate;
 
-            string url = "https://api.weixin.qq.com/datacube/getcardbizuininfo?access_token={0}";
+            string url = string.Format("https://api.weixin.qq.com/datacube/getcardbizuininfo?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new
             {
@@ -1152,7 +1205,7 @@ namespace Wechat.API
                 cond_source = source
             };
 
-            return WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), JsonConvert.SerializeObject(obj));
+            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
         }
 
         // 摘要: 
@@ -1204,7 +1257,7 @@ namespace Wechat.API
 
             endDate = interval > 62 ? beginDate.AddDays(62) : endDate;
 
-            string url = "https://api.weixin.qq.com/datacube/getcardcardinfo?access_token={0}";
+            string url = string.Format("https://api.weixin.qq.com/datacube/getcardcardinfo?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new
             {
@@ -1214,7 +1267,7 @@ namespace Wechat.API
                 card_id = cardId
             };
 
-            return WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), JsonConvert.SerializeObject(obj));
+            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
         }
 
         // 摘要: 
@@ -1261,7 +1314,7 @@ namespace Wechat.API
 
             endDate = interval > 62 ? beginDate.AddDays(62) : endDate;
 
-            string url = "https://api.weixin.qq.com/datacube/getcardmembercardinfo?access_token={0}";
+            string url = string.Format("https://api.weixin.qq.com/datacube/getcardmembercardinfo?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new
             {
@@ -1270,37 +1323,7 @@ namespace Wechat.API
                 cond_source = source
             };
 
-            return WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), JsonConvert.SerializeObject(obj));
-        }
-        #endregion
-
-        #region 创建货架
-        // 摘要: 
-        //     创建货架接口。
-        //
-        // 参数: 
-        //   appId:
-        //     公众号appID。
-        //
-        //   appSecret:
-        //     公众号appSecret。
-        //
-        //   data:
-        //     post内容（json字符串）。
-        //
-        // 返回结果: 
-        //{
-        //     "errcode":0,
-        //     "errmsg":"ok",
-        //     "url":"www.test.url",
-        //     "page_id":1
-        // }
-        //
-        public static string CreateShelves(string appId, string appSecret, string data)
-        {
-            string url = "https://api.weixin.qq.com/card/landingpage/create?access_token={0}";
-
-            return WebHttpClient.Post(string.Format(url, AccessToken.GetToken(appId, appSecret)), data);
+            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
         }
         #endregion
 

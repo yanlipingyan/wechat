@@ -25,9 +25,9 @@ namespace Wechat.API
         //
         public static string[] GetIP(string appId, string appSecret)
         {
-            string url = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token={0}";//获取微信服务器Ip地址的url。
+            string url = string.Format("https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token={0}", AccessToken.GetToken(appId, appSecret));//获取微信服务器Ip地址的url。
 
-            string result = WebHttpClient.Get(string.Format(url, AccessToken.GetToken(appId, appSecret)));
+            string result = WebHttpClient.Get(url);
 
             return JsonConvert.DeserializeObject<dynamic>(result)["ip_list"];
         }
