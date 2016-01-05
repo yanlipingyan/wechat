@@ -9,7 +9,6 @@ using System.Xml.Serialization;
 
 namespace Wechat.API.Model
 {
-    [Serializable]
     public static class ApiModel
     {
         private static string appID;
@@ -22,10 +21,10 @@ namespace Wechat.API.Model
 
         static ApiModel()
         {
-            string file = string.Format(@"{0}Config\WechatSetting.config", AppDomain.CurrentDomain.BaseDirectory);
-            if (File.Exists(file.Replace("\\", "/")))
+            string file = string.Format(@"{0}Config\WechatSetting.config", AppDomain.CurrentDomain.BaseDirectory).Replace("\\", @"\");
+            if (File.Exists(file))
             {
-                var result = Helper.XMLSerializerHelper.DeSerialize<dynamic>(file);
+                var result = Helper.XMLSerializerHelper.DeSerialize<ApiConfigModel>(file);
 
                 if (result != null)
                 {
