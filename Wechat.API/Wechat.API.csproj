@@ -54,6 +54,7 @@
     <Compile Include="Helper\JsApiTicketHelper.cs" />
     <Compile Include="Helper\XMLSerializerHelper.cs" />
     <Compile Include="JsSdk.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Model\AccessTokenModel.cs" />
     <Compile Include="Model\ApiConfigModel.cs">
