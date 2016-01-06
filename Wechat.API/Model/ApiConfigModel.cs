@@ -26,5 +26,15 @@ namespace Wechat.API.Model
 
         [XmlElement]
         public string MchAPISecret { get; set; }
+
+        public ApiConfigModel()
+        {
+            this.AppID =ApiModel.AppID;
+            this.AppSecret = ApiModel.AppSecret;
+            this.Token = ApiModel.Token;
+            this.EncodingAESKey = ApiModel.EncodingAESKey;
+            this.MchID = ApiModel.MchID;
+            this.MchAPISecret = ApiModel.MchAPISecret;
+        }
     }
 }

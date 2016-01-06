@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Wechat.API.Model.ApiConfigModel
+@{
     ViewBag.Title = "配置管理";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -24,7 +25,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1">AppID </label>
 
                     <div class="col-sm-9">
-                        <input type="text" id="form-field-1" placeholder="微信公众平台基本配置里的AppID(应用ID)" class="col-xs-10 col-sm-5" />
+                        <input type="text" id="form-field-1" name="" value="@Model.AppID" placeholder="微信公众平台基本配置里的AppID(应用ID)" class="col-xs-10 col-sm-5" />
                     </div>
                 </div>
 
@@ -34,7 +35,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-2">AppSecret </label>
 
                     <div class="col-sm-9">
-                        <input type="text" id="form-field-2" placeholder="微信公众平台基本配置里的AppSecret(应用密钥)" class="col-xs-10 col-sm-5" />
+                        <input type="text" id="form-field-2" name="" value="@Model.AppSecret" placeholder="微信公众平台基本配置里的AppSecret(应用密钥)" class="col-xs-10 col-sm-5" />
                     </div>
                 </div>
 
@@ -44,7 +45,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-3">Token </label>
 
                     <div class="col-sm-9">
-                        <input type="text" id="form-field-3" placeholder="微信公众平台基本配置里的Token(令牌)" class="col-xs-10 col-sm-5" />
+                        <input type="text" id="form-field-3" name="" value="@Model.Token" placeholder="微信公众平台基本配置里的Token(令牌)" class="col-xs-10 col-sm-5" />
                     </div>
                 </div>
 
@@ -54,7 +55,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-4">EncodingAESKey </label>
 
                     <div class="col-sm-9">
-                        <input type="text" id="form-field-4" placeholder="微信公众平台基本配置里的EncodingAESKey(消息加解密密钥)" class="col-xs-10 col-sm-5" />
+                        <input type="text" id="form-field-4" name="" value="@Model.EncodingAESKey" placeholder="微信公众平台基本配置里的EncodingAESKey(消息加解密密钥)" class="col-xs-10 col-sm-5" />
                     </div>
                 </div>
 
@@ -64,7 +65,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-5">MchID </label>
 
                     <div class="col-sm-9">
-                        <input type="text" id="form-field-5" placeholder="微信支付平台账户信息里的MchID(商户号)" class="col-xs-10 col-sm-5" />
+                        <input type="text" id="form-field-5" name="" value="@Model.MchID" placeholder="微信支付平台账户信息里的MchID(商户号)" class="col-xs-10 col-sm-5" />
                     </div>
                 </div>
 
@@ -74,7 +75,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-6">MchAPISecret </label>
 
                     <div class="col-sm-9">
-                        <input type="text" id="form-field-6" placeholder="微信支付平台API安全里的MchAPISecret(商户API密钥)" class="col-xs-10 col-sm-5" />
+                        <input type="text" id="form-field-6" name="" value="@Model.MchAPISecret" placeholder="微信支付平台API安全里的MchAPISecret(商户API密钥)" class="col-xs-10 col-sm-5" />
                     </div>
                 </div>
 

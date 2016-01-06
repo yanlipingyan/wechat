@@ -13,7 +13,7 @@ namespace Wechat.WebUI.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View(new Wechat.API.Model.ApiConfigModel());
         }
 
         public ActionResult Submit()
