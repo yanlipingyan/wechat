@@ -33,16 +33,6 @@ namespace Wechat.API
         }
 
         // 摘要: 
-        //     获取是否是微信内置浏览器。
-        //
-        // 返回结果: True，是；False，否
-        //
-        public static bool GetIsWx()
-        {
-            return System.Web.HttpContext.Current.Request.UserAgent.ToString().ToLower().Contains("micromessenger");
-        }
-
-        // 摘要: 
         //     获取微信版本号。
         //
         // 返回结果: 版本号

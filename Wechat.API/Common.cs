@@ -9,6 +9,15 @@ namespace Wechat.API
     public static class Common
     {
         /// <summary>
+        /// 获取是否是微信内置浏览器
+        /// </summary>
+        /// <returns>True，是；False，否</returns>
+        public static bool IsFromWechatBrowser()
+        {
+            return System.Web.HttpContext.Current.Request.UserAgent.ToString().ToLower().Contains("micromessenger");
+        }
+
+        /// <summary>
         /// jsapiTicket是否有效。
         /// </summary>
         /// <param name="date">上次卡券jsapiTicket生成的时间</param>
