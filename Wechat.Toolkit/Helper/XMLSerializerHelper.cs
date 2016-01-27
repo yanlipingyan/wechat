@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace Wechat.API.Helper
+namespace Wechat.Toolkit.Helper
 {
-    class XMLSerializerHelper
+    public class XMLSerializerHelper
     {
         /// <summary>
         /// xml序列化

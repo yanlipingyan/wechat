@@ -290,6 +290,10 @@
       <Project>{20356207-a933-4725-8370-4454c222a7a3}</Project>
       <Name>Wechat.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Wechat.Service\Wechat.Service.csproj">
+      <Project>{2ef6c1c4-ffff-47f2-b253-be5e9617a025}</Project>
+      <Name>Wechat.Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Wechat.Toolkit\Wechat.Toolkit.csproj">
       <Project>{f5d4f925-1edb-4973-bf7b-fe10c020fd94}</Project>
       <Name>Wechat.Toolkit</Name>
@@ -327,7 +331,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\WechatSetting.config" />
+    <Content Include="Config\WechatSetting.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Config\Index.cshtml" />

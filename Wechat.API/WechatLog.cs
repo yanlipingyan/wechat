@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace Wechat.API
+namespace Wechat.WebUI
 {
     public class WechatLog
     {

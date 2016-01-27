@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wechat.API.Helper
+namespace Wechat.WebUI.Helper
 {
     class AccessTokenHelper
     {

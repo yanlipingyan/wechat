@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Wechat.API
+namespace Wechat.WebUI
 {
     public class JsSdk
     {

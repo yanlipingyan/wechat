@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wechat.API
+namespace Wechat.WebUI
 {
     // 摘要: 
     //      微信二维码接口调用凭据

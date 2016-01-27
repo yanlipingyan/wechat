@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-namespace Wechat.API
+namespace Wechat.WebUI
 {
     public static class Common
     {

@@ -18,8 +18,8 @@ namespace Wechat.WebUI.Controllers
 
         public string ShowQrcode(string cardId)
         {
-            LogHelper.Error(Wechat.API.Card.ShowCardQrcode(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, cardId));
-            return Wechat.API.Card.ShowCardQrcode(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, cardId);
+            LogHelper.Error(Wechat.WebUI.Card.ShowCardQrcode(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, cardId));
+            return Wechat.WebUI.Card.ShowCardQrcode(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, cardId);
         }
 
         public ActionResult JSSDK()
@@ -29,12 +29,12 @@ namespace Wechat.WebUI.Controllers
 
         public string GetCardSign(string timestamp, string nonceStr, string shopId, string cardType, string cardId)
         {
-            return Wechat.API.Card.GetSign(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, nonceStr, timestamp, shopId, cardType, cardId);
+            return Wechat.WebUI.Card.GetSign(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, nonceStr, timestamp, shopId, cardType, cardId);
         }
 
         public ActionResult TestCardSign()
         {
-            return Content(Wechat.API.Card.GetSign(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, Wechat.API.Common.GetNonceStr(), Wechat.API.Common.GetTimeStamp()));
+            return Content(Wechat.WebUI.Card.GetSign(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, Wechat.WebUI.Common.GetNonceStr(), Wechat.WebUI.Common.GetTimeStamp()));
         }
 
         public string GetCardExt(string cardId, string timestamp, string nonceStr, string code, string openId)
@@ -45,32 +45,32 @@ namespace Wechat.WebUI.Controllers
                 openid = openId,
                 timestamp = timestamp,
                 nonce_str = nonceStr,
-                signature = Wechat.API.Card.GetCardExtSign(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, cardId, timestamp, nonceStr, code, openId)
+                signature = Wechat.WebUI.Card.GetCardExtSign(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, cardId, timestamp, nonceStr, code, openId)
             };
             return JsonConvert.SerializeObject(obj);
         }
 
         public ActionResult QueryDetail(string cardid = "pxKfavtut0Y7u8QzQJdIwAuMcvk0")
         {
-            string content = Wechat.API.Card.QueryCardDetail(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, cardid);
+            string content = Wechat.WebUI.Card.QueryCardDetail(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, cardid);
             return Content(content);
         }
 
         public ActionResult QueryList()
         {
             string[] status = new string[] { "CARD_STATUS_VERIFY_OK", "CARD_STATUS_DISPATCH", "CARD_STATUS_VERIFY_FAIL" };
-            string content = Wechat.API.Card.QueryCardList(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, status);
+            string content = Wechat.WebUI.Card.QueryCardList(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, status);
             return Content(content);
         }
 
         public ActionResult QueryListForMe(string openId = "oxKfavv2QQtVecXAmVehYt8fB15s")
         {
-            return Content(Wechat.API.Card.QueryCardListForUser(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, openId));
+            return Content(Wechat.WebUI.Card.QueryCardListForUser(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, openId));
         }
 
         public string CreateGroupon()
         {
-            var model = new Wechat.API.Model.GrouponCardModel()
+            var model = new Wechat.WebUI.Model.GrouponCardModel()
             {
                 LogoUrl = "http://mmbiz.qpic.cn/mmbiz/47BVHoK4A4kMQbicSLdYUciaI6rqWEv9x2MKOmZXPQYbWMFrDvXRny9LiaEtcVicoqFfbfJrgr7PUicS2DMHucmJZ1w/0",
                 CodeType = "CODE_TYPE_BARCODE",
@@ -100,12 +100,12 @@ namespace Wechat.WebUI.Controllers
                 CanGiveFriend = true,
                 DealDetail = "团购券",
             };
-            return Wechat.API.Card.CreateGrouponCard(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, model);
+            return Wechat.WebUI.Card.CreateGrouponCard(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, model);
         }
 
         public string CreateCashCard()
         {
-            var model = new Wechat.API.Model.CashCardModel()
+            var model = new Wechat.WebUI.Model.CashCardModel()
             {
                 LogoUrl = "http://mmbiz.qpic.cn/mmbiz/47BVHoK4A4kMQbicSLdYUciaI6rqWEv9x2MKOmZXPQYbWMFrDvXRny9LiaEtcVicoqFfbfJrgr7PUicS2DMHucmJZ1w/0",
                 CodeType = "CODE_TYPE_BARCODE",
@@ -136,12 +136,12 @@ namespace Wechat.WebUI.Controllers
                 LeastCost = 100,
                 ReduceCost = 20,
             };
-            return Wechat.API.Card.CreateCashCard(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, model);
+            return Wechat.WebUI.Card.CreateCashCard(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, model);
         }
 
         public string CreateDiscountCard()
         {
-            var model = new Wechat.API.Model.DiscountCardModel()
+            var model = new Wechat.WebUI.Model.DiscountCardModel()
             {
                 LogoUrl = "http://mmbiz.qpic.cn/mmbiz/47BVHoK4A4kMQbicSLdYUciaI6rqWEv9x2MKOmZXPQYbWMFrDvXRny9LiaEtcVicoqFfbfJrgr7PUicS2DMHucmJZ1w/0",
                 CodeType = "CODE_TYPE_BARCODE",
@@ -171,12 +171,12 @@ namespace Wechat.WebUI.Controllers
                 CanGiveFriend = true,
                 Discount = 70
             };
-            return Wechat.API.Card.CreateDiscountCard(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, model);
+            return Wechat.WebUI.Card.CreateDiscountCard(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, model);
         }
 
         public string CreateGiftCard()
         {
-            var model = new Wechat.API.Model.GiftCardModel()
+            var model = new Wechat.WebUI.Model.GiftCardModel()
             {
                 LogoUrl = "http://mmbiz.qpic.cn/mmbiz/47BVHoK4A4kMQbicSLdYUciaI6rqWEv9x2MKOmZXPQYbWMFrDvXRny9LiaEtcVicoqFfbfJrgr7PUicS2DMHucmJZ1w/0",
                 CodeType = "CODE_TYPE_QRCODE",
@@ -206,12 +206,12 @@ namespace Wechat.WebUI.Controllers
                 CanGiveFriend = true,
                 Gift = "可兑换手套一个"
             };
-            return Wechat.API.Card.CreateGiftCard(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, model);
+            return Wechat.WebUI.Card.CreateGiftCard(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, model);
         }
 
         public string CreateGeneralCouponCard()
         {
-            var model = new Wechat.API.Model.GeneralCouponCardModel()
+            var model = new Wechat.WebUI.Model.GeneralCouponCardModel()
             {
                 LogoUrl = "http://mmbiz.qpic.cn/mmbiz/47BVHoK4A4kMQbicSLdYUciaI6rqWEv9x2MKOmZXPQYbWMFrDvXRny9LiaEtcVicoqFfbfJrgr7PUicS2DMHucmJZ1w/0",
                 CodeType = "CODE_TYPE_QRCODE",
@@ -241,50 +241,50 @@ namespace Wechat.WebUI.Controllers
                 CanGiveFriend = true,
                 DefaultDetail = "优惠30元"
             };
-            return Wechat.API.Card.CreateGeneralCouponCard(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, model);
+            return Wechat.WebUI.Card.CreateGeneralCouponCard(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, model);
         }
 
         public ActionResult UpdateStock(string cardId = "pxKfavtut0Y7u8QzQJdIwAuMcvk0")
         {
-            return Content(Wechat.API.Card.UpdateCardStock(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, cardId, 5));
+            return Content(Wechat.WebUI.Card.UpdateCardStock(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, cardId, 5));
         }
 
         public ActionResult DeleteCard(string cardId = "pxKfavgLcNvXtzLe2LjqiTHy-Chs")
         {
-            return Content(Wechat.API.Card.DeleteCard(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, cardId));
+            return Content(Wechat.WebUI.Card.DeleteCard(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, cardId));
         }
 
         public ActionResult SetCardCanPay(string cardId = "pxKfavtut0Y7u8QzQJdIwAuMcvk0")
         {
-            return Content(Wechat.API.Card.SetCardCanPay(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, cardId));
+            return Content(Wechat.WebUI.Card.SetCardCanPay(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, cardId));
         }
 
         //注意：这里的结束时间不能是系统当天的时间
         public ActionResult GetCardStatistical()
         {
-            return Content(Wechat.API.Card.GetCardStatistical(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, DateTime.Now.AddDays(-2), DateTime.Now.AddDays(-1), 1));
+            return Content(Wechat.WebUI.Card.GetCardStatistical(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, DateTime.Now.AddDays(-2), DateTime.Now.AddDays(-1), 1));
         }
 
         //注意：这里的结束时间不能是系统当天的时间
         public ActionResult GetFreeCardStatistical()
         {
-            return Content(Wechat.API.Card.GetFreeCardStatistical(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, DateTime.Now.AddDays(-2), DateTime.Now.AddDays(-1), 1));
+            return Content(Wechat.WebUI.Card.GetFreeCardStatistical(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, DateTime.Now.AddDays(-2), DateTime.Now.AddDays(-1), 1));
         }
 
         //注意：这里的结束时间不能是系统当天的时间
         public ActionResult GetSpecialCardStatistical()
         {
-            return Content(Wechat.API.Card.GetSpecialCardStatistical(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, DateTime.Now.AddDays(-2), DateTime.Now.AddDays(-1), 1));
+            return Content(Wechat.WebUI.Card.GetSpecialCardStatistical(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, DateTime.Now.AddDays(-2), DateTime.Now.AddDays(-1), 1));
         }
 
         public ActionResult QueryCode(string cardId = "pxKfavr1cidMqbYHbstctHeMhQfM", string code = "833308329979")
         {
-            return Content(Wechat.API.Card.QueryCode(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, cardId, code));
+            return Content(Wechat.WebUI.Card.QueryCode(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, cardId, code));
         }
 
         public ActionResult UpdateCode(string cardId = "pxKfavr1cidMqbYHbstctHeMhQfM", string code = "833308329979")
         {
-            return Content(Wechat.API.Card.UpdateCode(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, code, "3495739475"));
+            return Content(Wechat.WebUI.Card.UpdateCode(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, code, "3495739475"));
         }
     }
 }

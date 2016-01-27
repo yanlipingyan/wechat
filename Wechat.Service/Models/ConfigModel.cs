@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using Wechat.WebUI.Model;
 
-namespace Wechat.API.Model
+namespace Wechat.Service.Models
 {
     [Serializable]
-    public class ApiConfigModel
+    public class ConfigModel
     {
         [XmlElement]
         public string AppID { get; set; }
@@ -27,9 +28,9 @@ namespace Wechat.API.Model
         [XmlElement]
         public string MchAPISecret { get; set; }
 
-        public ApiConfigModel()
+        public ConfigModel()
         {
-            this.AppID =ApiModel.AppID;
+            this.AppID = ApiModel.AppID;
             this.AppSecret = ApiModel.AppSecret;
             this.Token = ApiModel.Token;
             this.EncodingAESKey = ApiModel.EncodingAESKey;

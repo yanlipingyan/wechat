@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wechat.API.Model
+namespace Wechat.WebUI.Model
 {
     public class AccessTokenModel
     {

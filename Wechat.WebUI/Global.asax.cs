@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Wechat.Service;
 using Wechat.Toolkit.Helper;
 
 namespace Wechat.WebUI
@@ -22,6 +23,8 @@ namespace Wechat.WebUI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             LogHelper.LoadConfig(Server.MapPath("~/Config/log4net.config"));
+
+            ConfigService.InitConfig();
         }
     }
 }

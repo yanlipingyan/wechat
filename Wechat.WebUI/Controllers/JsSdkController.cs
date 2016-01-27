@@ -18,17 +18,17 @@ namespace Wechat.WebUI.Controllers
 
         public ActionResult GetJsApiTicket()
         {
-            return Content(Wechat.API.JsSdk.GetTicket(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret));
+            return Content(Wechat.WebUI.JsSdk.GetTicket(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret));
         }
 
         public string GetSign(string timestamp, string nonceStr, string url)
         {
-            return Wechat.API.JsSdk.GetSign(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret, nonceStr, timestamp, url);
+            return Wechat.WebUI.JsSdk.GetSign(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret, nonceStr, timestamp, url);
         }
 
         public ActionResult TestSign()
         {
-            return Content(Wechat.API.JsSdk.GetSign(Wechat.API.Model.ApiModel.AppID, Wechat.API.Model.ApiModel.AppSecret,Wechat.API.Common.GetNonceStr(),Wechat.API.Common.GetTimeStamp(), "http://www.linkin.net"));
+            return Content(Wechat.WebUI.JsSdk.GetSign(Wechat.WebUI.Model.ApiModel.AppID, Wechat.WebUI.Model.ApiModel.AppSecret,Wechat.WebUI.Common.GetNonceStr(),Wechat.WebUI.Common.GetTimeStamp(), "http://www.linkin.net"));
         }
     }
 }

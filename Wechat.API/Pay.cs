@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace Wechat.API
+namespace Wechat.WebUI
 {
     // 摘要:
     //      微信支付接口

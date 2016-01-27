@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 
-namespace Wechat.API
+namespace Wechat.WebUI
 {
     // 摘要:
     //      上传获取页面内容

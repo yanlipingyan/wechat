@@ -7,7 +7,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Wechat.API
+namespace Wechat.WebUI
 {
     // 摘要: 
     //      微信卡券接口调用凭据
