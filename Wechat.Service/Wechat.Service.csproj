@@ -50,9 +50,9 @@
       <Project>{8bb43531-38d6-41af-8fdf-c69802110d8a}</Project>
       <Name>Wechat.API</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Wechat.Toolkit\Wechat.Toolkit.csproj">
-      <Project>{f5d4f925-1edb-4973-bf7b-fe10c020fd94}</Project>
-      <Name>Wechat.Toolkit</Name>
+    <ProjectReference Include="..\YLP.Tookit\YLP.Tookit.csproj">
+      <Project>{84f286b9-a5e3-49a8-9fb8-5ff41f4dbf9f}</Project>
+      <Name>YLP.Tookit</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

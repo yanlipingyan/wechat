@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wechat.WebUI
+namespace Wechat.API
 {
     // 摘要:
     //      网页授权获取用户基本信息
@@ -33,9 +33,7 @@ namespace Wechat.WebUI
         //
         public static string GetCode(string appId, string redirect_url, string scope, string state)
         {
-            string url = string.Format("https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope={2}&state={3}#wechat_redirect", appId, redirect_url, scope, state);
-
-            return url;
+            return string.Format("https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope={2}&state={3}#wechat_redirect", appId, redirect_url, scope, state);
         }
 
         // 摘要: 
@@ -72,15 +70,15 @@ namespace Wechat.WebUI
         {
             string url = string.Format("https://api.weixin.qq.com/sns/oauth2/access_token?appid={0}&secret={1}&code={2}&grant_type=authorization_code", appId, appSecret, code);
 
-            return WebHttpClient.Get(url);
+            return WechatWebClient.Get(url);
         }
 
         // 摘要: 
         //     检验授权凭证（access_token）是否有效。
         //
         // 参数: 
-        //   appId:
-        //     公众号appID。
+        //   openId:
+        //     上面方法中获得openId。
         //
         //   token:
         //     获得的网页授权token。
@@ -94,11 +92,11 @@ namespace Wechat.WebUI
         //        "errmsg":"ok"
         //     }
         //
-        public static string GetOAuthTokenIsValid(string appId, string token)
+        public static string GetOAuthTokenIsValid(string openId, string token)
         {
-            string url = string.Format("https://api.weixin.qq.com/sns/auth?access_token={0}&openid={1}", token, appId);
+            string url = string.Format("https://api.weixin.qq.com/sns/auth?access_token={0}&openid={1}", token, openId);
 
-            return WebHttpClient.Get(url);
+            return WechatWebClient.Get(url);
         }
 
         // 摘要: 
@@ -130,7 +128,7 @@ namespace Wechat.WebUI
         {
             string url = string.Format("https://api.weixin.qq.com/sns/oauth2/refresh_token?appid={0}&grant_type=refresh_token&refresh_token={1}", appId, refreshToken);
 
-            return WebHttpClient.Get(url);
+            return WechatWebClient.Get(url);
         }
 
         // 摘要: 
@@ -157,7 +155,7 @@ namespace Wechat.WebUI
         //          "province":"PROVINCE"
         //          "city":"CITY",
         //          "country":"COUNTRY",
-        //          "headimgurl":    "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46", 
+        //          "headimgurl":"http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46", 
         //          "privilege":[
         //               "PRIVILEGE1"
         //               "PRIVILEGE2"
@@ -169,7 +167,7 @@ namespace Wechat.WebUI
         {
             string url = string.Format("https://api.weixin.qq.com/sns/userinfo?access_token={0}&openid={1}&lang={2}", token, openId, language);
 
-            return WebHttpClient.Get(url);
+            return WechatWebClient.Get(url);
         }
     }
 }

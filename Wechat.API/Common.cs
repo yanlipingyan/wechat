@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-namespace Wechat.WebUI
+namespace Wechat.API
 {
     public static class Common
     {
@@ -18,7 +18,7 @@ namespace Wechat.WebUI
         }
 
         /// <summary>
-        /// jsapiTicket是否有效。
+        /// 获取是否有效
         /// </summary>
         /// <param name="date">上次卡券jsapiTicket生成的时间</param>
         /// <param name="second">要添加的秒数</param>

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Wechat.WebUI
+namespace Wechat.API
 {
     public class JsSdk
     {
@@ -29,7 +29,7 @@ namespace Wechat.WebUI
 
             if (model == null || string.IsNullOrEmpty(model.Ticket) || Common.IsExprie(model.DateTime))
             {
-                string result = WebHttpClient.Get(url);
+                string result = WechatWebClient.Get(url);
 
                 model.Ticket = JsonConvert.DeserializeObject<dynamic>(result)["ticket"];
                 model.DateTime = DateTime.Now;

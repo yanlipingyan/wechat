@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wechat.WebUI.Helper
+namespace Wechat.API.Helper
 {
     class JsApiTicketHelper
     {
-        static Dictionary<string, Model.JsApiTicketModel> dic = new Dictionary<string, Model.JsApiTicketModel>();
+        static Dictionary<string, Models.JsApiTicketModel> dic = new Dictionary<string, Models.JsApiTicketModel>();
 
         /// <summary>
         /// 获取JsApiTicket
         /// </summary>
         /// <param name="key">关键字</param>
         /// <returns>JsApiTicketModel</returns>
-        public static Model.JsApiTicketModel Get(string key)
+        public static Models.JsApiTicketModel Get(string key)
         {
             if (!dic.ContainsKey(key))
-                return new Model.JsApiTicketModel();
+                return new Models.JsApiTicketModel();
 
             return dic[key];
         }
@@ -27,7 +27,7 @@ namespace Wechat.WebUI.Helper
         /// </summary>
         /// <param name="key">关键字</param>
         /// <param name="model">JsApiTicketModel</param>
-        public static void Set(string key, Model.JsApiTicketModel model)
+        public static void Set(string key, Models.JsApiTicketModel model)
         {
             dic.Remove(key);
             dic.Add(key, model);

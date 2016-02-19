@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "卡券";
+    Layout = "~/Views/Shared/_LayoutTest.cshtml";
+}
+
+<h2>卡券二维码</h2>
+<div style="text-align: center">
+    <img alt="" src="" id="cardQrcode" />@*不要直接通过路径的形式将返回的值赋值给src,因为那样的话，路由会默认将http://mp.weixin.qq.com、换成当前的域名*@
+</div>
+
+
+@section scripts{
+    <script>
+        $.post("/Test/Card/ShowQrcode", { cardId: '@ViewBag.CardId' }, function (res) {
+            $('#cardQrcode').attr('src', res);
+        })
+    </script>
+}

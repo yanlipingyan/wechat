@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "SaoMaPayOne";
+    Layout = "~/Views/Shared/_LayoutTest.cshtml";
+}
+
+<h2>扫码支付模式一</h2>
+<div style="text-align: center">
+    <img alt="" src="@Url.Action("NativePayOne", "Pay", new { area = "Test", id = 1 })" />
+</div>

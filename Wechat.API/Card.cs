@@ -7,7 +7,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Wechat.WebUI
+namespace Wechat.API
 {
     // 摘要: 
     //      微信卡券接口调用凭据
@@ -35,7 +35,7 @@ namespace Wechat.WebUI
 
             if (model == null || string.IsNullOrEmpty(model.Ticket) || Common.IsExprie(model.DateTime))
             {
-                string result = WebHttpClient.Get(url);
+                string result = WechatWebClient.Get(url);
 
                 model.Ticket = JsonConvert.DeserializeObject<dynamic>(result)["ticket"];
                 model.DateTime = DateTime.Now;
@@ -81,7 +81,7 @@ namespace Wechat.WebUI
             SortedDictionary<string, object> orderParams = new SortedDictionary<string, object>();
 
             orderParams.Add(card_jsapi_ticket, "api_ticket");
-            orderParams.Add(Model.ApiModel.AppID, "app_id");
+            orderParams.Add(Models.ApiModel.AppID, "app_id");
             orderParams.Add(noncestr, "nonce_str");
             orderParams.Add(timestamp, "time_stamp");
             if (!string.IsNullOrEmpty(shopId))
@@ -185,7 +185,7 @@ namespace Wechat.WebUI
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WebHttpClient.Post(url, data);
+            return WechatWebClient.Post(url, data);
         }
 
         // 摘要: 
@@ -208,7 +208,7 @@ namespace Wechat.WebUI
         {
             string url = string.Format("https://api.weixin.qq.com/card/create?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WebHttpClient.Post(url, data.ToString().Replace("\\", "").Replace("\"{", "{").Replace("}\"", "}"));
+            return WechatWebClient.Post(url, data.ToString().Replace("\\", "").Replace("\"{", "{").Replace("}\"", "}"));
         }
 
         // 摘要: 
@@ -227,7 +227,7 @@ namespace Wechat.WebUI
         // 返回结果: 
         //      {"errcode":0,"errmsg":"ok","card_id":"p1Pj9jr90_SQRaVqYI239Ka1erkI"}
         //
-        public static string CreateGrouponCard(string appId, string appSecret, Model.GrouponCardModel model)
+        public static string CreateGrouponCard(string appId, string appSecret, Models.GrouponCardModel model)
         {
             object date_info = null;
             if (model.Type == 1)
@@ -297,7 +297,7 @@ namespace Wechat.WebUI
         // 返回结果: 
         //      {"errcode":0,"errmsg":"ok","card_id":"p1Pj9jr90_SQRaVqYI239Ka1erkI"}
         //
-        public static string CreateCashCard(string appId, string appSecret, Model.CashCardModel model)
+        public static string CreateCashCard(string appId, string appSecret, Models.CashCardModel model)
         {
             object date_info = null;
             if (model.Type == 1)
@@ -368,7 +368,7 @@ namespace Wechat.WebUI
         // 返回结果: 
         //      {"errcode":0,"errmsg":"ok","card_id":"p1Pj9jr90_SQRaVqYI239Ka1erkI"}
         //
-        public static string CreateDiscountCard(string appId, string appSecret, Model.DiscountCardModel model)
+        public static string CreateDiscountCard(string appId, string appSecret, Models.DiscountCardModel model)
         {
             object date_info = null;
             if (model.Type == 1)
@@ -438,7 +438,7 @@ namespace Wechat.WebUI
         // 返回结果: 
         //      {"errcode":0,"errmsg":"ok","card_id":"p1Pj9jr90_SQRaVqYI239Ka1erkI"}
         //
-        public static string CreateGiftCard(string appId, string appSecret, Model.GiftCardModel model)
+        public static string CreateGiftCard(string appId, string appSecret, Models.GiftCardModel model)
         {
             object date_info = null;
             if (model.Type == 1)
@@ -508,7 +508,7 @@ namespace Wechat.WebUI
         // 返回结果: 
         //      {"errcode":0,"errmsg":"ok","card_id":"p1Pj9jr90_SQRaVqYI239Ka1erkI"}
         //
-        public static string CreateGeneralCouponCard(string appId, string appSecret, Model.GeneralCouponCardModel model)
+        public static string CreateGeneralCouponCard(string appId, string appSecret, Models.GeneralCouponCardModel model)
         {
             object date_info = null;
             if (model.Type == 1)
@@ -623,7 +623,7 @@ namespace Wechat.WebUI
                     }
                 };
 
-                result = WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+                result = WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
             }
             else
             {
@@ -644,7 +644,7 @@ namespace Wechat.WebUI
                     }
                 };
 
-                result = WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+                result = WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
             }
 
             var ticket = JsonConvert.DeserializeObject<dynamic>(result)["ticket"].ToString();
@@ -677,7 +677,7 @@ namespace Wechat.WebUI
         {
             string url = string.Format("https://api.weixin.qq.com/card/landingpage/create?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WebHttpClient.Post(url, data);
+            return WechatWebClient.Post(url, data);
         }
         #endregion
 
@@ -751,7 +751,7 @@ namespace Wechat.WebUI
                 check_consume = check_consume
             };
 
-            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
         }
 
         // 摘要: 
@@ -790,7 +790,7 @@ namespace Wechat.WebUI
                 card_id = cardId
             };
 
-            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
         }
 
         // 摘要: 
@@ -858,7 +858,7 @@ namespace Wechat.WebUI
                 card_id = cardId,
             };
 
-            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
         }
 
         // 摘要: 
@@ -886,7 +886,7 @@ namespace Wechat.WebUI
         {
             string url = string.Format("https://api.weixin.qq.com/card/batchget?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WebHttpClient.Post(url, data);
+            return WechatWebClient.Post(url, data);
         }
 
         // 摘要: 
@@ -952,7 +952,7 @@ namespace Wechat.WebUI
         {
             string url = string.Format("https://api.weixin.qq.com/card/update?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WebHttpClient.Post(url, data);
+            return WechatWebClient.Post(url, data);
         }
 
         // 摘要: 
@@ -997,7 +997,7 @@ namespace Wechat.WebUI
                     is_open = isOpen
                 };
 
-                return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+                return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
             }
 
             return "该卡券未设置门店，不可设置买单";
@@ -1039,7 +1039,7 @@ namespace Wechat.WebUI
                 reduce_stock_value = reduce_stock_value,
             };
 
-            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
         }
 
         // 摘要: 
@@ -1078,7 +1078,7 @@ namespace Wechat.WebUI
                 new_code = newCode
             };
 
-            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
         }
 
         // 摘要: 
@@ -1112,7 +1112,7 @@ namespace Wechat.WebUI
                 card_id = cardId
             };
 
-            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
         }
 
         // 摘要: 
@@ -1147,7 +1147,7 @@ namespace Wechat.WebUI
                 card_id = cardId
             };
 
-            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
         }
         #endregion
 
@@ -1205,7 +1205,7 @@ namespace Wechat.WebUI
                 cond_source = source
             };
 
-            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
         }
 
         // 摘要: 
@@ -1267,7 +1267,7 @@ namespace Wechat.WebUI
                 card_id = cardId
             };
 
-            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
         }
 
         // 摘要: 
@@ -1323,7 +1323,7 @@ namespace Wechat.WebUI
                 cond_source = source
             };
 
-            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
         }
         #endregion
 

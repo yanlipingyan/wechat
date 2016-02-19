@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace Wechat.WebUI
+namespace Wechat.API
 {
     // 摘要:
     //      微信支付接口
@@ -94,7 +94,7 @@ namespace Wechat.WebUI
         //
         public static SortedDictionary<string, object> UnifiedOrder(SortedDictionary<string, object> orderParams)
         {
-            var resultXml = WebHttpClient.Post("https://api.mch.weixin.qq.com/pay/unifiedorder", Common.SortedDictionaryToXml(orderParams));
+            var resultXml = WechatWebClient.Post("https://api.mch.weixin.qq.com/pay/unifiedorder", Common.SortedDictionaryToXml(orderParams));
 
             return Common.XmlToSortedDictionary(resultXml);
         }
@@ -141,7 +141,7 @@ namespace Wechat.WebUI
         //
         public static SortedDictionary<string, object> QueryOrder(SortedDictionary<string, object> orderParams)
         {
-            var resultXml = WebHttpClient.Post("https://api.mch.weixin.qq.com/pay/orderquery", Common.SortedDictionaryToXml(orderParams));
+            var resultXml = WechatWebClient.Post("https://api.mch.weixin.qq.com/pay/orderquery", Common.SortedDictionaryToXml(orderParams));
 
             return Common.XmlToSortedDictionary(resultXml);
         }
@@ -182,7 +182,7 @@ namespace Wechat.WebUI
         //
         public static SortedDictionary<string, object> CloseOrder(SortedDictionary<string, object> orderParams)
         {
-            var resultXml = WebHttpClient.Post("https://api.mch.weixin.qq.com/pay/closeorder", Common.SortedDictionaryToXml(orderParams));
+            var resultXml = WechatWebClient.Post("https://api.mch.weixin.qq.com/pay/closeorder", Common.SortedDictionaryToXml(orderParams));
 
             return Common.XmlToSortedDictionary(resultXml);
         }
@@ -228,7 +228,7 @@ namespace Wechat.WebUI
         //
         public static SortedDictionary<string, object> RefundOrder(SortedDictionary<string, object> orderParams)
         {
-            var resultXml = WebHttpClient.Post("https://api.mch.weixin.qq.com/secapi/pay/refund", Common.SortedDictionaryToXml(orderParams));
+            var resultXml = WechatWebClient.Post("https://api.mch.weixin.qq.com/secapi/pay/refund", Common.SortedDictionaryToXml(orderParams));
 
             return Common.XmlToSortedDictionary(resultXml);
         }
@@ -273,7 +273,7 @@ namespace Wechat.WebUI
         //
         public static SortedDictionary<string, object> QueryRefundOrder(SortedDictionary<string, object> orderParams)
         {
-            var resultXml = WebHttpClient.Post("https://api.mch.weixin.qq.com/pay/refundquery", Common.SortedDictionaryToXml(orderParams));
+            var resultXml = WechatWebClient.Post("https://api.mch.weixin.qq.com/pay/refundquery", Common.SortedDictionaryToXml(orderParams));
 
             return Common.XmlToSortedDictionary(resultXml);
         }
@@ -311,7 +311,7 @@ namespace Wechat.WebUI
         //
         public static SortedDictionary<string, object> DownloadBill(SortedDictionary<string, object> orderParams)
         {
-            var resultXml = WebHttpClient.Post("https://api.mch.weixin.qq.com/pay/downloadbill", Common.SortedDictionaryToXml(orderParams));
+            var resultXml = WechatWebClient.Post("https://api.mch.weixin.qq.com/pay/downloadbill", Common.SortedDictionaryToXml(orderParams));
 
             if (resultXml.Substring(0, 5) == "<xml>") //若接口调用失败会返回xml格式的结果
                 return Common.XmlToSortedDictionary(resultXml);
@@ -351,7 +351,7 @@ namespace Wechat.WebUI
         //
         public static SortedDictionary<string, object> Report(SortedDictionary<string, object> orderParams)
         {
-            var resultXml = WebHttpClient.Post("https://api.mch.weixin.qq.com/payitil/report", Common.SortedDictionaryToXml(orderParams));
+            var resultXml = WechatWebClient.Post("https://api.mch.weixin.qq.com/payitil/report", Common.SortedDictionaryToXml(orderParams));
 
             return Common.XmlToSortedDictionary(resultXml);
         }
@@ -456,11 +456,11 @@ namespace Wechat.WebUI
 
                 //查询订单，判断订单真实性
                 var orderPrams = new SortedDictionary<string, object>();
-                orderPrams.Add("appid", Model.ApiModel.AppID);
-                orderPrams.Add("mch_id",Model.ApiModel.MchID);
+                orderPrams.Add("appid", Models.ApiModel.AppID);
+                orderPrams.Add("mch_id",Models.ApiModel.MchID);
                 orderPrams.Add("transaction_id", transaction_id);
                 orderPrams.Add("nonce_str", Common.GetNonceStr());
-                orderPrams.Add("sign", Pay.GetSign(orderPrams, Model.ApiModel.MchAPISecret));
+                orderPrams.Add("sign", Pay.GetSign(orderPrams, Models.ApiModel.MchAPISecret));
                 var queryResult = QueryOrder(orderPrams);
                 if (queryResult["return_code"].ToString() != "SUCCESS" || queryResult["result_code"].ToString() != "SUCCESS")
                     return ErrorInfo("订单查询失败"); //若订单查询失败，则立即返回结果给微信支付后台

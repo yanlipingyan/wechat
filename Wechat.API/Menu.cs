@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wechat.WebUI
+namespace Wechat.API
 {
     public static class Menu
     {
@@ -16,11 +16,11 @@ namespace Wechat.WebUI
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="data">post数据（json格式）</param>
         /// <returns>成功时：{"errcode":0,"errmsg":"ok"}；失败时：{"errcode":40018,"errmsg":"invalid button name size"}</returns>
-        public static string CreateMenu(string appId, string appSecret,string data) 
+        public static string CreateMenu(string appId, string appSecret, string data)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/create?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WebHttpClient.Post(url, data);
+            return WechatWebClient.Post(url, data);
         }
 
         /// <summary>
@@ -29,11 +29,11 @@ namespace Wechat.WebUI
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <returns>menu为默认菜单，conditionalmenu为个性化菜单列表</returns>
-        public static string QueryAllMenu(string appId, string appSecret) 
+        public static string QueryAllMenu(string appId, string appSecret)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/get?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WebHttpClient.Get(url);
+            return WechatWebClient.Get(url);
         }
 
         /// <summary>
@@ -42,11 +42,11 @@ namespace Wechat.WebUI
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <returns>成功时：{"errcode":0,"errmsg":"ok"}</returns>
-        public static string DeleteAllMenu(string appId, string appSecret) 
+        public static string DeleteAllMenu(string appId, string appSecret)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/delete?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WebHttpClient.Get(url);
+            return WechatWebClient.Get(url);
         }
         #endregion
 
@@ -62,7 +62,7 @@ namespace Wechat.WebUI
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/addconditional?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WebHttpClient.Post(url, data);
+            return WechatWebClient.Post(url, data);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Wechat.WebUI
 
             var obj = new { menuid = menuId };
 
-            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
         }
 
 
@@ -89,13 +89,13 @@ namespace Wechat.WebUI
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="userId">post数据（user_id可以是粉丝的OpenID，也可以是粉丝的微信号。）</param>
         /// <returns></returns>
-        public static string TryMatchPersonaliseMenu(string appId, string appSecret, string userId) 
+        public static string TryMatchPersonaliseMenu(string appId, string appSecret, string userId)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/trymatch?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new { user_id = userId };
 
-            return WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
         }
         #endregion
     }

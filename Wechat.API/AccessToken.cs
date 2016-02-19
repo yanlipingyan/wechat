@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wechat.WebUI
+namespace Wechat.API
 {
     // 摘要: 
     //      获取普通access_token
@@ -32,7 +32,7 @@ namespace Wechat.WebUI
             //如果token不存在或已过期则重新生成Token
             if (tokenModel == null || string.IsNullOrEmpty(tokenModel.Token) || Common.IsExprie(tokenModel.DateTime))
             {
-                string result = WebHttpClient.Get(url);
+                string result = WechatWebClient.Get(url);
 
                 tokenModel.Token = JsonConvert.DeserializeObject<dynamic>(result)["access_token"];
                 tokenModel.DateTime = DateTime.Now;

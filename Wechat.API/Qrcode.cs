@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wechat.WebUI
+namespace Wechat.API
 {
     // 摘要: 
     //      微信二维码接口调用凭据
@@ -47,7 +47,7 @@ namespace Wechat.WebUI
                 }
             };
 
-            var result = WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+            var result = WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
 
             var ticket = JsonConvert.DeserializeObject<dynamic>(result)["ticket"].ToString();
 
@@ -88,7 +88,7 @@ namespace Wechat.WebUI
                 }
             };
 
-            var result = WebHttpClient.Post(url, JsonConvert.SerializeObject(obj));
+            var result = WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
 
             var ticket = JsonConvert.DeserializeObject<dynamic>(result)["ticket"].ToString();
 

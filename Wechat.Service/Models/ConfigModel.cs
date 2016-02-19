@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
-using Wechat.WebUI.Model;
+using Wechat.API.Models;
 
 namespace Wechat.Service.Models
 {

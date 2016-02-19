@@ -1,0 +1,119 @@
+﻿@model Wechat.WebUI.Models.Product
+@{
+    ViewBag.Title = "公众号支付";
+    Layout = "~/Views/Shared/_LayoutTest.cshtml";
+}
+
+<div data-role="page">
+    <div data-role="content">
+        <form method="post" action="">
+            <label class="ui-input-text margin-bottom">商品名称：@Model.Title</label>
+            <label class="ui-input-text margin-bottom">商品描述：@Model.Description</label>
+            <label class="ui-input-text margin-bottom">商品价格：@(Model.Price)分</label>
+            <label class="ui-input-text margin-bottom">收获地址：<span id="address" class="color-red">点击获取收货地址</span></label>
+            <input id="pay" type="button" data-inline="true" value="提交">
+        </form>
+    </div>
+</div>
+
+@section styles{
+    <style type="text/css">
+        .margin-bottom {
+            margin-bottom: 10px;
+        }
+
+        .color-red {
+            color: red;
+        }
+    </style>
+}
+
+@section scripts{
+
+    <script src="~/Content/lib/google/google.sha1.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            var timeStamp = '@Wechat.API.Common.GetTimeStamp()',//时间戳
+                nonceStr = '@Wechat.API.Common.GetNonceStr()';//随即串
+
+            //起调共享收获地址
+            $('#address').on('click', function () {
+                alert('开始起调微信共享收获地址...');
+                if (typeof WeixinJSBridge == "undefined") {
+                    if (document.addEventListener) {
+                        document.addEventListener('WeixinJSBridgeReady', editAddress, false);
+                    }
+                    else if (document.attachEvent) {
+                        document.attachEvent('WeixinJSBridgeReady', editAddress);
+                        document.attachEvent('onWeixinJSBridgeReady', editAddress);
+                    }
+                }
+                else {
+                    editAddress();
+                }
+            })
+
+            function editAddress() {
+                var signStr = "";
+                signStr += "accesstoken=@ViewBag.Oauth2Token";
+                signStr += "&appid=@ViewBag.AppId";
+                signStr += "&noncestr=" + nonceStr;
+                signStr += "&timestamp=" + timeStamp;
+                signStr += "&url=" + window.location.href;
+
+                var addrSign = CryptoJS.SHA1(signStr, { asString: true });
+                addrSign = addrSign.toString();
+
+                WeixinJSBridge.invoke('editAddress', {
+                    "appId": "@ViewBag.AppId",
+                    "scope": "jsapi_address",
+                    "signType": "sha1",
+                    "addrSign": addrSign,
+                    "timeStamp": timeStamp,
+                    "nonceStr": nonceStr
+                }, function (res) {
+                    if (res.err_msg == 'edit_address:ok') {
+                        var addressStr = '<p>' + res.userName + res.telNumber + '</p>' + '<p>' + res.proviceFirstStageName + res.addressCitySecondStageName + res.addressCountiesThirdStageName + res.addressDetailInfo + '</p>';
+                        $('#address').text(addressStr);
+                    }
+                });
+            }
+
+            $('#pay').on('click', function () {
+                alert('开始起调JSAPI支付接口...');
+                $.post('/pay/jspay', { title: '测试商品', description: '优惠大酬宾，赶紧的~', price: '1' }, function (jsonData) {
+                    if (typeof WeixinJSBridge == "undefined") {
+                        if (document.addEventListener) {
+                            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                        }
+                        else if (document.attachEvent) {
+                            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                        }
+                    }
+                    else {
+                        WeixinJSBridge.invoke('getBrandWCPayRequest', jsonData, function (res) {
+                            alert(JSON.stringify(res));
+                            //支付成功后的回调
+                            if (res.err_msg == "get_brand_wcpay_request：ok") {
+                                alert("成功");
+                            }
+                            //取消支付后的回调
+                            if (res.err_msg == "get_brand_wcpay_request:cancel") {
+                                alert("取消");
+                            }
+                            //支付失败后的回调
+                            if (res.err_msg == "get_brand_wcpay_request:fail") {
+                                alert("失败");
+                            }
+                        });
+                    }
+                }, 'json')
+            })
+        })
+
+
+    </script>
+}
+
