@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,9 @@ namespace Wechat.API
         //   appSecret:
         //     公众号appSecret。
         //
-        // 返回结果: Ip地址列表(string[])
+        // 返回结果: Ip地址列表(JArray)
         //
-        public static string[] GetIP(string appId, string appSecret)
+        public static JArray GetIP(string appId, string appSecret)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token={0}", AccessToken.GetToken(appId, appSecret));//获取微信服务器Ip地址的url。
 

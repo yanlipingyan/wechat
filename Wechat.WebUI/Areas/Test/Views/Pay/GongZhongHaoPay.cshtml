@@ -82,7 +82,8 @@
 
             $('#pay').on('click', function () {
                 alert('开始起调JSAPI支付接口...');
-                $.post('/pay/jspay', { title: '测试商品', description: '优惠大酬宾，赶紧的~', price: '1' }, function (jsonData) {
+                $.post('test/pay/jspay', { title: '测试商品', description: '优惠大酬宾，赶紧的~', price: '1' }, function (jsonData) {
+                    alert(jsonData);
                     if (typeof WeixinJSBridge == "undefined") {
                         if (document.addEventListener) {
                             document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);

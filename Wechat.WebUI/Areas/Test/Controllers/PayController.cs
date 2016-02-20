@@ -9,6 +9,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using ThoughtWorks.QRCode.Codec;
+using Wechat.API;
 using Wechat.API.Models;
 using Wechat.WebUI.Filters;
 
@@ -26,7 +27,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
         [WechatRoute]
         public ActionResult GongZhongHaoPay(string id, string code = "")
         {
-            var token = Wechat.API.OAuth2.GetToken(ApiModel.AppID, ApiModel.AppSecret, code);
+            var token = OAuth2.GetToken(ApiModel.AppID, ApiModel.AppSecret, code);
 
             ViewBag.Oauth2Token = JsonConvert.DeserializeObject<dynamic>(token)["access_token"];
             ViewBag.AppId = ApiModel.AppID;
@@ -57,30 +58,31 @@ namespace Wechat.WebUI.Areas.Test.Controllers
             orderParams.Add("attach", title);
             orderParams.Add("body", description);
             orderParams.Add("mch_id", ApiModel.MchID);
-            orderParams.Add("nonce_str", Wechat.API.Common.GetNonceStr());
+            orderParams.Add("nonce_str", Common.GetNonceStr());
             orderParams.Add("notify_url", "http://www.liblog.cn/test/pay/payresultnotify");
             orderParams.Add("openid", System.Web.HttpContext.Current.Request.Cookies["OpenId"].Value.ToString());
-            orderParams.Add("out_trade_no", Wechat.API.Pay.GetOutTradeNo(ApiModel.MchID));
+            orderParams.Add("out_trade_no", Pay.GetOutTradeNo(ApiModel.MchID));
             orderParams.Add("spbill_create_ip", "171.8.215.143");
             orderParams.Add("total_fee", price);
             orderParams.Add("trade_type", "JSAPI");
-            orderParams.Add("sign", Wechat.API.Pay.GetSign(orderParams, ApiModel.MchAPISecret));
+            orderParams.Add("sign", Pay.GetSign(orderParams, ApiModel.MchAPISecret));
 
-            var result = Wechat.API.Pay.UnifiedOrder(orderParams);
+            WechatLog.Info("", "1" + ApiModel.AppID + "2" + title + "3" + description + "4" + ApiModel.MchID + "5" + Common.GetNonceStr() + "6" + System.Web.HttpContext.Current.Request.Cookies["OpenId"].Value.ToString() + "7" + Pay.GetOutTradeNo(ApiModel.MchID) + "8" + Pay.GetSign(orderParams, ApiModel.MchAPISecret));
+            var result = Pay.UnifiedOrder(orderParams);
 
             //统一下单失败，返回错误结果给微信平台
             if (result["return_code"].ToString() != "SUCCESS")
-                return JsonConvert.SerializeObject(Wechat.API.Pay.ErrorInfo("统一下单失败"));
+                return JsonConvert.SerializeObject(Pay.ErrorInfo("统一下单失败"));
 
             //获取H5调起JS API参数
             SortedDictionary<string, object> apiParams = new SortedDictionary<string, object>();
 
             apiParams.Add("appId", ApiModel.AppID);
-            apiParams.Add("timeStamp", Wechat.API.Common.GetTimeStamp());
-            apiParams.Add("nonceStr", Wechat.API.Common.GetNonceStr());
+            apiParams.Add("timeStamp", Common.GetTimeStamp());
+            apiParams.Add("nonceStr", Common.GetNonceStr());
             apiParams.Add("package", "prepay_id=" + result["prepay_id"].ToString());
             apiParams.Add("signType", "MD5");
-            apiParams.Add("paySign", Wechat.API.Pay.GetSign(apiParams, ApiModel.MchAPISecret));
+            apiParams.Add("paySign", Pay.GetSign(apiParams, ApiModel.MchAPISecret));
 
             return JsonConvert.SerializeObject(apiParams);
         }
@@ -110,13 +112,13 @@ namespace Wechat.WebUI.Areas.Test.Controllers
             SortedDictionary<string, object> orderParams = new SortedDictionary<string, object>();
             orderParams.Add("appid", ApiModel.AppID);//公众帐号id
             orderParams.Add("mch_id", ApiModel.MchID);//商户号
-            orderParams.Add("time_stamp", Wechat.API.Common.GetTimeStamp());//时间戳
-            orderParams.Add("nonce_str", Wechat.API.Common.GetNonceStr());//随机字符串
+            orderParams.Add("time_stamp", Common.GetTimeStamp());//时间戳
+            orderParams.Add("nonce_str", Common.GetNonceStr());//随机字符串
             orderParams.Add("product_id", id);//商品订单号
-            orderParams.Add("sign", Wechat.API.Pay.GetSign(orderParams, ApiModel.MchAPISecret));//签名
+            orderParams.Add("sign", Pay.GetSign(orderParams, ApiModel.MchAPISecret));//签名
 
             //预支付URL
-            var url = Wechat.API.Pay.GetPayUrlForNativeOne(orderParams);
+            var url = Pay.GetPayUrlForNativeOne(orderParams);
 
             //初始化二维码生成工具
             QRCodeEncoder qrCodeEncoder = new QRCodeEncoder();
@@ -143,10 +145,10 @@ namespace Wechat.WebUI.Areas.Test.Controllers
         /// <returns></returns>
         public string CallbackUrl()
         {
-            var result = Wechat.API.Pay.GetNotifyData();
+            var result = Pay.GetNotifyData();
 
             if (string.IsNullOrEmpty(result["openid"].ToString()) || string.IsNullOrEmpty(result["product_id"].ToString()))
-                return Wechat.API.Common.SortedDictionaryToXml(Wechat.API.Pay.ErrorInfo("回调数据异常"));
+                return Common.SortedDictionaryToXml(Pay.ErrorInfo("回调数据异常"));
 
             //商户根据productid【在生成二维码时传的是订单号就是订单号，是商品号就是商品号，要对应起来】生成商户系统的订单
             //:TODO
@@ -157,21 +159,21 @@ namespace Wechat.WebUI.Areas.Test.Controllers
             orderParams.Add("attach", "微信扫码支付");
             orderParams.Add("body", "扫码支付一测试");
             orderParams.Add("mch_id", ApiModel.MchID);
-            orderParams.Add("nonce_str", Wechat.API.Common.GetNonceStr());
+            orderParams.Add("nonce_str", Common.GetNonceStr());
             orderParams.Add("notify_url", "http://www.liblog.cn/test/pay/payresultnotify");//支付成功后的回调URl
             orderParams.Add("openid", result["openid"].ToString());
             orderParams.Add("product_id", result["product_id"].ToString());//trade_type=NATIVE，此参数必传。此id为二维码中包含的商品ID，商户自行定义。
-            orderParams.Add("out_trade_no", Wechat.API.Pay.GetOutTradeNo(ApiModel.MchID));//result["product_id"].ToString()
+            orderParams.Add("out_trade_no", Pay.GetOutTradeNo(ApiModel.MchID));//result["product_id"].ToString()
             orderParams.Add("spbill_create_ip", "171.8.215.143");
             orderParams.Add("total_fee", 1);
             orderParams.Add("trade_type", "NATIVE");
-            orderParams.Add("sign", Wechat.API.Pay.GetSign(orderParams, ApiModel.MchAPISecret));
+            orderParams.Add("sign", Pay.GetSign(orderParams, ApiModel.MchAPISecret));
 
-            var orderResult = Wechat.API.Pay.UnifiedOrder(orderParams);
+            var orderResult = Pay.UnifiedOrder(orderParams);
 
             //统一下单失败，返回错误结果给微信平台
             if (orderResult["return_code"].ToString() != "SUCCESS")
-                return Wechat.API.Common.SortedDictionaryToXml(Wechat.API.Pay.ErrorInfo("统一下单失败"));
+                return Common.SortedDictionaryToXml(Pay.ErrorInfo("统一下单失败"));
 
             //统一下单成功,则返回成功结果给微信支付后台
             var resultParams = new SortedDictionary<string, object>();
@@ -179,13 +181,13 @@ namespace Wechat.WebUI.Areas.Test.Controllers
             resultParams.Add("return_msg", "OK");
             resultParams.Add("appid", ApiModel.AppID);
             resultParams.Add("mch_id", ApiModel.MchID);
-            resultParams.Add("nonce_str", Wechat.API.Common.GetNonceStr());
+            resultParams.Add("nonce_str", Common.GetNonceStr());
             resultParams.Add("prepay_id", orderResult["prepay_id"].ToString());
             resultParams.Add("result_code", "SUCCESS");
             resultParams.Add("err_code_des", "OK");
-            resultParams.Add("sign", Wechat.API.Pay.GetSign(resultParams, ApiModel.MchAPISecret));
+            resultParams.Add("sign", Pay.GetSign(resultParams, ApiModel.MchAPISecret));
 
-            return Wechat.API.Common.SortedDictionaryToXml(resultParams);
+            return Common.SortedDictionaryToXml(resultParams);
         }
         #endregion
 
@@ -217,17 +219,17 @@ namespace Wechat.WebUI.Areas.Test.Controllers
             orderParams.Add("attach", "微信扫码支付");//附加数据
             orderParams.Add("body", "扫码支付二测试");//商品描述
             orderParams.Add("mch_id", ApiModel.MchID);
-            orderParams.Add("nonce_str", Wechat.API.Common.GetNonceStr());
+            orderParams.Add("nonce_str", Common.GetNonceStr());
             orderParams.Add("notify_url", "http://www.liblog.cn/test/pay/payresultnotify");//支付成功后的回调URl
             orderParams.Add("product_id", id);//商品标记
-            orderParams.Add("out_trade_no", Wechat.API.Pay.GetOutTradeNo(ApiModel.MchID));//随机字符串
+            orderParams.Add("out_trade_no", Pay.GetOutTradeNo(ApiModel.MchID));//随机字符串
             orderParams.Add("spbill_create_ip", "171.8.215.143");
             orderParams.Add("total_fee", 1);//总金额
             orderParams.Add("trade_type", "NATIVE");//商品订单号
-            orderParams.Add("sign", Wechat.API.Pay.GetSign(orderParams, ApiModel.MchAPISecret));
+            orderParams.Add("sign", Pay.GetSign(orderParams, ApiModel.MchAPISecret));
 
             //直接支付URL
-            var url = Wechat.API.Pay.GetPayUrlForNativeTwo(orderParams);
+            var url = Pay.GetPayUrlForNativeTwo(orderParams);
 
             //初始化二维码生成工具
             QRCodeEncoder qrCodeEncoder = new QRCodeEncoder();
@@ -257,9 +259,9 @@ namespace Wechat.WebUI.Areas.Test.Controllers
         /// <returns>string</returns>
         public string PayResultNotify()
         {
-            var result = Wechat.API.Pay.PayResultNotify();
+            var result = Pay.PayResultNotify();
 
-            return Wechat.API.Common.SortedDictionaryToXml(result);
+            return Common.SortedDictionaryToXml(result);
         }
 
     }

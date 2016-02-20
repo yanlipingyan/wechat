@@ -20,17 +20,17 @@ namespace Wechat.WebUI.Areas.Test.Controllers
 
         public ActionResult GetJsApiTicket()
         {
-            return Content(Wechat.API.JsSdk.GetTicket(ApiModel.AppID, ApiModel.AppSecret));
+            return Content(JsSdk.GetTicket(ApiModel.AppID, ApiModel.AppSecret));
         }
 
         public string GetSign(string timestamp, string nonceStr, string url)
         {
-            return Wechat.API.JsSdk.GetSign(ApiModel.AppID, ApiModel.AppSecret, nonceStr, timestamp, url);
+            return JsSdk.GetSign(ApiModel.AppID, ApiModel.AppSecret, nonceStr, timestamp, url);
         }
 
         public ActionResult TestSign()
         {
-            return Content(Wechat.API.JsSdk.GetSign(ApiModel.AppID, ApiModel.AppSecret, Common.GetNonceStr(), Common.GetTimeStamp(), "http://www.liblog.cn"));
+            return Content(JsSdk.GetSign(ApiModel.AppID, ApiModel.AppSecret, Common.GetNonceStr(), Common.GetTimeStamp(), "http://www.liblog.cn"));
         }
     }
 }

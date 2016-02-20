@@ -68,6 +68,7 @@
     <Compile Include="ReceiveMessage.cs" />
     <Compile Include="SendMessage.cs" />
     <Compile Include="Server.cs" />
+    <Compile Include="Signature.cs" />
     <Compile Include="WebClient.cs" />
   </ItemGroup>
   <ItemGroup>
