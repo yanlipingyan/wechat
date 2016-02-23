@@ -5,15 +5,16 @@
 
 <h2>测试分享</h2>
 
-//JSSDK使用步骤
+@*JSSDK使用步骤*@
 @section scripts{
 
-    //步骤一：绑定域名
+    @*步骤一：绑定域名*@
     @*先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。如果你使用了支付类接口，请确保支付目录在该安全域名下，否则将无法完成支付。
 备注：登录后可在“开发者中心”查看对应的接口权限。*@
 
-    //步骤二：引入JS文件；备注：如需使用摇一摇周边功能，请引入 jweixin-1.1.0.js。支持使用 AMD/CMD 标准模块加载方法加载
+    @*步骤二：引入JS文件；备注：如需使用摇一摇周边功能，请引入 jweixin-1.1.0.js。支持使用 AMD/CMD 标准模块加载方法加载*@
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
 
     <script type="text/javascript">
 
@@ -30,8 +31,12 @@
                 timestamp: timestamp, // 必填，生成签名的时间戳
                 nonceStr: noncestr, // 必填，生成签名的随机串
                 signature: sign,// 必填，签名，见附录1
-                jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-            });
+                jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone', 'chooseImage', ' previewImage',
+                    'uploadImage', 'downloadImage', 'startRecord', 'stopRecord', 'onVoiceRecordEnd', 'playVoice', 'pauseVoice', 'stopVoice', 'onVoicePlayEnd', 'uploadVoice',
+                    'downloadVoice', 'translateVoice', 'getNetworkType', 'openLocation', 'getLocation', 'hideOptionMenu', 'showOptionMenu', 'closeWindow',
+                    'hideMenuItems', 'showMenuItems', 'hideAllNonBaseMenuItem', 'showAllNonBaseMenuItem', 'scanQRCode', 'openProductSpecificView', 'startSearchBeacons',
+                    'stopSearchBeacons'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });//'startSearchBeacons', 'stopSearchBeacons',摇一摇的两个
 
             //步骤四：通过ready接口处理成功验证
             wx.ready(function () {
@@ -39,7 +44,10 @@
 
                 //判断当前客户端版本是否支持指定JS接口
                 wx.checkJsApi({
-                    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+                    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone', 'chooseImage', ' previewImage',
+                    'uploadImage', 'downloadImage', 'startRecord', 'stopRecord', 'onVoiceRecordEnd', 'playVoice', 'pauseVoice', 'stopVoice', 'onVoicePlayEnd', 'uploadVoice', 'downloadVoice',
+                    'translateVoice', 'getNetworkType', 'openLocation', 'getLocation', 'hideOptionMenu', 'showOptionMenu', 'closeWindow', 'hideMenuItems', 'showMenuItems',
+                    'hideAllNonBaseMenuItem', 'showAllNonBaseMenuItem', 'scanQRCode', 'openProductSpecificView', 'startSearchBeacons', 'stopSearchBeacons'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
                     success: function (res) {
                         // 以键值对的形式返回，可用的api值true，不可用为false；如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
                     }
