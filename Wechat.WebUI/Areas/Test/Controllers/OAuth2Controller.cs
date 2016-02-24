@@ -22,9 +22,9 @@ namespace Wechat.WebUI.Areas.Test.Controllers
                 return Content("code为空");
 
             var getToken = OAuth2.GetToken(ApiModel.AppID, ApiModel.AppSecret, code);
-            var tokenIsValid = OAuth2.GetOAuthTokenIsValid(JsonConvert.DeserializeObject<dynamic>(getToken)["openid"].ToString(), JsonConvert.DeserializeObject<dynamic>(getToken)["access_token"].ToString());
-            var refreshToken = OAuth2.RefreshToken(ApiModel.AppID, JsonConvert.DeserializeObject<dynamic>(getToken)["refresh_token"].ToString());
-            var getUserInfo = OAuth2.GetUserInfo(JsonConvert.DeserializeObject<dynamic>(getToken)["openid"].ToString(), JsonConvert.DeserializeObject<dynamic>(getToken)["access_token"].ToString(), "zh_CN");
+            var tokenIsValid = OAuth2.GetOAuthTokenIsValid(getToken.openid, getToken.access_token);
+            var refreshToken = OAuth2.RefreshToken(ApiModel.AppID, getToken.refresh_token);
+            var getUserInfo = OAuth2.GetUserInfo(getToken.openid, getToken.access_token, "zh_CN");
 
             return Content("GetToken：" + getToken + "；</br>" + "GetOAuthTokenIsValid:" + tokenIsValid + "；</br>" + "RefreshToken:" + refreshToken + "；</br>" + "getUserInfo:" + getUserInfo + "；</br>");
         }

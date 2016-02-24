@@ -29,12 +29,12 @@ namespace Wechat.WebUI.Areas.Test.Controllers
         {
             var token = OAuth2.GetToken(ApiModel.AppID, ApiModel.AppSecret, code);
 
-            ViewBag.Oauth2Token = JsonConvert.DeserializeObject<dynamic>(token)["access_token"];
+            ViewBag.Oauth2Token = token.access_token;
             ViewBag.AppId = ApiModel.AppID;
 
             //将此微信用户openId保存到cookie里
             HttpCookie cookie = new HttpCookie("OpenId");//初使化并设置Cookie的名称
-            cookie.Value = JsonConvert.DeserializeObject<dynamic>(token)["openid"];
+            cookie.Value = token.openid;
             cookie.Expires = DateTime.Now.AddDays(1);
             System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
 
