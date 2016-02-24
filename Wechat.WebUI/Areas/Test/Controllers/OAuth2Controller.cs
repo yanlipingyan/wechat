@@ -26,7 +26,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
             var refreshToken = OAuth2.RefreshToken(ApiModel.AppID, getToken.refresh_token);
             var getUserInfo = OAuth2.GetUserInfo(getToken.openid, getToken.access_token, "zh_CN");
 
-            return Content("GetToken：" + getToken + "；</br>" + "GetOAuthTokenIsValid:" + tokenIsValid + "；</br>" + "RefreshToken:" + refreshToken + "；</br>" + "getUserInfo:" + getUserInfo + "；</br>");
+            return Content("GetToken：" + JsonConvert.SerializeObject(getToken) + "；</br>" + "GetOAuthTokenIsValid:" + JsonConvert.SerializeObject(tokenIsValid) + "；</br>" + "RefreshToken:" + JsonConvert.SerializeObject(refreshToken) + "；</br>" + "getUserInfo:" + JsonConvert.SerializeObject(getUserInfo) + "；</br>");
         }
 
     }
