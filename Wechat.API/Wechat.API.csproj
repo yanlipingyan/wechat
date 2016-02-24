@@ -57,6 +57,7 @@
     <Compile Include="Helper\AccessTokenHelper.cs" />
     <Compile Include="Helper\JsApiTicketHelper.cs" />
     <Compile Include="JsSdk.cs" />
+    <Compile Include="Material.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Models\AccessTokenModel.cs" />
     <Compile Include="Models\ApiModel.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Qrcode.cs" />
     <Compile Include="ReceiveMessage.cs" />
+    <Compile Include="ResultModels\MaterialResult.cs" />
     <Compile Include="ResultModels\Oauth2\Oauth2TokenResult.cs" />
     <Compile Include="ResultModels\Oauth2\OAuth2UserInfoResult.cs" />
     <Compile Include="ResultModels\WechatResult.cs" />

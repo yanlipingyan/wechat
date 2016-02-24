@@ -29,7 +29,7 @@ namespace Wechat.API
         //   state:
         //     重定向后会带上state参数，开发者可以填写a-zA-Z0-9的参数值，最多128字节。
         //
-        public static string GetCode(string appId, string redirect_url, Enums.OAuthScope scope, string state)
+        public static string GetCode(string appId, string redirect_url, Enums.OAuthScopeEnum scope, string state)
         {
             /* 这一步发送之后，客户会得到授权页面，无论同意或拒绝，都会返回redirectUrl页面。
              * 如果用户同意授权，页面将跳转至 redirect_uri/?code=CODE&state=STATE。这里的code用于换取access_token（和通用接口的access_token不通用）

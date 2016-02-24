@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Wechat.API
 {
-    // 摘要: 
-    //      获取普通access_token
-    //
+    /// <summary>
+    /// 获取普通access_token
+    /// </summary>
     public static class AccessToken
     {
         // 摘要: 

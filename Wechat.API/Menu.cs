@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Wechat.API
 {
+    /// <summary>
+    /// 自定义菜单API接口
+    /// </summary>
     public static class Menu
     {
         #region 普通菜单

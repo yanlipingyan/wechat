@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Wechat.API
 {
-    public class JsSdk
+    public static class JsSdk
     {
         // 摘要: 
         //     获取jsapiTicket。
