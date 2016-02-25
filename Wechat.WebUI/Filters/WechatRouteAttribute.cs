@@ -16,7 +16,7 @@ namespace Wechat.WebUI.Filters
 
             if (Common.IsFromWechatBrowser() && !path.Contains("open.weixin.qq.com") && (HttpContext.Current.Request.QueryString["code"] == null || string.IsNullOrEmpty(HttpContext.Current.Request.QueryString["code"].ToString())))
             {
-                filterContext.Result = new RedirectResult(OAuth2.GetCode(ApiModel.AppID, path,Wechat.API.Enums.OAuthScope.snsapi_userinfo, "STATE"));
+                filterContext.Result = new RedirectResult(OAuth2.GetCode(ApiModel.AppID, path, Wechat.API.Enums.OAuthScopeEnum.snsapi_userinfo, "STATE"));
             }
         }
     }

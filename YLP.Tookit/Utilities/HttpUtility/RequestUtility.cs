@@ -21,47 +21,44 @@ namespace YLP.Tookit.Utilities.HttpUtility
         {
             WebClient wc = new WebClient();
             wc.Encoding = encoding ?? Encoding.UTF8;
-            //if (encoding != null)
-            //{
-            //    wc.Encoding = encoding;
-            //}
             return wc.DownloadString(url);
         }
 
-        ///// <summary>
-        ///// 使用Get方法获取字符串结果（加入Cookie）
-        ///// </summary>
-        ///// <param name="url"></param>
-        ///// <param name="cookieContainer"></param>
-        ///// <param name="encoding"></param>
-        ///// <returns></returns>
-        //public static string HttpGet(string url, CookieContainer cookieContainer = null, Encoding encoding = null, int timeOut = Config.TIME_OUT)
-        //{
-        //    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-        //    request.Method = "GET";
-        //    request.Timeout = timeOut;
+        /// <summary>
+        /// 使用Get方法获取字符串结果（加入Cookie）
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="cookieContainer"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static string HttpGet(string url, CookieContainer cookieContainer = null, Encoding encoding = null)//, int timeOut = Config.TIME_OUT
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);//不要使用 HttpWebRequest 构造函数。使用 System.Net.WebRequest.Create 方法初始化新的 HttpWebRequest 对象。
+            request.Method = "GET";
+            //request.Timeout = timeOut;
 
-        //    if (cookieContainer != null)
-        //    {
-        //        request.CookieContainer = cookieContainer;
-        //    }
+            if (cookieContainer != null)
+            {
+                request.CookieContainer = cookieContainer;//为安全起见，默认情况下禁用 Cookie。如果您希望使用 Cookie，请使用 CookieContainer 属性启用 Cookie。
+            }
 
-        //    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();//决不要直接创建 HttpWebResponse 类的实例。而应当使用通过调用 HttpWebRequest.GetResponse 所返回的实例。GetResponse 方法向 RequestUri 属性中指定的资源发出同步请求并返回包含该响应的 HttpWebResponse。可以使用 BeginGetResponse 和 EndGetResponse 方法对资源发出异步请求。
 
-        //    if (cookieContainer != null)
-        //    {
-        //        response.Cookies = cookieContainer.GetCookies(response.ResponseUri);
-        //    }
+            if (cookieContainer != null)
+            {
+                response.Cookies = cookieContainer.GetCookies(response.ResponseUri);
+            }
 
-        //    using (Stream responseStream = response.GetResponseStream())
-        //    {
-        //        using (StreamReader myStreamReader = new StreamReader(responseStream, encoding ?? Encoding.GetEncoding("utf-8")))
-        //        {
-        //            string retString = myStreamReader.ReadToEnd();
-        //            return retString;
-        //        }
-        //    }
-        //}
+            //using中声明的对象，在using语句块结束后会自动释放。不过该对象必须实现了IDisposable接口，其功能和try ,catch,Finally完全相同。
+            using (Stream responseStream = response.GetResponseStream())//通过调用 GetResponseStream 方法，以 Stream 的形式返回来自 Internet 资源的响应的内容。
+            {
+                using (StreamReader myStreamReader = new StreamReader(responseStream, encoding ?? Encoding.GetEncoding("utf-8")))
+                {
+                    string retString = myStreamReader.ReadToEnd();
+                    return retString;
+                }
+            }
+        }
 
         ///// <summary>
         ///// 使用Post方法获取字符串结果，常规提交
@@ -364,9 +361,7 @@ namespace YLP.Tookit.Utilities.HttpUtility
         public static string GetQueryString(this Dictionary<string, string> formData)
         {
             if (formData == null || formData.Count == 0)
-            {
                 return "";
-            }
 
             StringBuilder sb = new StringBuilder();
 

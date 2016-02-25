@@ -19,13 +19,13 @@ namespace Wechat.API
         /// <param name="file"></param>
         /// <param name="timeOut">代理请求超时时间（毫秒）</param>
         /// <returns></returns>
-        public static ResultModels.TemporaryMaterialResult UploadTemporaryMedia(string appId, string appSecret, Enums.MaterialFileEnum type, string file, int timeOut = Config.TIME_OUT)
+        public static ResultModels.TemporaryMaterialResult UploadTemporaryMedia(string appId, string appSecret, Enums.MaterialFileEnum type, string file)
         {
-            var url = string.Format("http://api.weixin.qq.com/cgi-bin/media/upload?access_token={0}&type={1}", AccessToken.GetToken(appId,appSecret), type.ToString());
+            var url = string.Format("http://api.weixin.qq.com/cgi-bin/media/upload?access_token={0}&type={1}", AccessToken.GetToken(appId, appSecret), type.ToString());
 
             var fileDictionary = new Dictionary<string, string>();
             fileDictionary["media"] = file;
-            return HttpUtility.Post.PostFileGetJson<UploadTemporaryMediaResult>(url, null, fileDictionary, null, timeOut: timeOut);
+            return new ResultModels.TemporaryMaterialResult();// HttpUtility.Post.PostFileGetJson<ResultModels.TemporaryMaterialResult>(url, null, fileDictionary, null, timeOut: timeOut);
             //return ApiHandlerWapper.TryCommonApi(accessToken =>
             //{
             //    var url = string.Format("http://api.weixin.qq.com/cgi-bin/media/upload?access_token={0}&type={1}", accessToken, type.ToString());
