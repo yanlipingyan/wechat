@@ -130,6 +130,7 @@
     <Compile Include="Areas\Test\Controllers\PayController.cs" />
     <Compile Include="Areas\Test\Controllers\QrcodeController.cs" />
     <Compile Include="Areas\Test\Controllers\ServerController.cs" />
+    <Compile Include="Areas\Test\Controllers\UploadImageController.cs" />
     <Compile Include="Areas\Test\TestAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
@@ -138,6 +139,9 @@
     <Compile Include="Filters\WechatRouteAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HttpHandler\UploadImage.ashx.cs">
+      <DependentUpon>UploadImage.ashx</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -355,6 +359,7 @@
     <Content Include="Areas\Test\Views\JsSdk\Index.cshtml" />
     <Content Include="Areas\Test\Views\Card\Index.cshtml" />
     <Content Include="Areas\Test\Views\Card\JSSDK.cshtml" />
+    <Content Include="HttpHandler\UploadImage.ashx" />
     <None Include="Properties\PublishProfiles\wechat.pubxml" />
   </ItemGroup>
   <PropertyGroup>
