@@ -11,13 +11,13 @@ namespace Wechat.WebUI.Areas.Test.Controllers
         //
         // GET: /Test/UploadImage/
 
-        public ActionResult Index()
+        public ActionResult Index(string img)
         {
-            return View();
+            return View(img);
         }
 
         [HttpPost]
-        public ActionResult Upload()
+        public ActionResult Upload(string memberId = "")
         {
             #region 上传到本地
             var strogeFolder = string.Format("/Upload/Header/{0}/", DateTime.Now.ToString("yyyy/MM/dd"));
@@ -31,10 +31,14 @@ namespace Wechat.WebUI.Areas.Test.Controllers
 
             if (!string.IsNullOrEmpty(header))
             {
-                //TODO:保存到数据库
+                if (!string.IsNullOrEmpty(memberId))
+                {
+                    //TODO:保存到数据库
+                }
 
                 return Content("上传成功");
             }
+
             return Content("上传失败");
             #endregion
         }

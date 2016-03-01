@@ -1,0 +1,1 @@
+//坑爹  FaustCplus 只能放在js文件夹下

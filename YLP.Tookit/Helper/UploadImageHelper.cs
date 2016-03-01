@@ -8,6 +8,9 @@ using System.Web;
 
 namespace YLP.Tookit.Helper
 {
+    /// <summary>
+    /// FaustCplus插件上传图片
+    /// </summary>
     public class UploadImageHelper
     {
         /// <summary>

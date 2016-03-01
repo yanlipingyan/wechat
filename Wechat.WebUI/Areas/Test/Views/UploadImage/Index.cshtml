@@ -1,0 +1,39 @@
+﻿@model string
+@{
+    ViewBag.Title = "FaustCplus上传头像";
+    Layout = "~/Views/Shared/_LayoutTest.cshtml";
+}
+
+<h2>测试上传头像</h2>
+<div data-role="page">
+    @if (!string.IsNullOrEmpty(Model))
+    { 
+        <div class="img" style="margin-bottom: 6px;">
+            <img src="@Model" alt="" />
+        </div>
+    }
+    else
+    {
+        <div class="img"></div>
+    }
+    <a href="javascript:;" style="padding: 6px 10px;" id="upLoadHead">上传头像</a>
+    <input type="hidden" name="Logo" value="@Model"/>
+</div>
+@section scripts{
+
+    <script src="~/Content/js/FaustCplus/headUpload.js"></script>
+
+    <script>
+        //上传头像事件
+        $("#upLoadHead").click(function () {
+            var $this = $(this);
+            headUpload($this, {
+                static: "/Content/",
+                url: '/Test/UploadImage/Upload?memberId=' + 1
+            },
+                function (res) {
+                    console.log(res)
+                })
+        })
+    </script>
+}
