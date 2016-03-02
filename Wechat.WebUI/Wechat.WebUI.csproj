@@ -121,7 +121,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiFilters\Test.cs" />
     <Compile Include="Areas\Test\Controllers\AccessTokenController.cs" />
+    <Compile Include="Areas\Test\Controllers\AllowAnonymousController.cs" />
     <Compile Include="Areas\Test\Controllers\CardController.cs" />
     <Compile Include="Areas\Test\Controllers\CommonController.cs" />
     <Compile Include="Areas\Test\Controllers\JsSdkController.cs" />
@@ -132,6 +134,7 @@
     <Compile Include="Areas\Test\Controllers\RecordWechatLogController.cs" />
     <Compile Include="Areas\Test\Controllers\ServerController.cs" />
     <Compile Include="Areas\Test\Controllers\UploadImageController.cs" />
+    <Compile Include="Areas\Test\Controllers\YLPAutorizeController.cs" />
     <Compile Include="Areas\Test\TestAreaRegistration.cs" />
     <Compile Include="Content\lib\ueditor\net\App_Code\Config.cs" />
     <Compile Include="Content\lib\ueditor\net\App_Code\ConfigHandler.cs" />

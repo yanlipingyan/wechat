@@ -19,16 +19,9 @@ namespace Wechat.WebUI.Controllers
             return Content("设置登录cookie");
         }
 
-        [Authorize(Roles = "ylp")]
         public ActionResult Test()
         {
-            return Content("这是Test");
-        }
-
-        [Authorize(Roles = "ce")]
-        public ActionResult Test1()
-        {
-            return Content("这是Test1");
+            return Content("测试");
         }
     }
 }

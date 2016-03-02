@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
+using System.Web.Mvc;//这是MVC的过滤器命名空间
 using Wechat.API;
 using Wechat.API.Models;
 
