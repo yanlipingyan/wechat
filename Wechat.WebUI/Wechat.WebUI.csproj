@@ -129,6 +129,7 @@
     <Compile Include="Areas\Test\Controllers\OAuth2Controller.cs" />
     <Compile Include="Areas\Test\Controllers\PayController.cs" />
     <Compile Include="Areas\Test\Controllers\QrcodeController.cs" />
+    <Compile Include="Areas\Test\Controllers\RecordWechatLogController.cs" />
     <Compile Include="Areas\Test\Controllers\ServerController.cs" />
     <Compile Include="Areas\Test\Controllers\UploadImageController.cs" />
     <Compile Include="Areas\Test\TestAreaRegistration.cs" />
@@ -576,6 +577,7 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ApiControllers\" />
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Test\Models\" />
     <Folder Include="Areas\Test\Views\Shared\" />

@@ -19,7 +19,7 @@ namespace Wechat.API
     public class WechatLog
     {
         //在网站根目录下创建日志目录
-        public static string path = HttpContext.Current.Request.PhysicalApplicationPath + "Wechat_Logs";
+        private static string path = HttpContext.Current.Request.PhysicalApplicationPath + "Wechat_Logs";
 
         /**
          * 向日志文件写入调试信息

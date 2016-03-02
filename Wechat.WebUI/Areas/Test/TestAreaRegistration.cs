@@ -17,7 +17,8 @@ namespace Wechat.WebUI.Areas.Test
             context.MapRoute(
                 "Test_default",
                 "Test/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", id = UrlParameter.Optional },
+                new string[] { "Wechat.WebUI.Areas.Test.Controllers" }
             );
         }
     }

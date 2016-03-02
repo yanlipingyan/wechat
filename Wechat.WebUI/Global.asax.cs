@@ -26,5 +26,19 @@ namespace Wechat.WebUI
 
             ConfigService.InitConfig();
         }
+
+        /// <summary>
+        /// 拦截用户权限（实现角色功能）
+        /// </summary>
+        protected void Application_AuthenticateRequest()
+        {
+            if (Context.User != null)
+            {
+                System.Security.Principal.IIdentity id = Context.User.Identity;
+
+                if (id != null && id.IsAuthenticated)
+                    Context.User = new System.Security.Principal.GenericPrincipal(id, new string[] { YLPAuthorize.Role });
+            }
+        }
     }
 }
