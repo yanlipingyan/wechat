@@ -21,7 +21,7 @@ namespace Wechat.WebUI.HttpHandler
 
             var fileName = string.Format("{0}.{1}", Guid.NewGuid().ToString("N"), "jpg");
 
-            YLP.Tookit.Helper.UploadImageHelper.Upload(networkPath, physicalPath, fileName);
+            YLP.Tookit.Helper.FaustCplusUploadHelper.Upload(networkPath, physicalPath, fileName);
         }
 
         public bool IsReusable

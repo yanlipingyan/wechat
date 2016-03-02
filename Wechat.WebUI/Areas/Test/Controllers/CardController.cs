@@ -23,7 +23,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
 
         public string ShowQrcode(string cardId)
         {
-            LogHelper.Error(Card.ShowCardQrcode(ApiModel.AppID, ApiModel.AppSecret, cardId));
+            Log4NetHelper.Error(Card.ShowCardQrcode(ApiModel.AppID, ApiModel.AppSecret, cardId));
             return Card.ShowCardQrcode(ApiModel.AppID, ApiModel.AppSecret, cardId);
         }
 

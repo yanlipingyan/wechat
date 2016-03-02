@@ -11,7 +11,7 @@ namespace YLP.Tookit.Helper
     /// <summary>
     /// FaustCplus插件上传图片
     /// </summary>
-    public class UploadImageHelper
+    public class FaustCplusUploadHelper
     {
         /// <summary>
         /// 上传头像

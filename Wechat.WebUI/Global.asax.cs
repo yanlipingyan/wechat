@@ -22,7 +22,7 @@ namespace Wechat.WebUI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            LogHelper.LoadConfig(Server.MapPath("~/Config/log4net.config"));
+            Log4NetHelper.LoadConfig(Server.MapPath("~/Config/log4net.config"));
 
             ConfigService.InitConfig();
         }

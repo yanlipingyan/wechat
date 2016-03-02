@@ -27,7 +27,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
 
             var fileName = string.Format("{0}.{1}", Guid.NewGuid().ToString("N"), "jpg");
 
-            string header = YLP.Tookit.Helper.UploadImageHelper.Upload(networkPath, physicalPath, fileName);
+            string header = YLP.Tookit.Helper.FaustCplusUploadHelper.Upload(networkPath, physicalPath, fileName);
 
             if (!string.IsNullOrEmpty(header))
             {
