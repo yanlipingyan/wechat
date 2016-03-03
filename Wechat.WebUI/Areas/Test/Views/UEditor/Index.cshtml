@@ -17,9 +17,9 @@
 
     <button id="getContent">获取当前编辑器内容</button>
 
-    @Html.Raw("<p>&nbsp; &nbsp; &nbsp; &nbsp;这是读取的修改上传图片路径及返回路径后的图片（对UploadHandler.cs文件中var localPath =Server.MapPath(savePath);进行了修改；还对config.json文件中该项配\"imageUrlPrefix\": \"/ueditor/net/\", /* 图片访问路径前缀 */进行了修改）,请看下图：\r\n <br/>&nbsp; &nbsp; &nbsp; &nbsp;<img alt=\"IMG_1812.PNG\" src=\"/upload/image/20160303/6359262146950772467612014.JPG\" title=\"IMG_1812.PNG\"/></p>")
+    @Html.Raw("<p>一、&nbsp; &nbsp; &nbsp; &nbsp;这是读取的修改上传图片路径及返回路径后的图片<br/>修改的内容如下：<br/>1、对UploadHandler.cs文件中var localPath =Server.MapPath(savePath);修改成var localPath = AppDomain.CurrentDomain.BaseDirectory + \"/\" + savePath;；<br/>2、对UploadHandler.cs文件中Result.Url = savePath;修改成Result.Url = \"/\" + savePath;<br/>3、还对config.json文件中图片访问路径前缀该项配\"imageUrlPrefix\": \"/ueditor/net/\", 修改成了：\"imageUrlPrefix\": \"空\",<br/>请看下图：\r\n <br/>&nbsp; &nbsp; &nbsp; &nbsp;<img alt=\"IMG_1812.PNG\" src=\"/upload/image/20160303/6359262146950772467612014.JPG\" title=\"IMG_1812.PNG\"/></p>")
 
-    @Html.Raw("<p>&nbsp; &nbsp; &nbsp; &nbsp;这是读取的默认情况下上传图片的路径下的图片,请看下图：\r\n <br/>&nbsp; &nbsp; &nbsp; &nbsp;<img alt=\"IMG_1811.JPG\" src=\"/Content/lib/ueditor/net/upload/image/20160303/6359261966295339562742567.JPG\" title=\"IMG_1811.JPG\"/></p>")
+    @Html.Raw("<p>二、&nbsp; &nbsp; &nbsp; &nbsp;这是读取的默认情况下上传图片的路径下的图片,请看下图：\r\n <br/>&nbsp; &nbsp; &nbsp; &nbsp;<img alt=\"IMG_1811.JPG\" src=\"/Content/lib/ueditor/net/upload/image/20160303/6359261966295339562742567.JPG\" title=\"IMG_1811.JPG\"/></p>")
 
 
 
