@@ -64,7 +64,9 @@ public class UploadHandler : Handler
         Result.OriginFileName = uploadFileName;
 
         var savePath = PathFormatter.Format(uploadFileName, UploadConfig.PathFormat);
-        var localPath = Server.MapPath(savePath);
+        // var localPath = Server.MapPath(savePath);//这是原生的 
+        var localPath = AppDomain.CurrentDomain.BaseDirectory + "/" + savePath;//这是修改后的              
+
         try
         {
             if (!Directory.Exists(Path.GetDirectoryName(localPath)))
@@ -72,7 +74,8 @@ public class UploadHandler : Handler
                 Directory.CreateDirectory(Path.GetDirectoryName(localPath));
             }
             File.WriteAllBytes(localPath, uploadFileBytes);
-            Result.Url = savePath;
+            //Result.Url = savePath;//这是原生的
+            Result.Url = "/" + savePath;//这是修改后的
             Result.State = UploadState.Success;
         }
         catch (Exception e)
@@ -111,7 +114,7 @@ public class UploadHandler : Handler
             case UploadState.TypeNotAllow:
                 return "不允许的文件格式";
             case UploadState.NetworkError:
-                return "网络错误"; 
+                return "网络错误";
         }
         return "未知错误";
     }

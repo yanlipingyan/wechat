@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace Wechat.WebUI.Areas.Test.Controllers
 {
-    public class UploadImageController : Controller
+    public class FaustCplusController : Controller
     {
         //
-        // GET: /Test/UploadImage/
+        // GET: /Test/FaustCplus/
 
         public ActionResult Index(string img)
         {

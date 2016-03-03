@@ -1,0 +1,60 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ueditor demo</title>
+</head>
+
+<body>
+    <form action="@Url.Action("Save", "UEditor", new { area = "Test" })"  method="post">
+        <!-- 加载编辑器的容器 -->
+        <script id="container" name="content" type="text/plain">
+        这里写你的初始化内容
+        </script>
+        <button type="submit">提交</button>
+    </form>
+
+    <button id="getContent">获取当前编辑器内容</button>
+
+    @Html.Raw("<p>&nbsp; &nbsp; &nbsp; &nbsp;这是读取的修改上传图片路径及返回路径后的图片（对UploadHandler.cs文件中var localPath =Server.MapPath(savePath);进行了修改；还对config.json文件中该项配\"imageUrlPrefix\": \"/ueditor/net/\", /* 图片访问路径前缀 */进行了修改）,请看下图：\r\n <br/>&nbsp; &nbsp; &nbsp; &nbsp;<img alt=\"IMG_1812.PNG\" src=\"/upload/image/20160303/6359262146950772467612014.JPG\" title=\"IMG_1812.PNG\"/></p>")
+
+    @Html.Raw("<p>&nbsp; &nbsp; &nbsp; &nbsp;这是读取的默认情况下上传图片的路径下的图片,请看下图：\r\n <br/>&nbsp; &nbsp; &nbsp; &nbsp;<img alt=\"IMG_1811.JPG\" src=\"/Content/lib/ueditor/net/upload/image/20160303/6359261966295339562742567.JPG\" title=\"IMG_1811.JPG\"/></p>")
+
+
+
+    <!-- 引入jquery文件 -->
+    <script type="text/javascript" src="~/Content/lib/jquery/jquery-1.8.3.min.js"></script>
+
+    <!-- 引入UEditor配置文件 -->
+    <script type="text/javascript" src="~/Content/lib/ueditor/ueditor.config.js"></script>
+
+    <!-- 引入UEditor编辑器源码文件 -->
+    <script type="text/javascript" src="~/Content/lib/ueditor/ueditor.all.js"></script>
+
+    <!-- 实例化UEditor编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('container');
+    </script>
+
+    <script type="text/javascript">
+
+        $('#getContent').on('click', function () {
+            //对编辑器的操作最好在编辑器ready之后再做
+            ue.ready(function () {
+                //设置编辑器的内容
+                //ue.setContent('hello');
+                //获取html内容，返回: <p>hello</p> 
+                var html = ue.getContent();
+                alert(html);
+                //获取纯文本内容，返回: hello 
+                var txt = ue.getContentTxt();
+                alert(txt);
+            });
+        })
+
+    </script>
+</body>
+
+</html>
+
