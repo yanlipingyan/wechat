@@ -121,9 +121,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiControllers\ApiBasicController.cs" />
+    <Compile Include="ApiControllers\TestController.cs" />
     <Compile Include="ApiFilters\Test.cs" />
     <Compile Include="Areas\Test\Controllers\AccessTokenController.cs" />
     <Compile Include="Areas\Test\Controllers\AllowAnonymousController.cs" />
+    <Compile Include="Areas\Test\Controllers\ApiController.cs" />
     <Compile Include="Areas\Test\Controllers\CardController.cs" />
     <Compile Include="Areas\Test\Controllers\CommonController.cs" />
     <Compile Include="Areas\Test\Controllers\FaustCplusController.cs" />
@@ -298,6 +301,42 @@
     <Content Include="Content\lib\jquery.mobile\jquery.mobile-1.3.2.min.css" />
     <Content Include="Content\lib\jquery.mobile\jquery.mobile-1.3.2.min.js" />
     <Content Include="Content\lib\jquery\jquery-1.8.3.min.js" />
+    <Content Include="Content\lib\layer\laycode-v1.1\laycode-v1.1\laycode\laycode.css" />
+    <Content Include="Content\lib\layer\laycode-v1.1\laycode-v1.1\laycode\laycode.js" />
+    <Content Include="Content\lib\layer\laycode-v1.1\laycode-v1.1\laycode如何使用.txt" />
+    <Content Include="Content\lib\layer\laydate-v1.1\demo.html" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate\laydate.js" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate\need\laydate.css" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate\skins\dahong\icon.png" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate\skins\dahong\laydate.css" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate\skins\danlan\danlan\icon.png" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate\skins\danlan\danlan\laydate.css" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate\skins\default\icon.png" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate\skins\default\laydate.css" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate\skins\molv\icon.png" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate\skins\molv\laydate.css" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate\skins\qianhuang\icon.png" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate\skins\qianhuang\laydate.css" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate\skins\yahui\icon.png" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate\skins\yahui\laydate.css" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate\skins\yalan\icon.png" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate\skins\yalan\laydate.css" />
+    <Content Include="Content\lib\layer\laydate-v1.1\layDate的使用方法.txt" />
+    <Content Include="Content\lib\layer\laydate-v1.1\更新日志.txt" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\demo.html" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\layer\extend\layer.ext.js" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\layer\layer.min.js" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\layer\skin\default\icon_ext.png" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\layer\skin\default\textbg.png" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\layer\skin\default\xubox_ico0.png" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\layer\skin\default\xubox_loading0.gif" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\layer\skin\default\xubox_loading1.gif" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\layer\skin\default\xubox_loading2.gif" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\layer\skin\default\xubox_loading3.gif" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\layer\skin\default\xubox_title0.png" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\layer\skin\layer.css" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\layer\skin\layer.ext.css" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\更新日志.txt" />
     <Content Include="Content\lib\ueditor\dialogs\anchor\anchor.html" />
     <Content Include="Content\lib\ueditor\dialogs\attachment\attachment.css" />
     <Content Include="Content\lib\ueditor\dialogs\attachment\attachment.html" />
@@ -581,7 +620,6 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ApiControllers\" />
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Test\Models\" />
     <Folder Include="Areas\Test\Views\Shared\" />
@@ -661,6 +699,15 @@
     <Content Include="Content\lib\ueditor\third-party\video-js\font\vjs.woff" />
     <Content Include="Areas\Test\Views\FaustCplus\Index.cshtml" />
     <Content Include="Areas\Test\Views\UEditor\Index.cshtml" />
+    <Content Include="Areas\Test\Views\Api\Index.cshtml" />
+    <Content Include="Content\lib\layer\laycode-v1.1\laycode-v1.1\demo.url" />
+    <Content Include="Content\lib\layer\laydate-v1.1\laydate的API文档.docx" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\doc\jquery下载.url" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\doc\layer交流.url" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\doc\layer官网.url" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\doc\layer授权.url" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\Jquery插件弹出层layer-v1.8.3API使用手册.docx" />
+    <Content Include="Content\lib\layer\layer-v1.8.3\layer图片浏览使用.docx" />
     <None Include="Properties\PublishProfiles\wechat.pubxml" />
   </ItemGroup>
   <PropertyGroup>

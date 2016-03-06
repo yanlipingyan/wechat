@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutTest.cshtml";
+}
+
+<button class="js-get">测试Get</button>
+<button class="js-post">测试Post</button>
+<button class="js-put">测试Put</button>
+<button class="js-delete">测试Delete</button>
+
+@section scripts{
+    <script src="~/Content/lib/layer/layer-v1.8.3/layer/layer.min.js"></script>
+
+    <script>
+        $('.js-get').on('click', function () {
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: '/api/test',
+                //data: dataurl,
+                success: function (res) {
+                    if (res.Flag) {
+                        layer.msg(res.Content, { icon: 6 });
+                        // layer.msg(res.Content);
+                        return;
+                    }
+                    // layer.msg(res.Content, { icon: 5 });
+                }
+            });
+        });
+
+        $('.js-post').on('click', function () {
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url: '/api/test',
+                data: { '': "This is Post Method" },
+                success: function (res) {
+                    if (res.Flag) {
+                        layer.msg(res.Content, { icon: 6 });
+                        // layer.msg(res.Content);
+                        return;
+                    }
+                    // layer.msg(res.Content, { icon: 5 });
+                }
+            });
+        });
+
+        $('.js-put').on('click', function () {
+            $.ajax({
+                type: "put",
+                dataType: "json",
+                url: '/api/test/1',
+                data: { '': "This is Put Method" },
+                success: function (res) {
+                    if (res.Flag) {
+                        layer.msg(res.Content, { icon: 6 });
+                        return;
+                    }
+                    // layer.msg(res.Content, { icon: 5 });
+                }
+            });
+        });
+
+        $('.js-delete').on('click', function () {
+            $.ajax({
+                type: "delete",
+                dataType: "json",
+                url: '/api/test/1',
+                //data: { content: "This is Post Method" },
+                success: function (res) {
+                    if (res.Flag) {
+                        layer.msg(res.Content, { icon: 6 });
+                        // layer.msg(res.Content);
+                        return;
+                    }
+                    // layer.msg(res.Content, { icon: 5 });
+                }
+            });
+        });
+    </script>
+}
