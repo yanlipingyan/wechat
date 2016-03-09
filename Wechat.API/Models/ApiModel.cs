@@ -27,7 +27,7 @@ namespace Wechat.API.Models
             {
                 if (string.IsNullOrEmpty(appID))
                 {
-                    if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["AppSecret"]))
+                    if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["AppID"]))
                         return null;
                     return ConfigurationManager.AppSettings["AppID"].ToString();
                 }

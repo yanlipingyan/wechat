@@ -18,19 +18,16 @@ namespace Wechat.WebUI.Areas.Test.Controllers
             return View();
         }
 
-        public ActionResult GetJsApiTicket()
-        {
-            return Content(JsSdk.GetTicket(ApiModel.AppID, ApiModel.AppSecret));
-        }
-
+        /// <summary>
+        /// 获取JsSdk签名
+        /// </summary>
+        /// <param name="timestamp"></param>
+        /// <param name="nonceStr"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public string GetSign(string timestamp, string nonceStr, string url)
         {
             return JsSdk.GetSign(ApiModel.AppID, ApiModel.AppSecret, nonceStr, timestamp, url);
-        }
-
-        public ActionResult TestSign()
-        {
-            return Content(JsSdk.GetSign(ApiModel.AppID, ApiModel.AppSecret, Common.GetNonceStr(), Common.GetTimeStamp(), "http://www.liblog.cn"));
         }
     }
 }

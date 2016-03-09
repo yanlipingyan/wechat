@@ -48,34 +48,63 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessToken.cs" />
-    <Compile Include="Card.cs" />
+    <Compile Include="Card.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Common.cs" />
-    <Compile Include="Enums\CardEnum.cs" />
-    <Compile Include="Enums\CommonEnum.cs" />
-    <Compile Include="Enums\WechatReturnCode.cs" />
+    <Compile Include="Enums\CardEnum.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\CommonEnum.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\WechatReturnCode.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Exception.cs" />
     <Compile Include="Helper\AccessTokenHelper.cs" />
     <Compile Include="Helper\JsApiTicketHelper.cs" />
     <Compile Include="JsSdk.cs" />
-    <Compile Include="Material.cs" />
+    <Compile Include="Material.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Menu.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Models\AccessTokenModel.cs" />
     <Compile Include="Models\ApiModel.cs" />
-    <Compile Include="Models\CardModel.cs" />
-    <Compile Include="Models\EventModel.cs" />
+    <Compile Include="Models\CardModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\EventModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\JsApiTicketModel.cs" />
-    <Compile Include="Models\MessageModel.cs" />
+    <Compile Include="Models\MessageModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="OAuth2.cs" />
-    <Compile Include="Pay.cs" />
+    <Compile Include="Pay.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Qrcode.cs" />
-    <Compile Include="ReceiveMessage.cs" />
-    <Compile Include="ResultModels\MaterialResult.cs" />
+    <Compile Include="Qrcode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ReceiveMessage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ResultModels\MaterialResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ResultModels\Oauth2\Oauth2TokenResult.cs" />
     <Compile Include="ResultModels\Oauth2\OAuth2UserInfoResult.cs" />
     <Compile Include="ResultModels\WechatResult.cs" />
-    <Compile Include="SendMessage.cs" />
-    <Compile Include="Server.cs" />
+    <Compile Include="SendMessage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Server.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Signature.cs" />
     <Compile Include="WebClient.cs" />
   </ItemGroup>

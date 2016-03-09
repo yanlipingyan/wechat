@@ -4,15 +4,147 @@
 }
 
 <h2>测试分享</h2>
+<div class="wxapi_container">
+    <div class="wxapi_index_container">
+        <ul class="label_box lbox_close wxapi_index_list">
+            <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-basic">基础接口</a></li>
+            <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-share">分享接口</a></li>
+            <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-image">图像接口</a></li>
+            <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-voice">音频接口</a></li>
+            <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-smart">智能接口</a></li>
+            <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-device">设备信息接口</a></li>
+            <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-location">地理位置接口</a></li>
+            <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-webview">界面操作接口</a></li>
+            <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-scan">微信扫一扫接口</a></li>
+            <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-shopping">微信小店接口</a></li>
+            <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-card">微信卡券接口</a></li>
+            <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-pay">微信支付接口</a></li>
+        </ul>
+    </div>
+    <div class="lbox_close wxapi_form">
+        <h3 id="menu-basic">基础接口</h3>
+        <span class="desc">判断当前客户端是否支持指定JS接口</span>
+        <button class="btn btn_primary" id="checkJsApi">checkJsApi</button>
+
+        <h3 id="menu-share">分享接口</h3>
+        <span class="desc">获取“分享到朋友圈”按钮点击状态及自定义分享内容接口</span>
+        <button class="btn btn_primary" id="onMenuShareTimeline">onMenuShareTimeline</button>
+        <span class="desc">获取“分享给朋友”按钮点击状态及自定义分享内容接口</span>
+        <button class="btn btn_primary" id="onMenuShareAppMessage">onMenuShareAppMessage</button>
+        <span class="desc">获取“分享到QQ”按钮点击状态及自定义分享内容接口</span>
+        <button class="btn btn_primary" id="onMenuShareQQ">onMenuShareQQ</button>
+        <span class="desc">获取“分享到腾讯微博”按钮点击状态及自定义分享内容接口</span>
+        <button class="btn btn_primary" id="onMenuShareWeibo">onMenuShareWeibo</button>
+        <span class="desc">获取“分享到QZone”按钮点击状态及自定义分享内容接口</span>
+        <button class="btn btn_primary" id="onMenuShareQZone">onMenuShareQZone</button>
+
+        <h3 id="menu-image">图像接口</h3>
+        <span class="desc">拍照或从手机相册中选图接口</span>
+        <button class="btn btn_primary" id="chooseImage">chooseImage</button>
+        <span class="desc">预览图片接口</span>
+        <button class="btn btn_primary" id="previewImage">previewImage</button>
+        <span class="desc">上传图片接口</span>
+        <button class="btn btn_primary" id="uploadImage">uploadImage</button>
+        <span class="desc">下载图片接口</span>
+        <button class="btn btn_primary" id="downloadImage">downloadImage</button>
+
+        <h3 id="menu-voice">音频接口</h3>
+        <span class="desc">开始录音接口</span>
+        <button class="btn btn_primary" id="startRecord">startRecord</button>
+        <span class="desc">停止录音接口</span>
+        <button class="btn btn_primary" id="stopRecord">stopRecord</button>
+        <span class="desc">播放语音接口</span>
+        <button class="btn btn_primary" id="playVoice">playVoice</button>
+        <span class="desc">暂停播放接口</span>
+        <button class="btn btn_primary" id="pauseVoice">pauseVoice</button>
+        <span class="desc">停止播放接口</span>
+        <button class="btn btn_primary" id="stopVoice">stopVoice</button>
+        <span class="desc">上传语音接口</span>
+        <button class="btn btn_primary" id="uploadVoice">uploadVoice</button>
+        <span class="desc">下载语音接口</span>
+        <button class="btn btn_primary" id="downloadVoice">downloadVoice</button>
+
+        <h3 id="menu-smart">智能接口</h3>
+        <span class="desc">识别音频并返回识别结果接口</span>
+        <button class="btn btn_primary" id="translateVoice">translateVoice</button>
+
+        <h3 id="menu-device">设备信息接口</h3>
+        <span class="desc">获取网络状态接口</span>
+        <button class="btn btn_primary" id="getNetworkType">getNetworkType</button>
+
+        <h3 id="menu-location">地理位置接口</h3>
+        <span class="desc">使用微信内置地图查看位置接口</span>
+        <button class="btn btn_primary" id="openLocation">openLocation</button>
+        <span class="desc">获取地理位置接口</span>
+        <button class="btn btn_primary" id="getLocation">getLocation</button>
+
+        <h3 id="menu-webview">界面操作接口</h3>
+        <span class="desc">隐藏右上角菜单接口</span>
+        <button class="btn btn_primary" id="hideOptionMenu">hideOptionMenu</button>
+        <span class="desc">显示右上角菜单接口</span>
+        <button class="btn btn_primary" id="showOptionMenu">showOptionMenu</button>
+        <span class="desc">关闭当前网页窗口接口</span>
+        <button class="btn btn_primary" id="closeWindow">closeWindow</button>
+        <span class="desc">批量隐藏功能按钮接口</span>
+        <button class="btn btn_primary" id="hideMenuItems">hideMenuItems</button>
+        <span class="desc">批量显示功能按钮接口</span>
+        <button class="btn btn_primary" id="showMenuItems">showMenuItems</button>
+        <span class="desc">隐藏所有非基础按钮接口</span>
+        <button class="btn btn_primary" id="hideAllNonBaseMenuItem">hideAllNonBaseMenuItem</button>
+        <span class="desc">显示所有功能按钮接口</span>
+        <button class="btn btn_primary" id="showAllNonBaseMenuItem">showAllNonBaseMenuItem</button>
+
+        <h3 id="menu-scan">微信扫一扫</h3>
+        <span class="desc">调起微信扫一扫接口</span>
+        <button class="btn btn_primary" id="scanQRCode0">scanQRCode(微信处理结果)</button>
+        <button class="btn btn_primary" id="scanQRCode1">scanQRCode(直接返回结果)</button>
+
+        <h3 id="menu-shopping">微信小店接口</h3>
+        <span class="desc">跳转微信商品页接口</span>
+        <button class="btn btn_primary" id="openProductSpecificView">openProductSpecificView</button>
+
+        <h3 id="menu-card">微信卡券接口</h3>
+        <span class="desc">批量添加卡券接口</span>
+        <button class="btn btn_primary" id="addCard">addCard</button>
+        <span class="desc">调起适用于门店的卡券列表并获取用户选择列表</span>
+        <button class="btn btn_primary" id="chooseCard">chooseCard</button>
+        <span class="desc">查看微信卡包中的卡券接口</span>
+        <button class="btn btn_primary" id="openCard">openCard</button>
+
+        <h3 id="menu-pay">微信支付接口</h3>
+        <span class="desc">发起一个微信支付请求</span>
+        <button class="btn btn_primary" id="chooseWXPay">chooseWXPay</button>
+    </div>
+</div>
+
 
 @*JSSDK使用步骤*@
+
+@section styles{
+    <link href="~/Content/css/JsSdk.css" rel="stylesheet" />
+}
+
 @section scripts{
 
-    @*步骤一：绑定域名*@
-    @*先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。如果你使用了支付类接口，请确保支付目录在该安全域名下，否则将无法完成支付。
-备注：登录后可在“开发者中心”查看对应的接口权限。*@
+    <script>
+        /*
+         * 注意：
+         * 1. 所有的JS接口只能在公众号绑定的域名下调用，公众号开发者需要先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。
+         * 2. 如果发现在 Android 不能分享自定义内容，请到官网下载最新的包覆盖安装，Android 自定义分享接口需升级至 6.0.2.58 版本及以上。
+         * 3. 常见问题及完整 JS-SDK 文档地址：http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html
+         *
+         * 开发中遇到问题详见文档“附录5-常见错误及解决办法”解决，如仍未能解决可通过以下渠道反馈：
+         * 邮箱地址：weixin-open@qq.com
+         * 邮件主题：【微信JS-SDK反馈】具体问题
+         * 邮件内容说明：用简明的语言描述问题所在，并交代清楚遇到该问题的场景，可附上截屏图片，微信团队会尽快处理你的反馈。
+         */
+    </script>
 
-    @*步骤二：引入JS文件；备注：如需使用摇一摇周边功能，请引入 jweixin-1.1.0.js。支持使用 AMD/CMD 标准模块加载方法加载*@
+    <!-- 步骤一：绑定域名 -->
+    <!-- 注释：先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。如果你使用了支付类接口，请确保支付目录在该安全域名下，否则将无法完成支付。
+备注：登录后可在“开发者中心”查看对应的接口权限。-->
+
+    <!-- 步骤二：引入JS文件；备注：如需使用摇一摇周边功能，请引入 jweixin-1.1.0.js。支持使用 AMD/CMD 标准模块加载方法加载 -->
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
 
@@ -42,301 +174,1072 @@
             wx.ready(function () {
 
 
+
                 //判断当前客户端版本是否支持指定JS接口
-                wx.checkJsApi({
-                    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone', 'chooseImage', ' previewImage',
-                    'uploadImage', 'downloadImage', 'startRecord', 'stopRecord', 'onVoiceRecordEnd', 'playVoice', 'pauseVoice', 'stopVoice', 'onVoicePlayEnd', 'uploadVoice', 'downloadVoice',
-                    'translateVoice', 'getNetworkType', 'openLocation', 'getLocation', 'hideOptionMenu', 'showOptionMenu', 'closeWindow', 'hideMenuItems', 'showMenuItems',
-                    'hideAllNonBaseMenuItem', 'showAllNonBaseMenuItem', 'scanQRCode', 'openProductSpecificView', 'startSearchBeacons', 'stopSearchBeacons'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
-                    success: function (res) {
-                        // 以键值对的形式返回，可用的api值true，不可用为false；如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
-                    }
-                });
+                document.querySelector('#checkJsApi').onclick = function () {
+                    wx.checkJsApi({
+                        jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone', 'chooseImage', ' previewImage',
+                        'uploadImage', 'downloadImage', 'startRecord', 'stopRecord', 'onVoiceRecordEnd', 'playVoice', 'pauseVoice', 'stopVoice', 'onVoicePlayEnd', 'uploadVoice', 'downloadVoice',
+                        'translateVoice', 'getNetworkType', 'openLocation', 'getLocation', 'hideOptionMenu', 'showOptionMenu', 'closeWindow', 'hideMenuItems', 'showMenuItems',
+                        'hideAllNonBaseMenuItem', 'showAllNonBaseMenuItem', 'scanQRCode', 'openProductSpecificView', 'startSearchBeacons', 'stopSearchBeacons'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+                        success: function (res) {
+                            // 以键值对的形式返回，可用的api值true，不可用为false；如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+
 
 
                 //获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
-                wx.onMenuShareTimeline({
-                    title: '测试分享到朋友圈', // 分享标题
-                    link: 'http://www.liblog.cn/test/qrcode/index', // 分享链接
-                    imgUrl: 'http://www.liblog.cn/Content/images/logo.png', // 分享图标
-                    success: function () {
-                        //用户确认分享后执行的回调函数
+                document.querySelector('#onMenuShareTimeline').onclick = function () {
+                    wx.onMenuShareTimeline({
+                        title: '测试分享到朋友圈', // 分享标题
+                        link: 'http://www.liblog.cn/test/qrcode/index', // 分享链接
+                        imgUrl: 'http://www.liblog.cn/Content/images/logo.png', // 分享图标
+                        success: function (res) {
+                            //用户确认分享后执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                    alert("已成功注册分享到朋友圈事件，请分享");
+                };
+
+                //获取“分享给朋友”按钮点击状态及自定义分享内容接口
+                document.querySelector('#onMenuShareAppMessage').onclick = function () {
+                    wx.onMenuShareAppMessage({
+                        title: '测试分享给朋友', // 分享标题
+                        desc: '分享给你，因为你是我的好朋友，好呀好朋友', // 分享描述
+                        link: 'http://www.liblog.cn/test/qrcode/index', // 分享链接
+                        imgUrl: 'http://www.liblog.cn/Content/images/logo.png', // 分享图标
+                        type: 'link', // 分享类型,music、video或link，不填默认为link
+                        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                        success: function (res) {
+                            //用户确认分享后执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                    alert("已成功注册分享给朋友事件，请分享");
+                };
+
+                //获取“分享到QQ”按钮点击状态及自定义分享内容接口
+                document.querySelector('#onMenuShareQQ').onclick = function () {
+                    wx.onMenuShareQQ({
+                        title: '测试分享到QQ', // 分享标题
+                        desc: '分享到我的QQ，其他人都可以看到', // 分享描述
+                        link: 'http://www.liblog.cn/test/qrcode/index', // 分享链接
+                        imgUrl: 'http://www.liblog.cn/Content/images/logo.png', // 分享图标
+                        success: function (res) {
+                            //用户确认分享后执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                    alert("已成功注册分享到QQ事件，请分享");
+                };
+
+                //获取“分享到腾讯微博”按钮点击状态及自定义分享内容接口
+                document.querySelector('#onMenuShareWeibo').onclick = function () {
+                    wx.onMenuShareWeibo({
+                        title: '测试分享到腾讯微博', // 分享标题
+                        desc: '分享到我的腾讯微博，其他人都可以看到', // 分享描述
+                        link: 'http://www.liblog.cn/test/qrcode/index', // 分享链接
+                        imgUrl: 'http://www.liblog.cn/Content/images/logo.png', // 分享图标
+                        success: function (res) {
+                            //用户确认分享后执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                    alert("已成功注册分享到腾讯微博事件，请分享");
+                };
+
+                //获取“分享到QQ空间”按钮点击状态及自定义分享内容接口
+                document.querySelector('#onMenuShareQZone').onclick = function () {
+                    wx.onMenuShareQZone({
+                        title: '测试分享到QQ空间', // 分享标题
+                        desc: '分享到我的QQ空间，其他人都可以看到', // 分享描述
+                        link: 'http://www.liblog.cn/test/qrcode/index', // 分享链接
+                        imgUrl: 'http://www.liblog.cn/Content/images/logo.png', // 分享图标
+                        success: function (res) {
+                            //用户确认分享后执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                    alert("已成功注册分享到QQ空间事件，请分享");
+                };
+
+
+
+
+                var images = {
+                    localId: [],
+                    serverId: []
+                };
+                //拍照或从手机相册中选图接口
+                document.querySelector('#chooseImage').onclick = function () {
+                    wx.chooseImage({
+                        count: 1, // 默认9
+                        sizeType: ['original', 'compressed'], // 可以指定是原图（original）还是压缩图（compressed），默认二者都有
+                        sourceType: ['album', 'camera'], // 可以指定来源是相册（album）还是相机（camera），默认二者都有
+                        success: function (res) {
+                            var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                            images.localId = localIds;
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+                //预览图片接口
+                document.querySelector('#previewImage').onclick = function () {
+                    wx.previewImage({
+                        current: 'http://img5.douban.com/view/photo/photo/public/p1353993776.jpg', // 当前显示图片的http链接
+                        urls: [
+                            'http://img3.douban.com/view/photo/photo/public/p2152117150.jpg',
+                            'http://img5.douban.com/view/photo/photo/public/p1353993776.jpg',
+                            'http://img3.douban.com/view/photo/photo/public/p2152134700.jpg'
+                        ], // 需要预览的图片http链接列表
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+                //上传图片接口
+                //备注：上传图片有效期3天，可用微信多媒体接口下载图片到自己的服务器，此处获得的 serverId 即 media_id，参考文档 ../12/58bfcfabbd501c7cd77c19bd9cfa8354.html 目前多媒体文件下载接口的频率限制为10000次/天，如需要调高频率，请邮件weixin-open@qq.com,邮件主题为【申请多媒体接口调用量】，请对你的项目进行简单描述，附上产品体验链接，并对用户量和使用量进行说明。
+                document.querySelector('#uploadImage').onclick = function () {
+
+                    if (images.localId.length == 0) {
+                        alert('请先调用 chooseImage 方法选择图片');
+                        return;
+                    }
+                    var i = 0,
+                        length = images.localId.length;
+
+                    images.serverId = [];
+
+                    function upload() {
+                        wx.uploadImage({
+                            localId: images.localId[i], // 需要上传的图片的本地ID，由chooseImage接口获得
+                            isShowProgressTips: 1, // 默认为1，显示进度提示
+                            success: function (res) {
+                                var serverId = res.serverId; // 返回图片的服务器端ID
+
+                                i++;
+                                images.serverId.push(serverId);
+                                if (i < length) {
+                                    upload();
+                                }
+                            },
+                            fail: function (res) {
+                                alert(JSON.stringify(res));//接口调用失败时执行的回调函数
+                            },
+                            complete: function (res) {
+                                //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                            },
+                            cancel: function (res) {
+                                //用户取消分享后执行的回调函数
+                            },
+                            trigger: function (res) {
+                                //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                            }
+                        });
+                    }
+                    upload();
+                };
+
+                //下载图片接口
+                document.querySelector('#downloadImage').onclick = function () {
+                    if (images.serverId.length === 0) {
+                        alert('请先调用 uploadImage 方法上面图片');
+                        return;
+                    }
+
+                    var i = 0,
+                        length = images.serverId.length;
+
+                    images.localId = [];
+
+                    function download() {
+                        wx.downloadImage({
+                            serverId: images.serverId[i], // 需要下载的图片的服务器端ID，由uploadImage接口获得
+                            isShowProgressTips: 1, // 默认为1，显示进度提示
+                            success: function (res) {
+                                var localId = res.localId; // 返回图片下载后的本地ID
+
+                                i++;
+                                images.localId.push(res.localId);
+                                if (i < length) {
+                                    download();
+                                }
+                            },
+                            fail: function (res) {
+                                //接口调用失败时执行的回调函数 
+                            },
+                            complete: function (res) {
+                                //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                            },
+                            cancel: function (res) {
+                                //用户取消分享后执行的回调函数
+                            },
+                            trigger: function (res) {
+                                //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                            }
+                        });
+                    }
+                    download();
+                };
+
+
+
+
+                var voice = {
+                    localId: '',
+                    serverId: ''
+                };
+                //开始录音接口
+                document.querySelector('#startRecord').onclick = function () {
+                    wx.startRecord({
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+                //停止录音接口
+                document.querySelector('#stopRecord').onclick = function () {
+                    wx.stopRecord({
+                        success: function (res) {
+                            var localId = res.localId;
+
+                            voice.localId = localId;
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                            alert(JSON.stringify(res));
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+                //监听录音自动停止接口
+                wx.onVoiceRecordEnd({
+                    success: function (res) {
+                        //接口调用成功时执行的回调函数
                     },
-                    fail: function () {
+                    fail: function (res) {
                         //接口调用失败时执行的回调函数 
                     },
-                    complete: function () {
-                        //接口调用完成时执行的回调函数，无论成功或失败都会执行 
-                    },
-                    cancel: function () {
+                    complete: function (res) {
+                        var localId = res.localId;
+
+                        voice.localId = localId;
+                    },// 录音时间超过一分钟没有停止的时候会执行 complete 回调
+                    cancel: function (res) {
                         //用户取消分享后执行的回调函数
                     },
-                    trigger: function () {
+                    trigger: function (res) {
                         //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
                     }
                 });
 
-                //获取“分享给朋友”按钮点击状态及自定义分享内容接口
-                wx.onMenuShareAppMessage({
-                    title: '测试分享给朋友', // 分享标题
-                    desc: '分享给你，因为你是我的好朋友，好呀好朋友', // 分享描述
-                    link: 'http://www.liblog.cn/test/qrcode/index', // 分享链接
-                    imgUrl: 'http://www.liblog.cn/Content/images/logo.png', // 分享图标
-                    type: 'link', // 分享类型,music、video或link，不填默认为link
-                    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                    success: function () {
-                        // 用户确认分享后执行的回调函数
-                    },
-                    cancel: function () {
-                        // 用户取消分享后执行的回调函数
-                    }
-                });
-
-                //获取“分享到QQ”按钮点击状态及自定义分享内容接口
-                wx.onMenuShareQQ({
-                    title: '测试分享到QQ', // 分享标题
-                    desc: '分享到我的QQ，其他人都可以看到', // 分享描述
-                    link: 'http://www.liblog.cn/test/qrcode/index', // 分享链接
-                    imgUrl: 'http://www.liblog.cn/Content/images/logo.png', // 分享图标
-                    success: function () {
-                        // 用户确认分享后执行的回调函数
-                    },
-                    cancel: function () {
-                        // 用户取消分享后执行的回调函数
-                    }
-                });
-
-                //获取“分享到腾讯微博”按钮点击状态及自定义分享内容接口
-                wx.onMenuShareWeibo({
-                    title: '测试分享到腾讯微博', // 分享标题
-                    desc: '分享到我的腾讯微博，其他人都可以看到', // 分享描述
-                    link: 'http://www.liblog.cn/test/qrcode/index', // 分享链接
-                    imgUrl: 'http://www.liblog.cn/Content/images/logo.png', // 分享图标
-                    success: function () {
-                        // 用户确认分享后执行的回调函数
-                    },
-                    cancel: function () {
-                        // 用户取消分享后执行的回调函数
-                    }
-                });
-
-                //获取“分享到QQ空间”按钮点击状态及自定义分享内容接口
-                wx.onMenuShareQZone({
-                    title: '测试分享到QQ空间', // 分享标题
-                    desc: '分享到我的QQ空间，其他人都可以看到', // 分享描述
-                    link: 'http://www.liblog.cn/test/qrcode/index', // 分享链接
-                    imgUrl: 'http://www.liblog.cn/Content/images/logo.png', // 分享图标
-                    success: function () {
-                        // 用户确认分享后执行的回调函数
-                    },
-                    cancel: function () {
-                        // 用户取消分享后执行的回调函数
-                    }
-                });
-
-
-                //拍照或从手机相册中选图接口
-                wx.chooseImage({
-                    count: 1, // 默认9
-                    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-                    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-                    success: function (res) {
-                        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                    }
-                });
-
-                //预览图片接口
-                wx.previewImage({
-                    current: '', // 当前显示图片的http链接
-                    urls: [] // 需要预览的图片http链接列表
-                });
-
-                //上传图片接口
-                wx.uploadImage({
-                    localId: '', // 需要上传的图片的本地ID，由chooseImage接口获得
-                    isShowProgressTips: 1, // 默认为1，显示进度提示
-                    success: function (res) {
-                        var serverId = res.serverId; // 返回图片的服务器端ID
-                    }
-                });
-
-                //下载图片接口
-                wx.downloadImage({
-                    serverId: '', // 需要下载的图片的服务器端ID，由uploadImage接口获得
-                    isShowProgressTips: 1, // 默认为1，显示进度提示
-                    success: function (res) {
-                        var localId = res.localId; // 返回图片下载后的本地ID
-                    }
-                });
-
-
-                //开始录音接口
-                wx.startRecord();
-
-                //停止录音接口
-                wx.stopRecord({
-                    success: function (res) {
-                        var localId = res.localId;
-                    }
-                });
-
-                //监听录音自动停止接口
-                wx.onVoiceRecordEnd({
-                    // 录音时间超过一分钟没有停止的时候会执行 complete 回调
-                    complete: function (res) {
-                        var localId = res.localId;
-                    }
-                });
-
                 //播放语音接口
-                wx.playVoice({
-                    localId: '' // 需要播放的音频的本地ID，由stopRecord接口获得
-                });
-
+                document.querySelector('#playVoice').onclick = function () {
+                    if (voice.localId == '') {
+                        alert('请先调用 startRecord 方法进行录音');
+                        return;
+                    }
+                    wx.playVoice({
+                        localId: voice.localId,// 需要播放的音频的本地ID，由stopRecord接口获得
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
 
                 //暂停播放接口
-                wx.pauseVoice({
-                    localId: '' // 需要暂停的音频的本地ID，由stopRecord接口获得
-                });
+                document.querySelector('#pauseVoice').onclick = function () {
+                    wx.pauseVoice({
+                        localId: voice.localId, // 需要暂停的音频的本地ID，由stopRecord接口获得
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
 
                 //停止播放接口
-                wx.stopVoice({
-                    localId: '' // 需要停止的音频的本地ID，由stopRecord接口获得
-                });
+                document.querySelector('#stopVoice').onclick = function () {
+                    wx.stopVoice({
+                        localId: voice.localId, // 需要停止的音频的本地ID，由stopRecord接口获得
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
 
                 //监听语音播放完毕接口
                 wx.onVoicePlayEnd({
                     success: function (res) {
                         var localId = res.localId; // 返回音频的本地ID
+                    },
+                    fail: function (res) {
+                        //接口调用失败时执行的回调函数 
+                    },
+                    complete: function (res) {
+                        //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                    },
+                    cancel: function (res) {
+                        //用户取消分享后执行的回调函数
+                    },
+                    trigger: function (res) {
+                        //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
                     }
                 });
 
                 //上传语音接口
                 //备注：上传语音有效期3天，可用微信多媒体接口下载语音到自己的服务器，此处获得的 serverId 即 media_id，参考文档 ../12/58bfcfabbd501c7cd77c19bd9cfa8354.html 目前多媒体文件下载接口的频率限制为10000次/天，如需要调高频率，请邮件weixin-open@qq.com,邮件主题为【申请多媒体接口调用量】，请对你的项目进行简单描述，附上产品体验链接，并对用户量和使用量进行说明。
-                wx.uploadVoice({
-                    localId: '', // 需要上传的音频的本地ID，由stopRecord接口获得
-                    isShowProgressTips: 1, // 默认为1，显示进度提示
-                    success: function (res) {
-                        var serverId = res.serverId; // 返回音频的服务器端ID
+                document.querySelector('#uploadVoice').onclick = function () {
+                    if (voice.localId == '') {
+                        alert('请先调用 startRecord 方法进行录音');
+                        return;
                     }
-                });
+                    wx.uploadVoice({
+                        localId: voice.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
+                        isShowProgressTips: 1, // 默认为1，显示进度提示
+                        success: function (res) {
+                            var serverId = res.serverId; // 返回音频的服务器端ID
+
+                            voice.serverId = serverId;
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
 
                 //下载语音接口
-                wx.downloadVoice({
-                    serverId: '', // 需要下载的音频的服务器端ID，由uploadVoice接口获得
-                    isShowProgressTips: 1, // 默认为1，显示进度提示
-                    success: function (res) {
-                        var localId = res.localId; // 返回音频的本地ID
+                document.querySelector('#downloadVoice').onclick = function () {
+                    if (voice.serverId == '') {
+                        alert('请先调用 uploadVoice 方法进行上传');
+                        return;
                     }
-                });
+                    wx.downloadVoice({
+                        serverId: voice.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
+                        isShowProgressTips: 1, // 默认为1，显示进度提示
+                        success: function (res) {
+                            var localId = res.localId; // 返回音频的本地ID
+
+                            voice.localId = localId;
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+
 
 
                 //识别音频并返回识别结果接口
-                wx.translateVoice({
-                    localId: '', // 需要识别的音频的本地Id，由录音相关接口获得
-                    isShowProgressTips: 1, // 默认为1，显示进度提示
-                    success: function (res) {
-                        alert(res.translateResult); // 语音识别的结果
+                document.querySelector('#translateVoice').onclick = function () {
+                    if (voice.localId == '') {
+                        alert('请先调用 startRecord 方法进行录音');
+                        return;
                     }
-                });
+                    wx.translateVoice({
+                        localId: voice.localId, // 需要识别的音频的本地Id，由录音相关接口获得
+                        isShowProgressTips: 1, // 默认为1，显示进度提示
+                        success: function (res) {
+                            alert(res.translateResult); // 语音识别的结果
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            if (res.hasOwnProperty('translateResult')) {
+                                alert(res.translateResult);
+                            } else {
+                                alert('1');
+                            }
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+
 
 
                 //获取网络状态接口
-                wx.getNetworkType({
-                    success: function (res) {
-                        var networkType = res.networkType; // 返回网络类型2g，3g，4g，wifi
-                    }
-                });
+                document.querySelector('#getNetworkType').onclick = function () {
+                    wx.getNetworkType({
+                        success: function (res) {
+                            var networkType = res.networkType; // 返回网络类型2g，3g，4g，wifi
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+
 
 
                 //使用微信内置地图查看位置接口
-                wx.openLocation({
-                    latitude: 0, // 纬度，浮点数，范围为90 ~ -90
-                    longitude: 0, // 经度，浮点数，范围为180 ~ -180。
-                    name: '', // 位置名
-                    address: '', // 地址详情说明
-                    scale: 1, // 地图缩放级别,整形值,范围从1~28。默认为最大
-                    infoUrl: '' // 在查看位置界面底部显示的超链接,可点击跳转
-                });
+                document.querySelector('#openLocation').onclick = function () {
+                    wx.openLocation({
+                        latitude: 23.099994, // 纬度，浮点数，范围为90 ~ -90
+                        longitude: 113.324520, // 经度，浮点数，范围为180 ~ -180。
+                        name: '位置名称', // 位置名
+                        address: '地址详情说明', // 地址详情说明
+                        scale: 1, // 地图缩放级别,整形值,范围从1~28。默认为最大
+                        infoUrl: 'http://www.liblog.cn', // 在查看位置界面底部显示的超链接,可点击跳转
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
 
                 //获取地理位置接口
-                wx.getLocation({
-                    type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-                    success: function (res) {
-                        var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
-                        var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
-                        var speed = res.speed; // 速度，以米/每秒计
-                        var accuracy = res.accuracy; // 位置精度
+                document.querySelector('#getLocation').onclick = function () {
+                    wx.getLocation({
+                        type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+                        success: function (res) {
+                            var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                            var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                            var speed = res.speed; // 速度，以米/每秒计
+                            var accuracy = res.accuracy; // 位置精度
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+
+
+
+                //隐藏右上角菜单接口
+                document.querySelector('#hideOptionMenu').onclick = function () {
+                    wx.hideOptionMenu({
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+                //显示右上角菜单接口
+                document.querySelector('#showOptionMenu').onclick = function () {
+                    wx.showOptionMenu({
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+                //关闭当前网页窗口接口
+                document.querySelector('#closeWindow').onclick = function () {
+                    wx.closeWindow({
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+                //批量隐藏功能按钮接口
+                document.querySelector('#hideMenuItems').onclick = function () {
+                    wx.hideMenuItems({
+                        menuList: [
+                             'menuItem:readMode',//阅读模式
+                             'menuItem:share:timeline',//分享到朋友圈
+                             'menuItem:copyUrl'//复制连接
+                        ], // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+                //批量显示功能按钮接口
+                document.querySelector('#showMenuItems').onclick = function () {
+                    wx.showMenuItems({
+                        menuList: [
+                             'menuItem:readMode',//阅读模式
+                             'menuItem:share:timeline',//分享到朋友圈
+                             'menuItem:copyUrl'//复制连接
+                        ], // 要显示的菜单项，所有menu项见附录3
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+                //隐藏所有非基础按钮接口
+                document.querySelector('#hideAllNonBaseMenuItem').onclick = function () {
+                    wx.hideAllNonBaseMenuItem({
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });// “基本类”按钮详见附录3
+                };
+
+                //显示所有功能按钮接口
+                document.querySelector('#showAllNonBaseMenuItem').onclick = function () {
+                    wx.showAllNonBaseMenuItem({
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+
+
+
+                //调起微信扫一扫接口
+                document.querySelector('#scanQRCode0').onclick = function () {
+                    wx.scanQRCode({
+                        needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                        scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                        success: function (res) {
+                            var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+                document.querySelector('#scanQRCode1').onclick = function () {
+                    wx.scanQRCode({
+                        needResult: 1,
+                        desc: 'scanQRCode desc',
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+
+
+
+                //跳转微信商品页接口
+                document.querySelector('#openProductSpecificView').onclick = function () {
+                    wx.openProductSpecificView({
+                        productId: '', // 商品id
+                        viewType: '', // 0.默认值，普通商品详情页1.扫一扫商品详情页2.小店商品详情页
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+
+
+
+                var codes = [];
+                //批量添加卡券接口
+                document.querySelector('#addCard').onclick = function () {
+                    wx.addCard({
+                        cardList: [
+                          {
+                              cardId: 'pDF3iY9tv9zCGCj4jTXFOo1DxHdo',
+                              cardExt: '{"code": "", "openid": "", "timestamp": "1418301401", "signature":"f54dae85e7807cc9525ccc127b4796e021f05b33"}'
+                          },
+                          {
+                              cardId: 'pDF3iY9tv9zCGCj4jTXFOo1DxHdo',
+                              cardExt: '{"code": "", "openid": "", "timestamp": "1418301401", "signature":"f54dae85e7807cc9525ccc127b4796e021f05b33"}'
+                          }
+                        ],
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+                //调起适用于门店的卡券列表并获取用户选择列表
+                document.querySelector('#chooseCard').onclick = function () {
+                    wx.chooseCard({
+                        cardSign: '8ef8aa071f1d2186cb1355ec132fed04ebba1c3f',
+                        timestamp: 1437997723,
+                        nonceStr: 'k0hGdSXKZEj3Min5',
+                        success: function (res) {
+                            res.cardList = JSON.parse(res.cardList);
+                            encrypt_code = res.cardList[0]['encrypt_code'];
+                            alert('宸查€夋嫨鍗″埜锛�' + JSON.stringify(res.cardList));
+                            decryptCode(encrypt_code, function (code) {
+                                codes.push(code);
+                            });
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+                //查看微信卡包中的卡券接口
+                document.querySelector('#openCard').onclick = function () {
+                    if (codes.length < 1) {
+                        alert('璇峰厛浣跨敤 chooseCard 鎺ュ彛閫夋嫨鍗″埜銆�');
+                        return false;
                     }
-                });
+                    var cardList = [];
+                    for (var i = 0; i < codes.length; i++) {
+                        cardList.push({
+                            cardId: 'pDF3iY9tv9zCGCj4jTXFOo1DxHdo',
+                            code: codes[i]
+                        });
+                    }
+                    wx.openCard({
+                        cardList: cardList,
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+                function decryptCode(code, callback) {
+                    $.getJSON('/jssdk/decrypt_code.php?code=' + encodeURI(code), function (res) {
+                        if (res.errcode == 0) {
+                            codes.push(res.code);
+                        }
+                    });
+                }
+
+
+
+
+                //微信支付接口
+                document.querySelector('#chooseWXPay').onclick = function () {
+                    wx.chooseWXPay({
+                        timestamp: '@Wechat.API.Common.GetTimeStamp()',
+                        nonceStr: '@Wechat.API.Common.GetNonceStr()',
+                        package: 'addition=action_id%3dgaby1234%26limit_pay%3d&bank_type=WX&body=innertest&fee_type=1&input_charset=GBK&notify_url=http%3A%2F%2F120.204.206.246%2Fcgi-bin%2Fmmsupport-bin%2Fnotifypay&out_trade_no=1414723227818375338&partner=1900000109&spbill_create_ip=127.0.0.1&total_fee=1&sign=432B647FE95C7BF73BCD177CEECBEF8D',
+                        signType: 'SHA1', // 娉ㄦ剰锛氭柊鐗堟敮浠樻帴鍙ｄ娇鐢� MD5 鍔犲瘑
+                        paySign: 'bd5b1933cda6e9548862944836a9b52e8c9a2b69',
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+
+
 
 
                 //开启查找周边ibeacon设备接口
                 //备注：如需接入摇一摇周边功能，请参考：申请开通摇一摇周边
                 wx.startSearchBeacons({
                     ticket: "",  //摇周边的业务ticket, 系统自动添加在摇出来的页面链接后面
-                    complete: function (argv) {
-                        //开启查找完成后的回调函数
+                    success: function (res) {
+                        //接口调用成功时执行的回调函数
+                    },
+                    fail: function (res) {
+                        //接口调用失败时执行的回调函数 
+                    },
+                    complete: function (res) {
+                        //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                    },
+                    cancel: function (res) {
+                        //用户取消分享后执行的回调函数
+                    },
+                    trigger: function (res) {
+                        //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
                     }
                 });
 
-
                 //关闭查找周边ibeacon设备接口
                 wx.stopSearchBeacons({
+                    success: function (res) {
+                        //接口调用成功时执行的回调函数
+                    },
+                    fail: function (res) {
+                        //接口调用失败时执行的回调函数 
+                    },
                     complete: function (res) {
-                        //关闭查找完成后的回调函数
+                        //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                    },
+                    cancel: function (res) {
+                        //用户取消分享后执行的回调函数
+                    },
+                    trigger: function (res) {
+                        //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
                     }
                 });
 
                 //监听周边ibeacon设备接口
                 //备注：上述摇一摇周边接口使用注意事项及更多返回结果说明，请参考：摇一摇周边获取设备信息
                 wx.onSearchBeacons({
-                    complete: function (argv) {
-                        //回调函数，可以数组形式取得该商家注册的在周边的相关设备列表
-                    }
-                });
-
-
-                //隐藏右上角菜单接口
-                wx.hideOptionMenu();
-
-                //显示右上角菜单接口
-                wx.showOptionMenu();
-
-                //关闭当前网页窗口接口
-                wx.closeWindow();
-
-                //批量隐藏功能按钮接口
-                wx.hideMenuItems({
-                    menuList: [] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
-                });
-
-                //批量显示功能按钮接口
-                wx.showMenuItems({
-                    menuList: [] // 要显示的菜单项，所有menu项见附录3
-                });
-
-                //隐藏所有非基础按钮接口
-                wx.hideAllNonBaseMenuItem();// “基本类”按钮详见附录3
-
-                //显示所有功能按钮接口
-                wx.showAllNonBaseMenuItem();
-
-
-                //调起微信扫一扫接口
-                wx.scanQRCode({
-                    needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-                    scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
                     success: function (res) {
-                        var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                        //接口调用成功时执行的回调函数
+                    },
+                    fail: function (res) {
+                        //接口调用失败时执行的回调函数 
+                    },
+                    complete: function (res) {
+                        //回调函数，可以数组形式取得该商家注册的在周边的相关设备列表
+                    },
+                    cancel: function (res) {
+                        //用户取消分享后执行的回调函数
+                    },
+                    trigger: function (res) {
+                        //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
                     }
-                });
-
-
-                //跳转微信商品页接口
-                wx.openProductSpecificView({
-                    productId: '', // 商品id
-                    viewType: '' // 0.默认值，普通商品详情页1.扫一扫商品详情页2.小店商品详情页
                 });
             });
 

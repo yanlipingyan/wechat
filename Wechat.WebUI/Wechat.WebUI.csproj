@@ -291,6 +291,7 @@
     <Content Include="Content\ace\typography.html" />
     <Content Include="Content\ace\widgets.html" />
     <Content Include="Content\ace\wysiwyg.html" />
+    <Content Include="Content\css\JsSdk.css" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\js\FaustCplus\def-img.jpg" />
     <Content Include="Content\js\FaustCplus\FaustCplus.swf" />
@@ -620,6 +621,7 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ApiModels\" />
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Test\Models\" />
     <Folder Include="Areas\Test\Views\Shared\" />
