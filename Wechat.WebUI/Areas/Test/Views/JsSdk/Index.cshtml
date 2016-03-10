@@ -353,7 +353,7 @@
                             images.localId = localIds;
 
                             alert(localIds[0]);
-                            $("#showImage").find("img").attr("src", localIds);
+                            $("#showImage").find("img").attr("src", localIds[0]);
                             document.getElementById('#showImage').innerHtml = '<img src="' + localIds[0] + '"/>';//这里值允许上传一张，所以直接赋值给了一个img控件，如果是多张的话，需要循环赋值给多个img
 
                         },
