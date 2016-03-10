@@ -1,9 +1,9 @@
 ﻿@{
-    ViewBag.Title = "测试分享";
+    ViewBag.Title = "测试JsSdk";
     Layout = "~/Views/Shared/_LayoutTest.cshtml";
 }
 
-<h2>测试分享</h2>
+<h2>测试JsSdk</h2>
 <div class="wxapi_container">
     <div class="wxapi_index_container">
         <ul class="label_box lbox_close wxapi_index_list">
@@ -352,8 +352,7 @@
                             var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                             images.localId = localIds;
 
-                            $('#showImage').innerHtml('<img src="' + localIds + '"/>');//这里值允许上传一张，所以直接赋值给了一个img控件，如果是多张的话，需要循环赋值给多个img
-                            //<img  src=""/>
+                            document.querySelector('#showImage').innerHtml = '<img src="' + localIds[1] + '"/>';//这里值允许上传一张，所以直接赋值给了一个img控件，如果是多张的话，需要循环赋值给多个img
 
                         },
                         fail: function (res) {
@@ -424,6 +423,9 @@
                                 if (i < length) {
                                     upload();
                                 }
+
+                                //调取后台的下载图片的方法进行下载到自己的服务器上
+
                             },
                             fail: function (res) {
                                 alert(JSON.stringify(res));//接口调用失败时执行的回调函数
