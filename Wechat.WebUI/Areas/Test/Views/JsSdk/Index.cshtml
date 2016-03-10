@@ -42,7 +42,7 @@
         <span class="desc">拍照或从手机相册中选图接口</span>
         <button class="btn btn_primary" id="chooseImage">chooseImage</button>
         <div id="showImage">
-            <img src="" style="width: 280px; height: 480px; display: none" />
+            <img src="" style="width: 290px; height: 400px; display: none" />
         </div>
         <span class="desc">预览图片接口</span>
         <button class="btn btn_primary" id="previewImage">previewImage</button>
@@ -351,11 +351,11 @@
                         sizeType: ['original', 'compressed'], // 可以指定是原图（original）还是压缩图（compressed），默认二者都有
                         sourceType: ['album', 'camera'], // 可以指定来源是相册（album）还是相机（camera），默认二者都有
                         success: function (res) {
-                            var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                            var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图，这里值允许上传一张，所以直接赋值给了一个img控件，如果是多张的话，需要循环赋值给多个img
                             images.localId = localIds;
 
                             $("#showImage").find("img").attr("src", localIds[0]).show();
-                            //document.getElementById('#showImage').innerHtml = '<img src="' + localIds[0] + '"/>';//这里值允许上传一张，所以直接赋值给了一个img控件，如果是多张的话，需要循环赋值给多个img
+                            //document.getElementById('#showImage').innerHtml = '<img src="' + localIds[0] + '"/>';
 
                         },
                         fail: function (res) {
