@@ -41,7 +41,9 @@
         <h3 id="menu-image">图像接口</h3>
         <span class="desc">拍照或从手机相册中选图接口</span>
         <button class="btn btn_primary" id="chooseImage">chooseImage</button>
-        <div id="showImage"><img src=""/></div>
+        <div id="showImage">
+            <img src="" style="width: 280px; height: 480px; display: none" />
+        </div>
         <span class="desc">预览图片接口</span>
         <button class="btn btn_primary" id="previewImage">previewImage</button>
         <span class="desc">上传图片接口</span>
@@ -352,9 +354,8 @@
                             var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                             images.localId = localIds;
 
-                            alert(localIds[0]);
-                            $("#showImage").find("img").attr("src", localIds[0]);
-                            document.getElementById('#showImage').innerHtml = '<img src="' + localIds[0] + '"/>';//这里值允许上传一张，所以直接赋值给了一个img控件，如果是多张的话，需要循环赋值给多个img
+                            $("#showImage").find("img").attr("src", localIds[0]).show();
+                            //document.getElementById('#showImage').innerHtml = '<img src="' + localIds[0] + '"/>';//这里值允许上传一张，所以直接赋值给了一个img控件，如果是多张的话，需要循环赋值给多个img
 
                         },
                         fail: function (res) {
