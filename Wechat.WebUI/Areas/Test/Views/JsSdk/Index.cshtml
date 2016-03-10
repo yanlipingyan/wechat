@@ -352,7 +352,8 @@
                             var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                             images.localId = localIds;
 
-                            document.getElementById('#showImage').innerHtml = '<img src="' + localIds[1] + '"/>';//这里值允许上传一张，所以直接赋值给了一个img控件，如果是多张的话，需要循环赋值给多个img
+                            alert(localIds[0]);
+                            document.getElementById('#showImage').innerHtml = '<img src="' + localIds[0] + '"/>';//这里值允许上传一张，所以直接赋值给了一个img控件，如果是多张的话，需要循环赋值给多个img
 
                         },
                         fail: function (res) {
