@@ -131,6 +131,7 @@
     <Compile Include="Areas\Test\Controllers\CommonController.cs" />
     <Compile Include="Areas\Test\Controllers\FaustCplusController.cs" />
     <Compile Include="Areas\Test\Controllers\JsSdkController.cs" />
+    <Compile Include="Areas\Test\Controllers\MaterialController.cs" />
     <Compile Include="Areas\Test\Controllers\MenuController.cs" />
     <Compile Include="Areas\Test\Controllers\OAuth2Controller.cs" />
     <Compile Include="Areas\Test\Controllers\PayController.cs" />
@@ -710,6 +711,7 @@
     <Content Include="Content\lib\layer\layer-v1.8.3\doc\layer授权.url" />
     <Content Include="Content\lib\layer\layer-v1.8.3\Jquery插件弹出层layer-v1.8.3API使用手册.docx" />
     <Content Include="Content\lib\layer\layer-v1.8.3\layer图片浏览使用.docx" />
+    <Content Include="Areas\Test\Views\Material\Download.cshtml" />
     <None Include="Properties\PublishProfiles\wechat.pubxml" />
   </ItemGroup>
   <PropertyGroup>

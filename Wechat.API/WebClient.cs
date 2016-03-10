@@ -45,6 +45,23 @@ namespace Wechat.API
         }
 
         /// <summary>
+        /// 通过url下载文件内容
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="stream"></param>
+        public static void Download(string url, Stream stream)
+        {
+            WebClient client = new WebClient();
+
+            var data = client.DownloadData(url);
+
+            foreach (var b in data)
+            {
+                stream.WriteByte(b);
+            }
+        }
+
+        /// <summary>
         /// 将数据上传到指定的Url上
         /// </summary>
         /// <param name="url">url路径</param>

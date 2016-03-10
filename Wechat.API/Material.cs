@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -34,6 +35,20 @@ namespace Wechat.API
             //    return HttpUtility.Post.PostFileGetJson<UploadTemporaryMediaResult>(url, null, fileDictionary, null, timeOut: timeOut);
 
             //}, accessTokenOrAppId);
+        }
+
+        public static string GetTemporaryMedia(string appId, string appSecret, string media_id)
+        {
+            var url = string.Format("http://file.api.weixin.qq.com/cgi-bin/media/get?access_token={0}&media_id={1}", AccessToken.GetToken(appId, appSecret), media_id);
+
+            return WechatWebClient.Get(url);
+        }
+
+        public static void GetTemporaryMedia(string appId, string appSecret, string media_id, Stream stream)
+        {
+            var url = string.Format("http://file.api.weixin.qq.com/cgi-bin/media/get?access_token={0}&media_id={1}", AccessToken.GetToken(appId, appSecret), media_id);
+
+            WechatWebClient.Download(url, stream);
         }
         #endregion
 
