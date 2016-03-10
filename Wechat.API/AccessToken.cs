@@ -6,23 +6,17 @@ using System.Text;
 
 namespace Wechat.API
 {
-    /// <summary>
-    /// 获取普通access_token
-    /// </summary>
+    // 摘要: 
+    //      获取普通access_token
+    //
     public static class AccessToken
     {
-        // 摘要: 
-        //     获取Token。
-        //
-        // 参数: 
-        //   appId:
-        //     公众号appID。
-        //
-        //   appSecret:
-        //     公众号appSecret。
-        //
-        // 返回结果: token(string)
-        //
+        /// <summary>
+        /// 获取Token
+        /// </summary>
+        /// <param name="appId">公众号appID</param>
+        /// <param name="appSecret">公众号appSecret</param>
+        /// <returns>token(string)</returns>
         public static string GetToken(string appId, string appSecret)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={0}&secret={1}", appId, appSecret);

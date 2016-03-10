@@ -12,18 +12,12 @@ namespace Wechat.API
     //  
     public static class WechatServer
     {
-        // 摘要: 
-        //     获取微信服务器Ip地址列表。
-        //
-        // 参数: 
-        //   appId:
-        //     公众号appID。
-        //
-        //   appSecret:
-        //     公众号appSecret。
-        //
-        // 返回结果: Ip地址列表(JArray)
-        //
+        /// <summary>
+        /// 获取微信服务器Ip地址列表
+        /// </summary>
+        /// <param name="appId">公众号appID</param>
+        /// <param name="appSecret">公众号appSecret</param>
+        /// <returns>Ip地址列表(JArray)</returns>
         public static JArray GetIP(string appId, string appSecret)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token={0}", AccessToken.GetToken(appId, appSecret));//获取微信服务器Ip地址的url。
@@ -33,11 +27,10 @@ namespace Wechat.API
             return JsonConvert.DeserializeObject<dynamic>(result)["ip_list"];
         }
 
-        // 摘要: 
-        //     获取微信版本号。
-        //
-        // 返回结果: 版本号
-        //
+        /// <summary>
+        /// 获取微信版本号
+        /// </summary>
+        /// <returns>版本号</returns>
         public static string GetVersion()
         {
             var userAgent = System.Web.HttpContext.Current.Request.UserAgent.ToString().ToLower();

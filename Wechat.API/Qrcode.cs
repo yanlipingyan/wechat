@@ -11,25 +11,14 @@ namespace Wechat.API
     //
     public static class Qrcode
     {
-        // 摘要: 
-        //     创建临时二维码图片URL。
-        //
-        //  注释：
-        //     这里返回的直接是一张图片，可以直接展示和下载
-        //
-        // 参数: 
-        //   appId:
-        //     公众号appID。
-        //
-        //   appSecret:
-        //     公众号appSecret。
-        //
-        //   scene_id:
-        //     场景值ID，临时二维码时为32位非0整型，永久二维码时最大值为100000（目前参数只支持1--100000）。
-        //
-        // 返回结果: 
-        //     二维码图片URL
-        //
+        /// <summary>
+        /// 创建临时二维码图片URL
+        /// 注释：这里返回的直接是一张图片，可以直接展示和下载
+        /// </summary>
+        /// <param name="appId">公众号appID</param>
+        /// <param name="appSecret">公众号appSecret</param>
+        /// <param name="scene_id">场景值ID，临时二维码时为32位非0整型，永久二维码时最大值为100000（目前参数只支持1--100000）。</param>
+        /// <returns>二维码图片URL</returns>
         public static string ShowTemporaryQrcode(string appId, string appSecret, int scene_id)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token={0}", AccessToken.GetToken(appId, appSecret));
@@ -54,25 +43,14 @@ namespace Wechat.API
             return string.Format("https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={0}", Uri.EscapeDataString(ticket));
         }
 
-        // 摘要: 
-        //     创建永久二维码图片URL。
-        //
-        //  注释：
-        //     这里返回的直接是一张图片，可以直接展示和下载
-        //
-        // 参数: 
-        //   appId:
-        //     公众号appID。
-        //
-        //   appSecret:
-        //     公众号appSecret。
-        //
-        //   scene_id:
-        //     场景值ID，临时二维码时为32位非0整型，永久二维码时最大值为100000（目前参数只支持1--100000）。
-        //
-        // 返回结果: 
-        //    二维码图片URL
-        //
+        /// <summary>
+        /// 创建永久二维码图片URL。
+        /// 注释：这里返回的直接是一张图片，可以直接展示和下载
+        /// </summary>
+        /// <param name="appId">公众号appID</param>
+        /// <param name="appSecret">公众号appSecret</param>
+        /// <param name="scene_id">场景值ID，临时二维码时为32位非0整型，永久二维码时最大值为100000（目前参数只支持1--100000）。</param>
+        /// <returns>二维码图片URL</returns>
         public static string ShowPermanentQrcode(string appId, string appSecret, int scene_id)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token={0}", AccessToken.GetToken(appId, appSecret));

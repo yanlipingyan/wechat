@@ -7,20 +7,17 @@ using System.Text;
 
 namespace Wechat.API
 {
+    // 摘要: 
+    //      jssdk接口
+    //
     public static class JsSdk
     {
-        // 摘要: 
-        //     获取jsapiTicket。
-        //
-        // 参数: 
-        //   appId:
-        //     公众号appID。
-        //
-        //   appSecret:
-        //     公众号appSecret。
-        //
-        // 返回结果: jsapiTicket(string)
-        //
+        /// <summary>
+        /// 获取jsapiTicket
+        /// </summary>
+        /// <param name="appId">公众号appID</param>
+        /// <param name="appSecret">公众号appSecret</param>
+        /// <returns>jsapiTicket(string)</returns>
         public static string GetTicket(string appId, string appSecret)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=jsapi", AccessToken.GetToken(appId, appSecret));
@@ -40,27 +37,15 @@ namespace Wechat.API
             return model.Ticket;
         }
 
-        // 摘要: 
-        //     微信JS-SDk签名。
-        //
-        // 参数: 
-        //   appId:
-        //     公众号appID。
-        //
-        //   appSecret:
-        //     公众号appSecret。
-        //
-        //   noncestr:
-        //     随机字符串(需要与调用JS接口页面的wx.config中的nonceStr相同)。
-        //
-        //   timestamp:
-        //     时间戳(需要与调用JS接口页面的wx.config中的timestamp相同)。
-        //
-        //   url:
-        //     url（当前网页的URL，url必须是调用JS接口页面的完整URL，不包含#及其后面部分。）。
-        //
-        // 返回结果: 签名(string)
-        //
+        /// <summary>
+        /// 微信JS-SDk签名
+        /// </summary>
+        /// <param name="appId">公众号appID</param>
+        /// <param name="appSecret">公众号appSecret</param>
+        /// <param name="noncestr">随机字符串(需要与调用JS接口页面的wx.config中的nonceStr相同)</param>
+        /// <param name="timestamp">时间戳(需要与调用JS接口页面的wx.config中的timestamp相同)</param>
+        /// <param name="url">url（当前网页的URL，url必须是调用JS接口页面的完整URL，不包含#及其后面部分）</param>
+        /// <returns>签名(string)</returns>
         public static string GetSign(string appId, string appSecret, string noncestr, string timestamp, string url)
         {
             string jsapi_ticket = JsSdk.GetTicket(appId, appSecret);

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Wechat.API
 {
-    /// <summary>
-    /// 素材管理API接口
-    /// </summary>
+    // 摘要: 
+    //      素材管理API接口
+    //
     public static class Material
     {
         #region 临时素材

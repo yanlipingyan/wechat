@@ -13,15 +13,11 @@ namespace Wechat.API
     //  
     public static class WechatWebClient
     {
-        // 摘要: 
-        //     通过Url读取文件内容。
-        //
-        // 参数: 
-        //   url:
-        //     url路径。
-        //
-        // 返回结果: 文件内容(string)
-        //
+        /// <summary>
+        /// 通过Url读取文件内容
+        /// </summary>
+        /// <param name="url">url路径</param>
+        /// <returns>文件内容(string)</returns>
         public static string Get(string url)
         {
             WebClient client = new WebClient();
@@ -48,18 +44,12 @@ namespace Wechat.API
             return t;
         }
 
-        // 摘要: 
-        //     将数据上传到指定的Url上。
-        //
-        // 参数: 
-        //   url:
-        //     url路径。
-        //
-        //   data:
-        //     上传的内容。
-        //
-        // 返回结果: 文件内容(string)
-        //
+        /// <summary>
+        /// 将数据上传到指定的Url上
+        /// </summary>
+        /// <param name="url">url路径</param>
+        /// <param name="data">上传的内容</param>
+        /// <returns>文件内容(string)</returns>
         public static string Post(string url, string data)
         {
             WebClient client = new WebClient();
