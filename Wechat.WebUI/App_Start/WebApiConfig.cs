@@ -14,6 +14,7 @@ namespace Wechat.WebUI
 
         public static void Register(HttpConfiguration config)
         {
+            //将api返回值转换为json格式
             config.Services.Replace(typeof(IContentNegotiator), new JsonContentNegotiator(jsonFormatter));
 
             config.Routes.MapHttpRoute(
