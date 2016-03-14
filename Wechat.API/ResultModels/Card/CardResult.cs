@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Wechat.API.ResultModels
 {
-    public class CreateCardResult : WechatResult
+    public class CardResult : WechatResult
     {
         /// <summary>
         /// 卡券id

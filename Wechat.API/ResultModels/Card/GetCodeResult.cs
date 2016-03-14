@@ -5,6 +5,18 @@ using System.Text;
 
 namespace Wechat.API.ResultModels
 {
+    public class GetCodeResult : WechatResult
+    {
+        /// <summary>
+        /// 用户openid
+        /// </summary>
+        public string openid { get; set; }
+        /// <summary>
+        /// 卡券详情
+        /// </summary>
+        public GetCode card { get; set; }
+    }
+
     public class GetCode
     {
         /// <summary>
@@ -27,17 +39,5 @@ namespace Wechat.API.ResultModels
         /// 是否可以核销，true为可以核销，false为不可核销
         /// </summary>
         public string can_consume { get; set; }
-    }
-
-    public class GetCodeResult : WechatResult
-    {
-        /// <summary>
-        /// 用户openid
-        /// </summary>
-        public string openid { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public GetCode card { get; set; }
     }
 }

@@ -18,12 +18,12 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="data">post数据（json格式）</param>
-        /// <returns>成功时：{"errcode":0,"errmsg":"ok"}；失败时：{"errcode":40018,"errmsg":"invalid button name size"}</returns>
-        public static string CreateMenu(string appId, string appSecret, string data)
+        /// <returns>ResultModels.WechatResult</returns>
+        public static ResultModels.WechatResult CreateMenu(string appId, string appSecret, string data)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/create?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WechatWebClient.Post(url, data);
+            return WechatWebClient.Post<ResultModels.WechatResult>(url, data);
         }
 
         /// <summary>
@@ -44,12 +44,12 @@ namespace Wechat.API
         /// </summary>
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
-        /// <returns>成功时：{"errcode":0,"errmsg":"ok"}</returns>
-        public static string DeleteAllMenu(string appId, string appSecret)
+        /// <returns>ResultModels.WechatResult</returns>
+        public static ResultModels.WechatResult DeleteAllMenu(string appId, string appSecret)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/delete?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WechatWebClient.Get(url);
+            return WechatWebClient.Get<ResultModels.WechatResult>(url);
         }
         #endregion
 
@@ -74,14 +74,14 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="menuId">post数据（个性菜单id）</param>
-        /// <returns>成功：{"errcode":0,"errmsg":"ok"}</returns>
-        public static string DeletePersonaliseMenu(string appId, string appSecret, string menuId)
+        /// <returns>ResultModels.WechatResult</returns>
+        public static ResultModels.WechatResult DeletePersonaliseMenu(string appId, string appSecret, string menuId)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/delconditional?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new { menuid = menuId };
 
-            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post<ResultModels.WechatResult>(url, JsonConvert.SerializeObject(obj));
         }
 
 

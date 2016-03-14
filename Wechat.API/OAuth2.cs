@@ -18,7 +18,7 @@ namespace Wechat.API
         /// <param name="redirect_url">授权后重定向的回调链接地址，请使用urlencode对链接进行处理。</param>
         /// <param name="scope">应用授权作用域，snsapi_base （不弹出授权页面，直接跳转，只能获取用户openid），snsapi_userinfo （弹出授权页面，可通过openid拿到昵称、性别、所在地。并且，即使在未关注的情况下，只要用户授权，也能获取其信息）。</param>
         /// <param name="state">重定向后会带上state参数，开发者可以填写a-zA-Z0-9的参数值，最多128字节</param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public static string GetCode(string appId, string redirect_url, Enums.OAuthScopeEnum scope, string state)
         {
             /* 这一步发送之后，客户会得到授权页面，无论同意或拒绝，都会返回redirectUrl页面。
@@ -37,7 +37,7 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="code">通过GetCode方法获得的code</param>
-        /// <returns></returns>
+        /// <returns>ResultModels.Oauth2TokenResult</returns>
         public static ResultModels.Oauth2TokenResult GetToken(string appId, string appSecret, string code)
         {
             string url = string.Format("https://api.weixin.qq.com/sns/oauth2/access_token?appid={0}&secret={1}&code={2}&grant_type=authorization_code", appId, appSecret, code);
@@ -50,7 +50,7 @@ namespace Wechat.API
         /// </summary>
         /// <param name="openId">上面方法中获得openId</param>
         /// <param name="token">获得的网页授权token</param>
-        /// <returns></returns>
+        /// <returns>ResultModels.WechatResult</returns>
         public static ResultModels.WechatResult GetOAuthTokenIsValid(string openId, string token)
         {
             string url = string.Format("https://api.weixin.qq.com/sns/auth?access_token={0}&openid={1}", token, openId);
@@ -58,19 +58,13 @@ namespace Wechat.API
             return WechatWebClient.Get<ResultModels.WechatResult>(url);
         }
 
-        // 摘要: 
-        //     刷新access_token。
-        //
-        // 注释：
-        //     如果需要则判断授权凭证是否有效，有效则不需刷新，无效就刷新。
-        //
-        // 参数: 
-        //   appId:
-        //     公众号appID。
-        //
-        //   refreshToken:
-        //     通过GetToken方法获得的refresh_token。
-        //
+        /// <summary>
+        /// 刷新access_token
+        /// 注释：如果需要则判断授权凭证是否有效，有效则不需刷新，无效就刷新
+        /// </summary>
+        /// <param name="appId">公众号appID</param>
+        /// <param name="refreshToken">通过GetToken方法获得的refresh_token</param>
+        /// <returns>ResultModels.Oauth2TokenResult</returns>
         public static ResultModels.Oauth2TokenResult RefreshToken(string appId, string refreshToken)
         {
             string url = string.Format("https://api.weixin.qq.com/sns/oauth2/refresh_token?appid={0}&grant_type=refresh_token&refresh_token={1}", appId, refreshToken);
@@ -78,19 +72,13 @@ namespace Wechat.API
             return WechatWebClient.Get<ResultModels.Oauth2TokenResult>(url);
         }
 
-        // 摘要: 
-        //     拉取scope为 snsapi_userinfo时的用户信息。
-        //
-        // 参数: 
-        //   openId:
-        //     上面方法中获得openId。
-        //
-        //   token:
-        //     上面方法中获得token。
-        //
-        //   language:
-        //     返回此用户国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语
-        //
+        /// <summary>
+        /// 拉取scope为 snsapi_userinfo时的用户信息
+        /// </summary>
+        /// <param name="openId">上面方法中获得openId</param>
+        /// <param name="token">上面方法中获得token</param>
+        /// <param name="language">返回此用户国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语</param>
+        /// <returns>ResultModels.OAuth2UserInfoResult</returns>
         public static ResultModels.OAuth2UserInfoResult GetUserInfo(string openId, string token, string language)
         {
             string url = string.Format("https://api.weixin.qq.com/sns/userinfo?access_token={0}&openid={1}&lang={2}", token, openId, language);

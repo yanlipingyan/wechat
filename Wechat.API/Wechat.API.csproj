@@ -73,12 +73,14 @@
     <Compile Include="Message.cs" />
     <Compile Include="Models\AccessTokenModel.cs" />
     <Compile Include="Models\ApiModel.cs" />
-    <Compile Include="Models\CardModel.cs">
+    <Compile Include="Models\Card\CardShelvesModel.cs" />
+    <Compile Include="Models\Card\CardModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\EventModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\Card\GetCodeModel.cs" />
     <Compile Include="Models\JsApiTicketModel.cs" />
     <Compile Include="Models\MessageModel.cs">
       <SubType>Code</SubType>
@@ -95,8 +97,10 @@
     <Compile Include="ReceiveMessage.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ResultModels\Card\CardResult.cs" />
+    <Compile Include="ResultModels\Card\CardShelvesResult.cs" />
+    <Compile Include="ResultModels\Card\CardQrcodeResult.cs" />
     <Compile Include="ResultModels\Card\GetCodeResult.cs" />
-    <Compile Include="ResultModels\Card\CreateCardResult.cs" />
     <Compile Include="ResultModels\MaterialResult.cs">
       <SubType>Code</SubType>
     </Compile>

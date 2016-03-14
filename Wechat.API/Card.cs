@@ -150,12 +150,12 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="data">post数据（json格式）</param>
-        /// <returns>ResultModels.CreateCardResult</returns>
-        public static ResultModels.CreateCardResult CreateCard(string appId, string appSecret, string data)
+        /// <returns>ResultModels.CardResult</returns>
+        public static ResultModels.CardResult CreateCard(string appId, string appSecret, string data)
         {
             string url = string.Format("https://api.weixin.qq.com/card/create?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WechatWebClient.Post<ResultModels.CreateCardResult>(url, data.ToString().Replace("\\", "").Replace("\"{", "{").Replace("}\"", "}"));
+            return WechatWebClient.Post<ResultModels.CardResult>(url, data.ToString().Replace("\\", "").Replace("\"{", "{").Replace("}\"", "}"));
         }
 
         /// <summary>
@@ -164,8 +164,8 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="model">团购券model</param>
-        /// <returns>ResultModels.CreateCardResult</returns>
-        public static ResultModels.CreateCardResult CreateGrouponCard(string appId, string appSecret, Models.GrouponCardModel model)
+        /// <returns>ResultModels.CardResult</returns>
+        public static ResultModels.CardResult CreateGrouponCard(string appId, string appSecret, Models.GrouponCardModel model)
         {
             object date_info = null;
             if (model.Type == 1)
@@ -225,8 +225,8 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="model">代金券model</param>
-        /// <returns>ResultModels.CreateCardResult</returns>
-        public static ResultModels.CreateCardResult CreateCashCard(string appId, string appSecret, Models.CashCardModel model)
+        /// <returns>ResultModels.CardResult</returns>
+        public static ResultModels.CardResult CreateCashCard(string appId, string appSecret, Models.CashCardModel model)
         {
             object date_info = null;
             if (model.Type == 1)
@@ -287,8 +287,8 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="model">折扣券model</param>
-        /// <returns>ResultModels.CreateCardResult</returns>
-        public static ResultModels.CreateCardResult CreateDiscountCard(string appId, string appSecret, Models.DiscountCardModel model)
+        /// <returns>ResultModels.CardResult</returns>
+        public static ResultModels.CardResult CreateDiscountCard(string appId, string appSecret, Models.DiscountCardModel model)
         {
             object date_info = null;
             if (model.Type == 1)
@@ -348,8 +348,8 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="model">礼品券model</param>
-        /// <returns>ResultModels.CreateCardResult</returns>
-        public static ResultModels.CreateCardResult CreateGiftCard(string appId, string appSecret, Models.GiftCardModel model)
+        /// <returns>ResultModels.CardResult</returns>
+        public static ResultModels.CardResult CreateGiftCard(string appId, string appSecret, Models.GiftCardModel model)
         {
             object date_info = null;
             if (model.Type == 1)
@@ -410,7 +410,7 @@ namespace Wechat.API
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="model">优惠券model</param>
         /// <returns>ResultModels.CreateCardResult</returns>
-        public static ResultModels.CreateCardResult CreateGeneralCouponCard(string appId, string appSecret, Models.GeneralCouponCardModel model)
+        public static ResultModels.CardResult CreateGeneralCouponCard(string appId, string appSecret, Models.GeneralCouponCardModel model)
         {
             object date_info = null;
             if (model.Type == 1)
@@ -468,7 +468,7 @@ namespace Wechat.API
 
         #region 投放卡券
         /// <summary>
-        /// 创建卡券二维码图片
+        /// 第一种方式：创建卡券二维码图片进行投放
         /// </summary>
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
@@ -485,7 +485,7 @@ namespace Wechat.API
 
             string url = string.Format("https://api.weixin.qq.com/card/qrcode/create?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            var result = "";
+            var result = new ResultModels.CardQrcodeResult();
 
             if (isNeverExpires)
             {
@@ -505,7 +505,7 @@ namespace Wechat.API
                     }
                 };
 
-                result = WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
+                result = WechatWebClient.Post<ResultModels.CardQrcodeResult>(url, JsonConvert.SerializeObject(obj));
             }
             else
             {
@@ -526,27 +526,38 @@ namespace Wechat.API
                     }
                 };
 
-                result = WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
+                result = WechatWebClient.Post<ResultModels.CardQrcodeResult>(url, JsonConvert.SerializeObject(obj));
             }
 
-            var ticket = JsonConvert.DeserializeObject<dynamic>(result)["ticket"].ToString();
-
-            return string.Format("https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={0}", Uri.EscapeDataString(ticket));
+            return string.Format("https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={0}", Uri.EscapeDataString(result.ticket));
         }
 
+        /// 第二种：添加卡券JS-SDK进行投放
+
         /// <summary>
-        /// 创建货架接口
+        /// 第三种：通过创建货架接口投放卡券
         /// </summary>
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
-        /// <param name="data">post内容（json字符串）</param>
-        /// <returns>{ "errcode":0,"errmsg":"ok","url":"www.test.url","page_id":1}</returns>
-        public static string CreateShelves(string appId, string appSecret, string data)
+        /// <param name="model">Models.CardShelvesModel</param>
+        /// <returns>ResultModels.CardShelvesResult</returns>
+        public static ResultModels.CardShelvesResult CreateShelves(string appId, string appSecret, Models.CardShelvesModel model)
         {
             string url = string.Format("https://api.weixin.qq.com/card/landingpage/create?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WechatWebClient.Post(url, data);
+            var obj = new
+            {
+                banner = model.Banner,
+                page_title = model.PageTitle,
+                can_share = model.CanShare,
+                scene = model.Scene,
+                card_list = model.CardList
+            };
+
+            return WechatWebClient.Post<ResultModels.CardShelvesResult>(url, JsonConvert.SerializeObject(obj));
         }
+
+        /// 第三种：通过群发卡券投放卡券
         #endregion
 
         #region 核销卡券
@@ -558,19 +569,17 @@ namespace Wechat.API
         /// </summary>
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
-        /// <param name="code">单张卡券的唯一标准</param>
-        /// <param name="cardId">卡券ID代表一类卡券</param>
-        /// <param name="check_consume">是否校验code核销状态，填入true和false时的code异常状态返回数据不同</param>
+        /// <param name="model">model</param>
         /// <returns>ResultModels.GetCodeResult</returns>
-        public static ResultModels.GetCodeResult GetCode(string appId, string appSecret, string code, string cardId = "", bool check_consume = false)
+        public static ResultModels.GetCodeResult GetCode(string appId, string appSecret, Models.GetCodeModel model)
         {
             string url = string.Format("https://api.weixin.qq.com/card/code/get?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new
             {
-                card_id = cardId,
-                code = code,
-                check_consume = check_consume
+                card_id = model.CardId,
+                code = model.Code,
+                check_consume = model.CheckConsume
             };
 
             return WechatWebClient.Post<ResultModels.GetCodeResult>(url, JsonConvert.SerializeObject(obj));
