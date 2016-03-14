@@ -138,6 +138,7 @@
     <Compile Include="Areas\Test\Controllers\QrcodeController.cs" />
     <Compile Include="Areas\Test\Controllers\RecordWechatLogController.cs" />
     <Compile Include="Areas\Test\Controllers\ServerController.cs" />
+    <Compile Include="Areas\Test\Controllers\ShakeAroundController.cs" />
     <Compile Include="Areas\Test\Controllers\UEditorController.cs" />
     <Compile Include="Areas\Test\Controllers\YLPAutorizeController.cs" />
     <Compile Include="Areas\Test\TestAreaRegistration.cs" />

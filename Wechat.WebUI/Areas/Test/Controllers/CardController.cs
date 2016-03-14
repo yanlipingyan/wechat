@@ -57,20 +57,20 @@ namespace Wechat.WebUI.Areas.Test.Controllers
 
         public ActionResult QueryDetail(string cardid = "pxKfavtut0Y7u8QzQJdIwAuMcvk0")
         {
-            string content = Card.QueryCardDetail(ApiModel.AppID, ApiModel.AppSecret, cardid);
+            string content = Card.GetCardDetail(ApiModel.AppID, ApiModel.AppSecret, cardid);
             return Content(content);
         }
 
         public ActionResult QueryList()
         {
             string[] status = new string[] { "CARD_STATUS_VERIFY_OK", "CARD_STATUS_DISPATCH", "CARD_STATUS_VERIFY_FAIL" };
-            string content = Card.QueryCardList(ApiModel.AppID, ApiModel.AppSecret, status);
+            string content = Card.GetCardList(ApiModel.AppID, ApiModel.AppSecret, status);
             return Content(content);
         }
 
         public ActionResult QueryListForMe(string openId = "oxKfavv2QQtVecXAmVehYt8fB15s")
         {
-            return Content(Card.QueryCardListForUser(ApiModel.AppID, ApiModel.AppSecret, openId));
+            return Content(Card.GetCardListForUser(ApiModel.AppID, ApiModel.AppSecret, openId));
         }
 
         public string CreateGroupon()
@@ -284,12 +284,17 @@ namespace Wechat.WebUI.Areas.Test.Controllers
 
         public ActionResult QueryCode(string cardId = "pxKfavr1cidMqbYHbstctHeMhQfM", string code = "833308329979")
         {
-            return Content(Card.QueryCode(ApiModel.AppID, ApiModel.AppSecret, cardId, code));
+            return Content(JsonConvert.SerializeObject(Card.GetCode(ApiModel.AppID, ApiModel.AppSecret, code, cardId)));
         }
 
         public ActionResult UpdateCode(string cardId = "pxKfavr1cidMqbYHbstctHeMhQfM", string code = "833308329979")
         {
             return Content(Card.UpdateCode(ApiModel.AppID, ApiModel.AppSecret, code, "3495739475"));
         }
+
+        //public ActionResult DecryptCode(string code) 
+        //{
+
+        //}
     }
 }

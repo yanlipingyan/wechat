@@ -28,7 +28,7 @@ namespace Wechat.API
         }
 
         /// <summary>
-        /// 通过Url读取文件内容。
+        /// 通过Url读取文件内容
         /// </summary>
         /// <typeparam name="T">返回某类型的model</typeparam>
         /// <param name="url">url路径</param>
@@ -40,6 +40,37 @@ namespace Wechat.API
             StreamReader reader = new StreamReader(stream);
 
             T t = JsonConvert.DeserializeObject<T>(reader.ReadToEnd());
+
+            return t;
+        }
+
+        /// <summary>
+        /// 将数据上传到指定的Url上
+        /// </summary>
+        /// <param name="url">url路径</param>
+        /// <param name="data">上传的内容</param>
+        /// <returns>文件内容(string)</returns>
+        public static string Post(string url, string data)
+        {
+            WebClient client = new WebClient();
+            client.Encoding = Encoding.UTF8;
+
+            return client.UploadString(url, data);
+        }
+
+        /// <summary>
+        /// 将数据上传到指定的Url上
+        /// </summary>
+        /// <typeparam name="T">返回某类型的model</typeparam>
+        /// <param name="url">url路径</param>
+        /// <param name="data">上传的内容</param>
+        /// <returns>T</returns>
+        public static T Post<T>(string url, string data)
+        {
+            WebClient client = new WebClient();
+            client.Encoding = Encoding.UTF8;
+
+            T t = JsonConvert.DeserializeObject<T>(client.UploadString(url, data));
 
             return t;
         }
@@ -59,20 +90,6 @@ namespace Wechat.API
             {
                 stream.WriteByte(b);
             }
-        }
-
-        /// <summary>
-        /// 将数据上传到指定的Url上
-        /// </summary>
-        /// <param name="url">url路径</param>
-        /// <param name="data">上传的内容</param>
-        /// <returns>文件内容(string)</returns>
-        public static string Post(string url, string data)
-        {
-            WebClient client = new WebClient();
-            client.Encoding = Encoding.UTF8;
-
-            return client.UploadString(url, data);
         }
     }
 }

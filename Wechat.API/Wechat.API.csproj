@@ -58,6 +58,7 @@
     <Compile Include="Enums\CommonEnum.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\WechatIndustryEnum.cs" />
     <Compile Include="Enums\WechatReturnCode.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -82,6 +83,7 @@
     <Compile Include="Models\MessageModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\ShakeAroundModel.cs" />
     <Compile Include="OAuth2.cs" />
     <Compile Include="Pay.cs">
       <SubType>Code</SubType>
@@ -93,6 +95,7 @@
     <Compile Include="ReceiveMessage.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ResultModels\Card\GetCodeResult.cs" />
     <Compile Include="ResultModels\MaterialResult.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -105,6 +108,7 @@
     <Compile Include="Server.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ShakeAround.cs" />
     <Compile Include="Signature.cs" />
     <Compile Include="WebClient.cs" />
   </ItemGroup>

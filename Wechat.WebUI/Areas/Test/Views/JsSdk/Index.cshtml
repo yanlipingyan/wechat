@@ -19,6 +19,7 @@
             <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-shopping">微信小店接口</a></li>
             <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-card">微信卡券接口</a></li>
             <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-pay">微信支付接口</a></li>
+            <li class="label_item wxapi_index_item"><a class="label_inner" href="#menu-pay">查找周边接口</a></li>
         </ul>
     </div>
     <div class="lbox_close wxapi_form">
@@ -117,8 +118,17 @@
         <h3 id="menu-pay">微信支付接口</h3>
         <span class="desc">发起一个微信支付请求</span>
         <button class="btn btn_primary" id="chooseWXPay">chooseWXPay</button>
+
+        <h3 id="menu-search">查找周边接口</h3>
+        <span class="desc">开启查找周边ibeacon设备接口</span>
+        <button class="btn btn_primary" id="startSearchBeacons">startSearchBeacons</button>
+        <span class="desc">关闭查找周边ibeacon设备接口</span>
+        <button class="btn btn_primary" id="stopSearchBeacons">stopSearchBeacons</button>
+        <span class="desc">监听周边ibeacon设备接口</span>
+        <button class="btn btn_primary" id="onSearchBeacons">onSearchBeacons</button>
     </div>
 </div>
+
 
 
 @*JSSDK使用步骤*@
@@ -1154,8 +1164,9 @@
                     });
                 };
 
+                //销毁卡券方法
                 function decryptCode(code, callback) {
-                    $.getJSON('/jssdk/decrypt_code.php?code=' + encodeURI(code), function (res) {
+                    $.getJSON('/test/card/DecryptCode?code=' + encodeURI(code), function (res) {
                         if (res.errcode == 0) {
                             codes.push(res.code);
                         }
@@ -1195,44 +1206,48 @@
 
 
                 //开启查找周边ibeacon设备接口
-                //备注：如需接入摇一摇周边功能，请参考：申请开通摇一摇周边
-                wx.startSearchBeacons({
-                    ticket: "",  //摇周边的业务ticket, 系统自动添加在摇出来的页面链接后面
-                    success: function (res) {
-                        //接口调用成功时执行的回调函数
-                    },
-                    fail: function (res) {
-                        //接口调用失败时执行的回调函数 
-                    },
-                    complete: function (res) {
-                        //接口调用完成时执行的回调函数，无论成功或失败都会执行 
-                    },
-                    cancel: function (res) {
-                        //用户取消分享后执行的回调函数
-                    },
-                    trigger: function (res) {
-                        //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
-                    }
-                });
+                //备注：如需接入摇一摇周边功能，请参考：申请开通摇一摇周边，参考文档 http://mp.weixin.qq.com/wiki/19/9fe9fdbb50fee9f9660438c551142ccf.html
+                document.querySelector('#startSearchBeacons').onclick = function () {
+                    wx.startSearchBeacons({
+                        ticket: "",  //摇周边的业务ticket, 系统自动添加在摇出来的页面链接后面
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
 
                 //关闭查找周边ibeacon设备接口
-                wx.stopSearchBeacons({
-                    success: function (res) {
-                        //接口调用成功时执行的回调函数
-                    },
-                    fail: function (res) {
-                        //接口调用失败时执行的回调函数 
-                    },
-                    complete: function (res) {
-                        //接口调用完成时执行的回调函数，无论成功或失败都会执行 
-                    },
-                    cancel: function (res) {
-                        //用户取消分享后执行的回调函数
-                    },
-                    trigger: function (res) {
-                        //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
-                    }
-                });
+                document.querySelector('#stopSearchBeacons').onclick = function () {
+                    wx.stopSearchBeacons({
+                        success: function (res) {
+                            //接口调用成功时执行的回调函数
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消分享后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
 
                 //监听周边ibeacon设备接口
                 //备注：上述摇一摇周边接口使用注意事项及更多返回结果说明，请参考：摇一摇周边获取设备信息
