@@ -150,12 +150,12 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="data">post数据（json格式）</param>
-        /// <returns>{"errcode":0,"errmsg":"ok","card_id":"p1Pj9jr90_SQRaVqYI239Ka1erkI"}</returns>
-        public static string CreateCard(string appId, string appSecret, string data)
+        /// <returns>ResultModels.CreateCardResult</returns>
+        public static ResultModels.CreateCardResult CreateCard(string appId, string appSecret, string data)
         {
             string url = string.Format("https://api.weixin.qq.com/card/create?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WechatWebClient.Post(url, data.ToString().Replace("\\", "").Replace("\"{", "{").Replace("}\"", "}"));
+            return WechatWebClient.Post<ResultModels.CreateCardResult>(url, data.ToString().Replace("\\", "").Replace("\"{", "{").Replace("}\"", "}"));
         }
 
         /// <summary>
@@ -164,8 +164,8 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="model">团购券model</param>
-        /// <returns>{"errcode":0,"errmsg":"ok","card_id":"p1Pj9jr90_SQRaVqYI239Ka1erkI"}</returns>
-        public static string CreateGrouponCard(string appId, string appSecret, Models.GrouponCardModel model)
+        /// <returns>ResultModels.CreateCardResult</returns>
+        public static ResultModels.CreateCardResult CreateGrouponCard(string appId, string appSecret, Models.GrouponCardModel model)
         {
             object date_info = null;
             if (model.Type == 1)
@@ -225,8 +225,8 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="model">代金券model</param>
-        /// <returns>{"errcode":0,"errmsg":"ok","card_id":"p1Pj9jr90_SQRaVqYI239Ka1erkI"}</returns>
-        public static string CreateCashCard(string appId, string appSecret, Models.CashCardModel model)
+        /// <returns>ResultModels.CreateCardResult</returns>
+        public static ResultModels.CreateCardResult CreateCashCard(string appId, string appSecret, Models.CashCardModel model)
         {
             object date_info = null;
             if (model.Type == 1)
@@ -287,8 +287,8 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="model">折扣券model</param>
-        /// <returns>{"errcode":0,"errmsg":"ok","card_id":"p1Pj9jr90_SQRaVqYI239Ka1erkI"}</returns>
-        public static string CreateDiscountCard(string appId, string appSecret, Models.DiscountCardModel model)
+        /// <returns>ResultModels.CreateCardResult</returns>
+        public static ResultModels.CreateCardResult CreateDiscountCard(string appId, string appSecret, Models.DiscountCardModel model)
         {
             object date_info = null;
             if (model.Type == 1)
@@ -348,8 +348,8 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="model">礼品券model</param>
-        /// <returns>{"errcode":0,"errmsg":"ok","card_id":"p1Pj9jr90_SQRaVqYI239Ka1erkI"}</returns>
-        public static string CreateGiftCard(string appId, string appSecret, Models.GiftCardModel model)
+        /// <returns>ResultModels.CreateCardResult</returns>
+        public static ResultModels.CreateCardResult CreateGiftCard(string appId, string appSecret, Models.GiftCardModel model)
         {
             object date_info = null;
             if (model.Type == 1)
@@ -409,8 +409,8 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="model">优惠券model</param>
-        /// <returns>{"errcode":0,"errmsg":"ok","card_id":"p1Pj9jr90_SQRaVqYI239Ka1erkI"}</returns>
-        public static string CreateGeneralCouponCard(string appId, string appSecret, Models.GeneralCouponCardModel model)
+        /// <returns>ResultModels.CreateCardResult</returns>
+        public static ResultModels.CreateCardResult CreateGeneralCouponCard(string appId, string appSecret, Models.GeneralCouponCardModel model)
         {
             object date_info = null;
             if (model.Type == 1)

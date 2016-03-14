@@ -96,6 +96,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ResultModels\Card\GetCodeResult.cs" />
+    <Compile Include="ResultModels\Card\CreateCardResult.cs" />
     <Compile Include="ResultModels\MaterialResult.cs">
       <SubType>Code</SubType>
     </Compile>
