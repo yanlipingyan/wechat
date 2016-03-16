@@ -105,7 +105,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
                 CanGiveFriend = true,
                 DealDetail = "团购券",
             };
-            return Card.CreateGrouponCard(ApiModel.AppID, ApiModel.AppSecret, model);
+            return JsonConvert.SerializeObject(Card.CreateGrouponCard(ApiModel.AppID, ApiModel.AppSecret, model));
         }
 
         public string CreateCashCard()
@@ -141,7 +141,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
                 LeastCost = 100,
                 ReduceCost = 20,
             };
-            return Card.CreateCashCard(ApiModel.AppID, ApiModel.AppSecret, model);
+            return JsonConvert.SerializeObject(Card.CreateCashCard(ApiModel.AppID, ApiModel.AppSecret, model));
         }
 
         public string CreateDiscountCard()
@@ -176,7 +176,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
                 CanGiveFriend = true,
                 Discount = 70
             };
-            return Card.CreateDiscountCard(ApiModel.AppID, ApiModel.AppSecret, model);
+            return JsonConvert.SerializeObject(Card.CreateDiscountCard(ApiModel.AppID, ApiModel.AppSecret, model));
         }
 
         public string CreateGiftCard()
@@ -211,7 +211,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
                 CanGiveFriend = true,
                 Gift = "可兑换手套一个"
             };
-            return Card.CreateGiftCard(ApiModel.AppID, ApiModel.AppSecret, model);
+            return JsonConvert.SerializeObject(Card.CreateGiftCard(ApiModel.AppID, ApiModel.AppSecret, model));
         }
 
         public string CreateGeneralCouponCard()
@@ -246,7 +246,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
                 CanGiveFriend = true,
                 DefaultDetail = "优惠30元"
             };
-            return Card.CreateGeneralCouponCard(ApiModel.AppID, ApiModel.AppSecret, model);
+            return JsonConvert.SerializeObject(Card.CreateGeneralCouponCard(ApiModel.AppID, ApiModel.AppSecret, model));
         }
 
         public ActionResult UpdateStock(string cardId = "pxKfavtut0Y7u8QzQJdIwAuMcvk0")
@@ -284,7 +284,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
 
         public ActionResult QueryCode(string cardId = "pxKfavr1cidMqbYHbstctHeMhQfM", string code = "833308329979")
         {
-            return Content(JsonConvert.SerializeObject(Card.GetCode(ApiModel.AppID, ApiModel.AppSecret, code, cardId)));
+            return Content(JsonConvert.SerializeObject(Card.GetCode(ApiModel.AppID, ApiModel.AppSecret, new GetCodeModel() { Code = code, CardId = cardId })));
         }
 
         public ActionResult UpdateCode(string cardId = "pxKfavr1cidMqbYHbstctHeMhQfM", string code = "833308329979")

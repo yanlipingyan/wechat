@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Wechat.API.Models;
 
 namespace Wechat.API
 {
@@ -17,13 +18,13 @@ namespace Wechat.API
         /// </summary>
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
-        /// <param name="data">post数据（json格式）</param>
+        /// <param name="model">ButtonGroupModel</param>
         /// <returns>ResultModels.WechatResult</returns>
-        public static ResultModels.WechatResult CreateMenu(string appId, string appSecret, string data)
+        public static ResultModels.WechatResult CreateMenu(string appId, string appSecret, ButtonGroupModel model)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/create?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WechatWebClient.Post<ResultModels.WechatResult>(url, data);
+            return WechatWebClient.Post<ResultModels.WechatResult>(url, JsonConvert.SerializeObject(model));
         }
 
         /// <summary>
@@ -31,8 +32,8 @@ namespace Wechat.API
         /// </summary>
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
-        /// <returns>menu为默认菜单，conditionalmenu为个性化菜单列表</returns>
-        public static string QueryAllMenu(string appId, string appSecret)
+        /// <returns>string</returns>
+        public static string GetMenu(string appId, string appSecret)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/get?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
@@ -59,13 +60,13 @@ namespace Wechat.API
         /// </summary>
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
-        /// <param name="data">post数据（json格式）</param>
-        /// <returns>成功：{ "menuid":"208379533" }</returns>
-        public static string CreatePersonaliseMenu(string appId, string appSecret, string data)
+        /// <param name="model">ButtonGroupModel</param>
+        /// <returns>ResultModels.GetPersonaliseMenuResult</returns>
+        public static ResultModels.GetPersonaliseMenuResult CreatePersonaliseMenu(string appId, string appSecret, ButtonGroupModel model)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/addconditional?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WechatWebClient.Post(url, data);
+            return WechatWebClient.Post<ResultModels.GetPersonaliseMenuResult>(url, JsonConvert.SerializeObject(model));
         }
 
         /// <summary>
@@ -91,7 +92,7 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="userId">post数据（user_id可以是粉丝的OpenID，也可以是粉丝的微信号。）</param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public static string TryMatchPersonaliseMenu(string appId, string appSecret, string userId)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/trymatch?access_token={0}", AccessToken.GetToken(appId, appSecret));
