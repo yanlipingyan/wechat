@@ -28,7 +28,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
                 string folder = string.Format("upload/material/{0}", DateTime.Now.ToString("yyyyMMdd"));
                 string filename = string.Format("{0}.jpg", DateTime.Now.Ticks);
                 string physicalPath = System.Web.HttpContext.Current.Request.PhysicalApplicationPath + folder;
-                string netPath = "/" + folder + filename;
+                string netPath = "/" + folder + "/" + filename;
 
                 //如果日志目录不存在就创建
                 if (!Directory.Exists(physicalPath))
@@ -42,7 +42,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
                 Material.GetTemporaryMedia(ApiModel.AppID, ApiModel.AppSecret, media_id, ms);
 
                 //保存到文件
-                var fileName = physicalPath + filename;
+                var fileName = physicalPath + "/" + filename;
                 using (FileStream fs = new FileStream(fileName, FileMode.Create))
                 {
                     ms.Position = 0;
