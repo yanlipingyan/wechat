@@ -7,6 +7,7 @@ using YLP.Tookit.Helper;
 using Wechat.API;
 using Wechat.API.Models;
 using Newtonsoft.Json;
+using Wechat.API.Enums;
 
 namespace Wechat.WebUI.Areas.Test.Controllers
 {
@@ -21,16 +22,18 @@ namespace Wechat.WebUI.Areas.Test.Controllers
             return View();
         }
 
+        public ActionResult JSSDK()
+        {
+            return View();
+        }
+
         public string ShowQrcode(string cardId)
         {
             Log4NetHelper.Error(Card.ShowCardQrcode(ApiModel.AppID, ApiModel.AppSecret, cardId));
             return Card.ShowCardQrcode(ApiModel.AppID, ApiModel.AppSecret, cardId);
         }
 
-        public ActionResult JSSDK()
-        {
-            return View();
-        }
+
 
         public string GetCardSign(string timestamp, string nonceStr, string shopId, string cardType, string cardId)
         {
@@ -64,13 +67,12 @@ namespace Wechat.WebUI.Areas.Test.Controllers
         public ActionResult QueryList()
         {
             string[] status = new string[] { "CARD_STATUS_VERIFY_OK", "CARD_STATUS_DISPATCH", "CARD_STATUS_VERIFY_FAIL" };
-            string content = Card.GetCardList(ApiModel.AppID, ApiModel.AppSecret, status);
-            return Content(content);
+            return Content(JsonConvert.SerializeObject(Card.GetCardList(ApiModel.AppID, ApiModel.AppSecret, new GetCardListModel() { StatusList = status })));
         }
 
         public ActionResult QueryListForMe(string openId = "oxKfavv2QQtVecXAmVehYt8fB15s")
         {
-            return Content(Card.GetCardListForUser(ApiModel.AppID, ApiModel.AppSecret, openId));
+            return Content(JsonConvert.SerializeObject(Card.GetUserCardList(ApiModel.AppID, ApiModel.AppSecret, new GetUserCardListModel() { OpenID = openId })));
         }
 
         public string CreateGroupon()
@@ -251,35 +253,35 @@ namespace Wechat.WebUI.Areas.Test.Controllers
 
         public ActionResult UpdateStock(string cardId = "pxKfavtut0Y7u8QzQJdIwAuMcvk0")
         {
-            return Content(Card.UpdateCardStock(ApiModel.AppID, ApiModel.AppSecret, cardId, 5));
+            return Content(JsonConvert.SerializeObject(Card.UpdateCardStock(ApiModel.AppID, ApiModel.AppSecret, new UpdateCardStockModel() { CardId = cardId, IncreaseStockValue = 5 })));
         }
 
         public ActionResult DeleteCard(string cardId = "pxKfavgLcNvXtzLe2LjqiTHy-Chs")
         {
-            return Content(Card.DeleteCard(ApiModel.AppID, ApiModel.AppSecret, cardId));
+            return Content(JsonConvert.SerializeObject(Card.DeleteCard(ApiModel.AppID, ApiModel.AppSecret, cardId)));
         }
 
         public ActionResult SetCardCanPay(string cardId = "pxKfavtut0Y7u8QzQJdIwAuMcvk0")
         {
-            return Content(Card.SetCardCanPay(ApiModel.AppID, ApiModel.AppSecret, cardId));
+            return Content(JsonConvert.SerializeObject(Card.SetCardCanPay(ApiModel.AppID, ApiModel.AppSecret, cardId)));
         }
 
         //注意：这里的结束时间不能是系统当天的时间
         public ActionResult GetCardStatistical()
         {
-            return Content(Card.GetCardStatistical(ApiModel.AppID, ApiModel.AppSecret, DateTime.Now.AddDays(-2), DateTime.Now.AddDays(-1), 1));
+            return Content(JsonConvert.SerializeObject(Card.GetCardStatistical(ApiModel.AppID, ApiModel.AppSecret, new GetCardStatisticalModel() { BeginDate = DateTime.Now.AddDays(-2), EndDate = DateTime.Now.AddDays(-1), CondSource = CardSourceEnum.公众平台创建的卡券数据 })));
         }
 
         //注意：这里的结束时间不能是系统当天的时间
         public ActionResult GetFreeCardStatistical()
         {
-            return Content(Card.GetFreeCardStatistical(ApiModel.AppID, ApiModel.AppSecret, DateTime.Now.AddDays(-2), DateTime.Now.AddDays(-1), 1));
+            return Content(JsonConvert.SerializeObject(Card.GetFreeCardStatistical(ApiModel.AppID, ApiModel.AppSecret, new GetCardStatisticalModel() { BeginDate = DateTime.Now.AddDays(-2), EndDate = DateTime.Now.AddDays(-1), CondSource = CardSourceEnum.公众平台创建的卡券数据 })));
         }
 
         //注意：这里的结束时间不能是系统当天的时间
         public ActionResult GetSpecialCardStatistical()
         {
-            return Content(Card.GetSpecialCardStatistical(ApiModel.AppID, ApiModel.AppSecret, DateTime.Now.AddDays(-2), DateTime.Now.AddDays(-1), 1));
+            return Content(JsonConvert.SerializeObject(Card.GetSpecialCardStatistical(ApiModel.AppID, ApiModel.AppSecret, new GetCardStatisticalModel() { BeginDate = DateTime.Now.AddDays(-2), EndDate = DateTime.Now.AddDays(-1), CondSource = CardSourceEnum.公众平台创建的卡券数据 })));
         }
 
         public ActionResult QueryCode(string cardId = "pxKfavr1cidMqbYHbstctHeMhQfM", string code = "833308329979")
@@ -289,7 +291,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
 
         public ActionResult UpdateCode(string cardId = "pxKfavr1cidMqbYHbstctHeMhQfM", string code = "833308329979")
         {
-            return Content(Card.UpdateCode(ApiModel.AppID, ApiModel.AppSecret, code, "3495739475"));
+            return Content(JsonConvert.SerializeObject(Card.UpdateCode(ApiModel.AppID, ApiModel.AppSecret, new UpdateCodeModel() { Code = code, NewCode = "3495739475" })));
         }
 
         //public ActionResult DecryptCode(string code) 

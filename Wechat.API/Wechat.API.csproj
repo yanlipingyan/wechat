@@ -73,6 +73,12 @@
     <Compile Include="Message.cs" />
     <Compile Include="Models\AccessTokenModel.cs" />
     <Compile Include="Models\ApiModel.cs" />
+    <Compile Include="Models\Card\GetCardListModel.cs" />
+    <Compile Include="Models\Card\GetCardStatisticalModel.cs" />
+    <Compile Include="Models\Card\GetUserCardListModel.cs" />
+    <Compile Include="Models\Card\SetCardInvalidModel.cs" />
+    <Compile Include="Models\Card\UpdateCardStockModel.cs" />
+    <Compile Include="Models\Card\UpdateCodeModel.cs" />
     <Compile Include="Models\Menu\ButtonSubModel.cs" />
     <Compile Include="Models\Menu\ButtonGroupModel.cs" />
     <Compile Include="Models\Menu\BaseSingleButtonModel.cs" />
@@ -106,7 +112,11 @@
     <Compile Include="ResultModels\Card\CardResult.cs" />
     <Compile Include="ResultModels\Card\CardShelvesResult.cs" />
     <Compile Include="ResultModels\Card\CardQrcodeResult.cs" />
+    <Compile Include="ResultModels\Card\GetCardListResult.cs" />
+    <Compile Include="ResultModels\Card\GetCardStatisticalResult.cs" />
     <Compile Include="ResultModels\Card\GetCodeResult.cs" />
+    <Compile Include="ResultModels\Card\GetUserCardListResult.cs" />
+    <Compile Include="ResultModels\Card\UpdateCardResult.cs" />
     <Compile Include="ResultModels\Menu\GetPersonaliseMenuResult.cs" />
     <Compile Include="ResultModels\MaterialResult.cs">
       <SubType>Code</SubType>

@@ -27,4 +27,19 @@ namespace Wechat.API.Enums
         SCENE_IVR,//自动回复
         SCENE_CARD_CUSTOM_CELL//卡券自定义cell
     }
+
+    public enum CardTypeEnum
+    {
+        折扣券 = 0,
+        代金券 = 1,
+        礼品券 = 2,
+        优惠券 = 3,
+        团购券 = 4,
+    }
+
+    public enum CardSourceEnum
+    {
+        公众平台创建的卡券数据 = 0,
+        API创建的卡券数据 = 1,
+    }
 }

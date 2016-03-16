@@ -590,20 +590,19 @@ namespace Wechat.API
         /// </summary>
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
-        /// <param name="openID">某领取者的openid</param>
-        /// <param name="cardId">卡券id，不填写时默认查询当前openId下的所有卡券</param>
-        /// <returns>{"errcode":0,"errmsg":"ok","card_list": [{"code": "xxx1434079154", "card_id": "xxxxxxxxxx"},{"code": "xxx1434079155", "card_id": "xxxxxxxxxx"}]}</returns>
-        public static string GetCardListForUser(string appId, string appSecret, string openID, string cardId = "")
+        /// <param name="model">Models.GetUserCardListModel</param>
+        /// <returns>ResultModels.GetUserCardListResult</returns>
+        public static ResultModels.GetUserCardListResult GetUserCardList(string appId, string appSecret, Models.GetUserCardListModel model)
         {
             string url = string.Format("https://api.weixin.qq.com/card/user/getcardlist?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new
             {
-                openid = openID,
-                card_id = cardId
+                openid = model.OpenID,
+                card_id = model.CardId
             };
 
-            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post<ResultModels.GetUserCardListResult>(url, JsonConvert.SerializeObject(obj));
         }
 
         /// <summary>
@@ -630,34 +629,20 @@ namespace Wechat.API
         /// </summary>
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
-        /// <param name="data">post数据（json格式字符串）</param>
-        /// <returns>{"errcode":0,"errmsg":"ok","card_id_list":["ph_gmt7cUVrlRk8swPwx7aDyF-pg"],"total_num":1}</returns>
-        public static string GetCardList(string appId, string appSecret, string data)
+        /// <param name="model">Models.GetCardModel</param>
+        /// <returns>ResultModels.GetCardListResult</returns>
+        public static ResultModels.GetCardListResult GetCardList(string appId, string appSecret, Models.GetCardListModel model)
         {
             string url = string.Format("https://api.weixin.qq.com/card/batchget?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WechatWebClient.Post(url, data);
-        }
-
-        /// <summary>
-        /// 查询某状态卡券的列表
-        /// </summary>
-        /// <param name="appId">公众号appID</param>
-        /// <param name="appSecret">公众号appSecret</param>
-        /// <param name="cardStatus">卡券状态,格式：["","",""]</param>
-        /// <param name="offset">查询卡列表的起始偏移量，从0开始，即offset: 5是指从从列表里的第六个开始读取</param>
-        /// <param name="count">需要查询的卡片的数量（数量最大50）</param>
-        /// <returns>{"errcode":0,"errmsg":"ok","card_id_list":["ph_gmt7cUVrlRk8swPwx7aDyF-pg"],"total_num":1}</returns>
-        public static string GetCardList(string appId, string appSecret, string[] cardStatus, int offset = 0, int count = 50)
-        {
             var obj = new
             {
-                offset = offset < 0 ? 0 : offset,
-                count = count > 50 ? 50 : count,
-                status_list = cardStatus
+                offset = model.Offset < 0 ? 0 : model.Offset,
+                count = model.Count > 50 ? 50 : model.Count,
+                status_list = model.StatusList
             };
 
-            return GetCardList(appId, appSecret, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post<ResultModels.GetCardListResult>(url, JsonConvert.SerializeObject(obj));
         }
 
         /// <summary>
@@ -666,12 +651,12 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="data">post内容（json格式的字符串）</param>
-        /// <returns>{"errcode":0,"errmsg":"ok","send_check":false}</returns>
-        public static string UpdateCard(string appId, string appSecret, string data)
+        /// <returns>ResultModels.UpdateCardResult</returns>
+        public static ResultModels.UpdateCardResult UpdateCard(string appId, string appSecret, string data)
         {
             string url = string.Format("https://api.weixin.qq.com/card/update?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
-            return WechatWebClient.Post(url, data);
+            return WechatWebClient.Post<ResultModels.UpdateCardResult>(url, data);
         }
 
         /// <summary>
@@ -681,8 +666,8 @@ namespace Wechat.API
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="cardId">卡券id</param>
         /// <param name="isOpen">是否开启买单功能，填true/false</param>
-        /// <returns>{"errcode":0,"errmsg":"ok"}</returns>
-        public static string SetCardCanPay(string appId, string appSecret, string cardId, bool isOpen = true)
+        /// <returns>ResultModels.WechatResult</returns>
+        public static ResultModels.WechatResult SetCardCanPay(string appId, string appSecret, string cardId, bool isOpen = true)
         {
             var card = GetCardDetail(appId, appSecret, cardId);
 
@@ -692,20 +677,15 @@ namespace Wechat.API
 
             JArray ja = (JArray)result["card"][card_type]["base_info"]["location_id_list"];
 
-            if (ja != null && ja.Count() != 0)
+            string url = string.Format("https://api.weixin.qq.com/card/paycell/set?access_token={0}", AccessToken.GetToken(appId, appSecret));
+
+            var obj = new
             {
-                string url = string.Format("https://api.weixin.qq.com/card/paycell/set?access_token={0}", AccessToken.GetToken(appId, appSecret));
+                card_id = cardId,
+                is_open = isOpen
+            };
 
-                var obj = new
-                {
-                    card_id = cardId,
-                    is_open = isOpen
-                };
-
-                return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
-            }
-
-            return "该卡券未设置门店，不可设置买单";
+            return WechatWebClient.Post<ResultModels.WechatResult>(url, JsonConvert.SerializeObject(obj));
         }
 
         /// <summary>
@@ -713,22 +693,20 @@ namespace Wechat.API
         /// </summary>
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
-        /// <param name="cardId">卡券id</param>
-        /// <param name="increase_stock_value">增加多少库存，支持不填或填0</param>
-        /// <param name="reduce_stock_value">减少多少库存，可以不填或填0</param>
-        /// <returns>{"errcode":0,"errmsg":"ok"}</returns>
-        public static string UpdateCardStock(string appId, string appSecret, string cardId, int increase_stock_value = 0, int reduce_stock_value = 0)
+        /// <param name="model">Models.UpdateCardStockModel</param>
+        /// <returns>ResultModels.WechatResult</returns>
+        public static ResultModels.WechatResult UpdateCardStock(string appId, string appSecret, Models.UpdateCardStockModel model)
         {
             string url = string.Format("https://api.weixin.qq.com/card/modifystock?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new
             {
-                card_id = cardId,
-                increase_stock_value = increase_stock_value,
-                reduce_stock_value = reduce_stock_value,
+                card_id = model.CardId,
+                increase_stock_value = model.IncreaseStockValue,
+                reduce_stock_value = model.ReduceStockValue,
             };
 
-            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post<ResultModels.WechatResult>(url, JsonConvert.SerializeObject(obj));
         }
 
         /// <summary>
@@ -736,22 +714,20 @@ namespace Wechat.API
         /// </summary>
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
-        /// <param name="code">需变更的Code码</param>
-        /// <param name="newCode">变更后的有效Code码</param>
-        /// <param name="cardId">卡券id，自定义Code码卡券为必填</param>
-        /// <returns>{"errcode":0,"errmsg":"ok"}</returns>
-        public static string UpdateCode(string appId, string appSecret, string code, string newCode, string cardId = "")
+        /// <param name="model">Models.UpdateCodeModel</param>
+        /// <returns>ResultModels.WechatResult</returns>
+        public static ResultModels.WechatResult UpdateCode(string appId, string appSecret, Models.UpdateCodeModel model)
         {
             string url = string.Format("https://api.weixin.qq.com/card/code/update?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new
             {
-                code = code,
-                card_id = cardId,
-                new_code = newCode
+                code = model.Code,
+                new_code = model.NewCode,
+                card_id = model.CardId
             };
 
-            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post<ResultModels.WechatResult>(url, JsonConvert.SerializeObject(obj));
         }
 
         /// <summary>
@@ -760,8 +736,8 @@ namespace Wechat.API
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="cardId">卡券id</param>
-        /// <returns>{"errcode":0,"errmsg":"ok"}</returns>
-        public static string DeleteCard(string appId, string appSecret, string cardId)
+        /// <returns>ResultModels.WechatResult</returns>
+        public static ResultModels.WechatResult DeleteCard(string appId, string appSecret, string cardId)
         {
             string url = string.Format("https://api.weixin.qq.com/card/delete?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
@@ -770,7 +746,7 @@ namespace Wechat.API
                 card_id = cardId
             };
 
-            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post<ResultModels.WechatResult>(url, JsonConvert.SerializeObject(obj));
         }
 
         /// <summary>
@@ -780,47 +756,56 @@ namespace Wechat.API
         /// <param name="appSecret">公众号appSecret</param>
         /// <param name="code">设置失效的Code码</param>
         /// <param name="cardId">卡券id,非自定义卡券不需要输入</param>
-        /// <returns>{"errcode":0,"errmsg":"ok"}</returns>
-        public static string SetCardUnavailable(string appId, string appSecret, string code, string cardId = "")
+        /// <returns>ResultModels.WechatResult</returns>
+        public static ResultModels.WechatResult SetCardInvalid(string appId, string appSecret, Models.SetCardInvalidModel model)
         {
             string url = string.Format("https://api.weixin.qq.com/card/code/unavailable?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new
             {
-                code = code,
-                card_id = cardId
+                code = model.Code,
+                card_id = model.CardId
             };
 
-            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post<ResultModels.WechatResult>(url, JsonConvert.SerializeObject(obj));
         }
         #endregion
 
         #region 卡券统计
+
+        /*
+         * 注意事项：
+         * 
+         * 1、查询时间区间需<=62天，否则报错{errcode: 61501，errmsg: "date range error"}；
+         * 2、传入时间格式需严格参照示例填写”2015-06-15”，否则报错{errcode":61500,"errmsg":"date format error"}；
+         * 3、需在获取卡券相关数据前区分卡券创建渠道：公众平台创建、调用卡券接口创建。
+         * 4、特别要注意，这里的结束时间不能是当天的时间，最少应该是前一天
+         * 
+         */
+
         /// <summary>
         /// 拉取卡券概况数据接口
         /// </summary>
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
-        /// <param name="beginDate">查询数据的起始时间，格式：2015-06-15</param>
-        /// <param name="endDate">查询数据的截至时间，格式：2015-06-30。特别要注意，这里的结束时间不能是当天的时间</param>
-        /// <param name="source">卡券来源，0为公众平台创建的卡券数据、1是API创建的卡券数据</param>
-        /// <returns>{"list": [{"ref_date": "2015-06-23","view_cnt": 1,"view_user": 1,"receive_cnt": 1,"receive_user": 1,"verify_cnt": 0,"verify_user": 0,"given_cnt": 0,"given_user": 0,"expire_cnt": 0,"expire_user": 0 }] }</returns>
-        public static string GetCardStatistical(string appId, string appSecret, DateTime beginDate, DateTime endDate, int source)
+        /// <param name="model">Models.GetCardStatisticalModel</param>
+        /// <returns>ResultModels.GetCardStatisticalResult</returns>
+        public static ResultModels.GetCardStatisticalResult GetCardStatistical(string appId, string appSecret, Models.GetCardStatisticalModel model)
         {
-            int interval = (endDate - beginDate).Days;
+            int interval = (model.EndDate - model.BeginDate).Days;
 
-            endDate = interval > 62 ? beginDate.AddDays(62) : endDate;
+            model.EndDate = interval > 62 ? model.BeginDate.AddDays(62) : model.EndDate;
 
             string url = string.Format("https://api.weixin.qq.com/datacube/getcardbizuininfo?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new
             {
-                begin_date = beginDate.ToString("yyyy-MM-dd"),
-                end_date = endDate.ToString("yyyy-MM-dd"),
-                cond_source = source
+                begin_date = model.BeginDate.ToString("yyyy-MM-dd"),
+                end_date = model.EndDate.ToString("yyyy-MM-dd"),
+                cond_source = model.CondSource
             };
 
-            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post<ResultModels.GetCardStatisticalResult>(url, JsonConvert.SerializeObject(obj));
         }
 
         /// <summary>
@@ -828,28 +813,25 @@ namespace Wechat.API
         /// </summary>
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
-        /// <param name="beginDate">查询数据的起始时间，格式：2015-06-15</param>
-        /// <param name="endDate">查询数据的截至时间，格式：2015-06-30。特别要注意，这里的结束时间不能是当天的时间</param>
-        /// <param name="source">卡券来源，0为公众平台创建的卡券数据、1是API创建的卡券数据</param>
-        /// <param name="cardId">卡券id,填写后，指定拉出该卡券的相关数据</param>
-        /// <returns>{"list": [{"ref_date": "2015-06-23","card_id": "po8pktyDLmakNY2fn2VyhkiEPqGE","card_type":3,"view_cnt": 1,"view_user": 1,"receive_cnt": 1,"receive_user": 1,"verify_cnt": 0,"verify_user": 0,"given_cnt": 0,"given_user": 0,expire_cnt": 0,"expire_user": 0}] }</returns>
-        public static string GetFreeCardStatistical(string appId, string appSecret, DateTime beginDate, DateTime endDate, int source, string cardId = "")
+        /// <param name="model">Models.GetCardStatisticalModel</param>
+        /// <returns>ResultModels.GetCardStatisticalResult</returns>
+        public static ResultModels.GetCardStatisticalResult GetFreeCardStatistical(string appId, string appSecret, Models.GetCardStatisticalModel model)
         {
-            int interval = (endDate - beginDate).Days;
+            int interval = (model.EndDate - model.BeginDate).Days;
 
-            endDate = interval > 62 ? beginDate.AddDays(62) : endDate;
+            model.EndDate = interval > 62 ? model.BeginDate.AddDays(62) : model.EndDate;
 
             string url = string.Format("https://api.weixin.qq.com/datacube/getcardcardinfo?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new
             {
-                begin_date = beginDate.ToString("yyyy-MM-dd"),
-                end_date = endDate.ToString("yyyy-MM-dd"),
-                cond_source = source,
-                card_id = cardId
+                begin_date = model.BeginDate.ToString("yyyy-MM-dd"),
+                end_date = model.EndDate.ToString("yyyy-MM-dd"),
+                cond_source = model.CondSource,
+                card_id = model.CardId
             };
 
-            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post<ResultModels.GetCardStatisticalResult>(url, JsonConvert.SerializeObject(obj));
         }
 
         /// <summary>
@@ -857,26 +839,24 @@ namespace Wechat.API
         /// </summary>
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
-        /// <param name="beginDate">查询数据的起始时间，格式：2015-06-15</param>
-        /// <param name="endDate">查询数据的截至时间，格式：2015-06-30。特别要注意，这里的结束时间不能是当天的时间</param>
-        /// <param name="source">卡券来源，0为公众平台创建的卡券数据、1是API创建的卡券数据</param>
-        /// <returns>{"list": [{"ref_date": "2015-06-23","view_cnt": 1,"view_user": 1,"receive_cnt": 1,"receive_user": 1,"verify_cnt": 0,"verify_user": 0,"given_cnt": 0,"given_user": 0,"expire_cnt": 0,"expire_user": 0}]}</returns>
-        public static string GetSpecialCardStatistical(string appId, string appSecret, DateTime beginDate, DateTime endDate, int source)
+        /// <param name="model">Models.GetCardStatisticalModel</param>
+        /// <returns>ResultModels.GetCardStatisticalResult</returns>
+        public static ResultModels.GetCardStatisticalResult GetSpecialCardStatistical(string appId, string appSecret, Models.GetCardStatisticalModel model)
         {
-            int interval = (endDate - beginDate).Days;
+            int interval = (model.EndDate - model.BeginDate).Days;
 
-            endDate = interval > 62 ? beginDate.AddDays(62) : endDate;
+            model.EndDate = interval > 62 ? model.BeginDate.AddDays(62) : model.EndDate;
 
             string url = string.Format("https://api.weixin.qq.com/datacube/getcardmembercardinfo?access_token={0}", AccessToken.GetToken(appId, appSecret));
 
             var obj = new
             {
-                begin_date = beginDate.ToString("yyyy-MM-dd"),
-                end_date = endDate.ToString("yyyy-MM-dd"),
-                cond_source = source
+                begin_date = model.BeginDate.ToString("yyyy-MM-dd"),
+                end_date = model.EndDate.ToString("yyyy-MM-dd"),
+                cond_source = model.CondSource
             };
 
-            return WechatWebClient.Post(url, JsonConvert.SerializeObject(obj));
+            return WechatWebClient.Post<ResultModels.GetCardStatisticalResult>(url, JsonConvert.SerializeObject(obj));
         }
         #endregion
     }

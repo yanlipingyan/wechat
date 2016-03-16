@@ -16,7 +16,8 @@ namespace Wechat.API
         /// </summary>
         /// <param name="appId">公众号appID</param>
         /// <param name="appSecret">公众号appSecret</param>
-        /// <returns>model(摇一摇周边申请model)</returns>
+        /// <param name="model">model(摇一摇周边申请model)</param>
+        /// <returns></returns>
         public static string Apply(string appId, string appSecret, Models.ShakeAroundApplyModel model)
         {
             string url = string.Format("https://api.weixin.qq.com/shakearound/account/register?access_token={0}", AccessToken.GetToken(appId, appSecret));
