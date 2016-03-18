@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutTest.cshtml";
+}
+
+<h2>测试上传</h2>
+<div class="wxapi_container">
+    <div class="lbox_close wxapi_form">
+        <h3 id="menu-image">图像接口</h3>
+        <span class="desc">拍照或从手机相册中选图接口</span>
+        <button class="btn btn_primary" id="chooseImage">chooseImage</button>
+    </div>
+</div>
+
+@section styles{
+    <link href="~/Content/css/JsSdk.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+    <script type="text/javascript">
+
+        var timestamp = '@Wechat.API.Common.GetTimeStamp()',//时间戳
+            noncestr = '@Wechat.API.Common.GetNonceStr()',//随即串
+            url = location.href;//当前页面路径
+
+        $.post('@Url.Action("GetSign", "JsSdk", new { area = "Test" })', { timestamp: timestamp, nonceStr: noncestr, url: url }, function (sign) {
+
+            //步骤三：通过config接口注入权限验证配置
+            wx.config({
+                debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: '@Wechat.API.Models.ApiModel.AppID', // 必填，公众号的唯一标识
+                timestamp: timestamp, // 必填，生成签名的时间戳
+                nonceStr: noncestr, // 必填，生成签名的随机串
+                signature: sign,// 必填，签名，见附录1
+                jsApiList: ['chooseImage', 'uploadImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
+
+            //步骤四：通过ready接口处理成功验证
+            wx.ready(function () {
+
+                var images = {
+                    localId: [],
+                    serverId: []
+                };
+                //拍照或从手机相册中选图接口
+                document.querySelector('#chooseImage').onclick = function () {
+                    wx.chooseImage({
+                        count: 9, // 默认9
+                        sizeType: ['original', 'compressed'], // 可以指定是原图（original）还是压缩图（compressed），默认二者都有
+                        sourceType: ['album', 'camera'], // 可以指定来源是相册（album）还是相机（camera），默认二者都有
+                        success: function (res) {
+                            var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图，这里值允许上传一张，所以直接赋值给了一个img控件，如果是多张的话，需要循环赋值给多个img
+                            images.localId = localIds;
+
+                            var i = 0,
+                                length = images.localId.length;
+
+                            images.serverId = [];
+
+                            var upload = function () {
+                                wx.uploadImage({
+                                    localId: images.localId[i], // 需要上传的图片的本地ID，由chooseImage接口获得
+                                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                                    success: function (res) {
+                                        var serverId = res.serverId; // 返回图片的服务器端ID
+
+                                        i++;
+                                        images.serverId.push(serverId);
+                                        if (i < length) {
+                                            upload();
+                                        }
+
+                                        //调取后台的下载图片的方法进行下载到自己的服务器上
+                                        $.post('/Test/Material/Download', { media_ids: JSON.stringify(images.serverId) }, function (res) {
+                                            //alert(res.Content);
+                                        }, 'json');
+                                    },
+                                    fail: function (res) {
+                                        alert(JSON.stringify(res));//接口调用失败时执行的回调函数
+                                    },
+                                    complete: function (res) {
+                                        //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                                    },
+                                    cancel: function (res) {
+                                        //用户取消分享后执行的回调函数
+                                    },
+                                    trigger: function (res) {
+                                        //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                                    }
+                                });
+                            }
+                            upload();
+                        },
+                        fail: function (res) {
+                            //接口调用失败时执行的回调函数 
+                        },
+                        complete: function (res) {
+                            //接口调用完成时执行的回调函数，无论成功或失败都会执行 
+                        },
+                        cancel: function (res) {
+                            //用户取消后执行的回调函数
+                        },
+                        trigger: function (res) {
+                            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口,不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                        }
+                    });
+                };
+            });
+
+            //步骤五：通过error接口处理失败验证
+            wx.error(function () {
+            });
+        })
+    </script>
+
+}
