@@ -25,9 +25,10 @@ namespace Wechat.WebUI.Areas.Test.Controllers
         public ActionResult Download(string media_ids)
         {
             string netPaths = "";
-            using (MemoryStream ms = new MemoryStream())
+
+            foreach (var media_id in media_ids.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
-                foreach (var media_id in media_ids.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                using (MemoryStream ms = new MemoryStream())
                 {
                     string folder = string.Format("upload/material/{0}", DateTime.Now.ToString("yyyyMMdd"));
                     string filename = string.Format("{0}.jpg", IDHelper.Id32);
@@ -48,15 +49,6 @@ namespace Wechat.WebUI.Areas.Test.Controllers
                     //保存到文件
                     var fileName = physicalPath + "/" + filename;
 
-                    //FileStream fs = new FileStream(fileName, FileMode.Create);
-                    //ms.Position = 0;
-                    //byte[] buffer = new byte[1024];
-                    //int bytesRead = 0;
-                    //while ((bytesRead = ms.Read(buffer, 0, buffer.Length)) != 0)
-                    //{
-                    //    fs.Write(buffer, 0, bytesRead);
-                    //}
-                    //fs.Flush();
                     using (FileStream fs = new FileStream(fileName, FileMode.Create))
                     {
                         ms.Position = 0;
