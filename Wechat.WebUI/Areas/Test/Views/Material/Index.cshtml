@@ -47,7 +47,7 @@
                 //拍照或从手机相册中选图接口
                 document.querySelector('#chooseImage').onclick = function () {
                     wx.chooseImage({
-                        count: 2, // 默认9
+                        count: 9, // 默认9
                         sizeType: ['original', 'compressed'], // 可以指定是原图（original）还是压缩图（compressed），默认二者都有
                         sourceType: ['album', 'camera'], // 可以指定来源是相册（album）还是相机（camera），默认二者都有
                         success: function (res) {
@@ -73,7 +73,7 @@
                                         }
 
                                         //调取后台的下载图片的方法进行下载到自己的服务器上
-                                        $.post('/Test/Material/Download', { media_ids: JSON.stringify(images.serverId) }, function (res) {
+                                        $.post('/Test/Material/Download', { media_ids: serverId }, function (res) {
                                             //alert(res.Content);
                                         }, 'json');
                                     },

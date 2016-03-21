@@ -31,7 +31,9 @@ namespace Wechat.WebUI.Areas.Test.Controllers
                 using (MemoryStream ms = new MemoryStream())
                 {
                     string folder = string.Format("upload/material/{0}", DateTime.Now.ToString("yyyyMMdd"));
-                    string filename = string.Format("{0}.jpg", IDHelper.Id32);
+                    string id = IDHelper.Id32;
+
+                    string filename = string.Format("{0}.jpg", id);
                     string physicalPath = System.Web.HttpContext.Current.Request.PhysicalApplicationPath + folder;
                     string netPath = "/" + folder + "/" + filename;
 
@@ -41,14 +43,10 @@ namespace Wechat.WebUI.Areas.Test.Controllers
                         Directory.CreateDirectory(physicalPath);
                     }
 
-                    if (string.IsNullOrEmpty(media_id))
-                        return Content("media_id为空");
-
                     Material.GetTemporaryMedia(ApiModel.AppID, ApiModel.AppSecret, media_id, ms);
 
                     //保存到文件
                     var fileName = physicalPath + "/" + filename;
-
                     using (FileStream fs = new FileStream(fileName, FileMode.Create))
                     {
                         ms.Position = 0;
