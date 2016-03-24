@@ -14,7 +14,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
     public class MaterialController : Controller
     {
         //
-        // GET: /Test/Material/
+        // GET: /Test/Material/测试分支
 
         public ActionResult Index()
         {
