@@ -49,10 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helper\FaustCplusUploadHelper.cs" />
+    <Compile Include="Component\FaustCplus.cs" />
+    <Compile Include="Component\TouClick.cs" />
     <Compile Include="Helper\IDHelper.cs" />
     <Compile Include="Helper\Log4NetHelper.cs" />
-    <Compile Include="Helper\TouClickHelper.cs" />
     <Compile Include="Helper\XMLSerializerHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\HttpUtility\RequestUtility.cs" />

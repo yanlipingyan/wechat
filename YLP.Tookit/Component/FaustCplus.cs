@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace YLP.Tookit.Helper
+namespace YLP.Tookit.Component
 {
     /// <summary>
     /// FaustCplus插件上传图片
     /// </summary>
-    public class FaustCplusUploadHelper
+    public class FaustCplus
     {
         /// <summary>
         /// 上传头像

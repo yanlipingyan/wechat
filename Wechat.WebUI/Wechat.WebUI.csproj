@@ -50,7 +50,10 @@
       <HintPath>..\Wechat.Reference\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Qiniu.6.2.1.1\lib\Net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Qiniu.4.0">
+      <HintPath>..\packages\Qiniu.6.2.1.1\lib\Net40\Qiniu.4.0.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

@@ -5,11 +5,10 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace YLP.Tookit.Helper
+namespace YLP.Tookit.Component
 {
-    public class TouClickHelper
+    public class TouClick
     {
         /// <summary>
         /// 返回   true   则表示验证成功

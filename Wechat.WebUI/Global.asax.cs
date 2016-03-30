@@ -25,6 +25,7 @@ namespace Wechat.WebUI
             Log4NetHelper.LoadConfig(Server.MapPath("~/Config/log4net.config"));
 
             ConfigService.InitConfig();
+            Qiniu.Conf.Config.Init();//初始化七牛
         }
 
         /// <summary>
