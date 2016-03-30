@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Qiniu.IO;
+using Qiniu.RS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +11,6 @@ namespace YLP.Tookit.Component
     {
         private void Upload()
         {
-            //设置账号的AK和SK
-            Qiniu.Conf.Config.ACCESS_KEY = "Access_Key";
-            Qiniu.Conf.Config.SECRET_KEY = "Secret_Key";
             IOClient target = new IOClient();
             PutExtra extra = new PutExtra();
             //设置上传的空间
