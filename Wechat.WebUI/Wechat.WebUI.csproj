@@ -138,6 +138,8 @@
     <Compile Include="Areas\Test\Controllers\MenuController.cs" />
     <Compile Include="Areas\Test\Controllers\OAuth2Controller.cs" />
     <Compile Include="Areas\Test\Controllers\PayController.cs" />
+    <Compile Include="Areas\Test\Controllers\ProjectPathController.cs" />
+    <Compile Include="Areas\Test\Controllers\QiNiuController.cs" />
     <Compile Include="Areas\Test\Controllers\QrcodeController.cs" />
     <Compile Include="Areas\Test\Controllers\RecordWechatLogController.cs" />
     <Compile Include="Areas\Test\Controllers\ServerController.cs" />
