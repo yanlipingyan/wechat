@@ -7,6 +7,7 @@ using System.Web.Http;
 
 namespace Wechat.WebUI.ApiControllers
 {
+    [CrossSite]
     public class TestController : ApiBasicController
     {
         [HttpGet]

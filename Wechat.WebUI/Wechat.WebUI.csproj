@@ -132,6 +132,7 @@
     <Compile Include="Areas\Test\Controllers\ApiController.cs" />
     <Compile Include="Areas\Test\Controllers\CardController.cs" />
     <Compile Include="Areas\Test\Controllers\CommonController.cs" />
+    <Compile Include="Areas\Test\Controllers\CrossSiteController.cs" />
     <Compile Include="Areas\Test\Controllers\FaustCplusController.cs" />
     <Compile Include="Areas\Test\Controllers\JsSdkController.cs" />
     <Compile Include="Areas\Test\Controllers\MaterialController.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WechatController.cs" />
+    <Compile Include="Filters\CrossSiteAttribute.cs" />
     <Compile Include="Filters\WechatRouteAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -718,6 +720,7 @@
     <Content Include="Content\lib\layer\layer-v1.8.3\Jquery插件弹出层layer-v1.8.3API使用手册.docx" />
     <Content Include="Content\lib\layer\layer-v1.8.3\layer图片浏览使用.docx" />
     <Content Include="Areas\Test\Views\Material\Index.cshtml" />
+    <Content Include="Areas\Test\Views\CrossSite\Index.cshtml" />
     <None Include="Properties\PublishProfiles\wechat.pubxml" />
   </ItemGroup>
   <PropertyGroup>

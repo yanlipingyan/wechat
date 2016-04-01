@@ -1,0 +1,26 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="/Content/js/jquery.min.js"></script>
+</head>
+<body>
+    <button type="button" id="e">测试跨域</button>
+    <script type="text/javascript">
+        $('#e').on('click', function () {
+            $.get('http://www.liblog.cn/api/test', {}, function (res) {
+                //如果不是同一个域，请求的时候这里会提示:
+                //已阻止跨源请求：同源策略禁止读取位于 http://www.liblog.cn/api/test 的远程资源。（原因：CORS 头缺少 'Access-Control-Allow-Origin'）。
+                //这时，需要在该请求的方法中增加：Response.AppendHeader("Access-Control-Allow-Origin", "*");
+                //加上这个以后再发送请求：此时返回200 ok {"Flag":true,"Content":"This id Get Method","RedirectUrl":null}
+            }, 'json');
+        })
+    </script>
+</body>
+</html>
