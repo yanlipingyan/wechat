@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using YLP.Tookit.Component;
 
 namespace Wechat.WebUI.Areas.Test.Controllers
 {
@@ -17,17 +18,32 @@ namespace Wechat.WebUI.Areas.Test.Controllers
         }
 
         [HttpPost]
-        public ActionResult Upload(string memberId = "")
+        public string Upload(string memberId = "")
         {
+            string header = "";
+
+            #region 上传到七牛
+            byte[] temp = new byte[4];
+            System.Web.HttpContext.Current.Request.InputStream.Read(temp, 0, temp.Length);
+
+            var fh = BitConverter.ToUInt32(temp, 0);
+
+            byte[] ms_b = new byte[fh];
+            System.Web.HttpContext.Current.Request.InputStream.Read(ms_b, 0, ms_b.Length);
+
+            header = QiNiu.GetDownloadUrl("7xqce5.com1.z0.glb.clouddn.com", "teamopf-test", QiNiu.Upload("teamopf-test", ms_b, "jpg"));
+            #endregion
+
             #region 上传到本地
-            var strogeFolder = string.Format("/Upload/Header/{0}/", DateTime.Now.ToString("yyyy/MM/dd"));
+            //var strogeFolder = string.Format("/Upload/Header/{0}/", DateTime.Now.ToString("yyyy/MM/dd"));
 
-            var networkPath = strogeFolder;
-            var physicalPath = string.Format("{0}{1}", System.AppDomain.CurrentDomain.BaseDirectory, strogeFolder);
+            //var networkPath = strogeFolder;
+            //var physicalPath = string.Format("{0}{1}", System.AppDomain.CurrentDomain.BaseDirectory, strogeFolder);
 
-            var fileName = string.Format("{0}.{1}", Guid.NewGuid().ToString("N"), "jpg");
+            //var fileName = string.Format("{0}.{1}", Guid.NewGuid().ToString("N"), "jpg");
 
-            string header = YLP.Tookit.Component.FaustCplus.Upload(networkPath, physicalPath, fileName);
+            //header = YLP.Tookit.Component.FaustCplus.Upload(networkPath, physicalPath, fileName);
+            #endregion
 
             if (!string.IsNullOrEmpty(header))
             {
@@ -36,11 +52,11 @@ namespace Wechat.WebUI.Areas.Test.Controllers
                     //TODO:保存到数据库
                 }
 
-                return Content("上传成功");
+                return header;
             }
 
-            return Content("上传失败");
-            #endregion
+            return "上传失败";
+
         }
     }
 }

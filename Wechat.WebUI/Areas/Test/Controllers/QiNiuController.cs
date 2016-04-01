@@ -14,7 +14,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
 
         public void Index()
         {
-            new QiNiu().Upload("teamopf-test", System.AppDomain.CurrentDomain.BaseDirectory + "/Content/images/logo.png");
+            //new QiNiu().Upload("teamopf-test", System.AppDomain.CurrentDomain.BaseDirectory + "/Content/images/logo.png");
         }
 
     }
