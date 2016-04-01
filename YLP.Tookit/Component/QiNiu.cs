@@ -33,8 +33,12 @@ namespace YLP.Tookit.Component
             PutRet ret = target.PutFile(upToken, key, filePath, extra);
 
             //打印出相应的信息
-            Log4NetHelper.Error(ret.Response.ToString());
-            Log4NetHelper.Error(ret.key);
+            if (ret != null)
+            {
+                Log4NetHelper.Error(ret.Response.ToString());
+                Log4NetHelper.Error(ret.key);
+            }
+            Log4NetHelper.Error("null");
             //Console.WriteLine(ret.Response.ToString());
             //Console.WriteLine(ret.key);
             //Console.ReadLine();
