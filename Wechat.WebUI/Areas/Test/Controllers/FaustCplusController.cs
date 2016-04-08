@@ -31,7 +31,11 @@ namespace Wechat.WebUI.Areas.Test.Controllers
             byte[] ms_b = new byte[fh];
             System.Web.HttpContext.Current.Request.InputStream.Read(ms_b, 0, ms_b.Length);
 
-            header = QiNiu.GetDownloadUrl("www.liblog.cn", "wechat", QiNiu.Upload("wechat", ms_b, "jpg"));
+            string key = QiNiu.Upload("wechat", ms_b, "jpg");
+            if (string.IsNullOrEmpty(key))
+                throw new Exception("上传失败");
+
+            header = QiNiu.GetDownloadUrl("www.liblog.cn", "wechat", key);
             #endregion
 
             #region 上传到本地
