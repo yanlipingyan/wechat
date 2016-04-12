@@ -22,7 +22,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
         {
             string header = "";
 
-            #region 上传到七牛
+            #region 上传到七牛-可用
             byte[] temp = new byte[4];
             System.Web.HttpContext.Current.Request.InputStream.Read(temp, 0, temp.Length);
 
@@ -35,10 +35,10 @@ namespace Wechat.WebUI.Areas.Test.Controllers
             if (string.IsNullOrEmpty(key))
                 throw new Exception("上传失败");
 
-            header = QiNiu.GetDownloadUrl("www.liblog.cn", "wechat", key);
+            header = QiNiu.GetDownloadUrl("7xsmp7.com2.z0.glb.clouddn.com", "wechat", key);
             #endregion
 
-            #region 上传到本地
+            #region 上传到本地-可用
             //var strogeFolder = string.Format("/Upload/Header/{0}/", DateTime.Now.ToString("yyyy/MM/dd"));
 
             //var networkPath = strogeFolder;

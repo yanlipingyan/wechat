@@ -9,6 +9,9 @@ using YLP.Tookit.Helper;
 
 namespace YLP.Tookit.Component
 {
+    /// <summary>
+    /// 七牛云存储
+    /// </summary>
     public class QiNiu
     {
         /// <summary>

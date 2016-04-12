@@ -8,6 +8,9 @@ using System.Text.RegularExpressions;
 
 namespace YLP.Tookit.Component
 {
+    /// <summary>
+    /// 点触验证码
+    /// </summary>
     public class TouClick
     {
         /// <summary>
