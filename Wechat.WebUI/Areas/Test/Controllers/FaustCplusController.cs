@@ -35,9 +35,6 @@ namespace Wechat.WebUI.Areas.Test.Controllers
 
             string key = QiNiu.Upload(ConfigurationManager.AppSettings["PUBLIC_BUCKET"], ms_b, "jpg");
 
-            Log4NetHelper.Error(ConfigurationManager.AppSettings["PUBLIC_BUCKET"]);
-            Log4NetHelper.Error(ConfigurationManager.AppSettings["DN_HOST"]);
-
             if (string.IsNullOrEmpty(key))
                 throw new Exception("上传失败");
 
