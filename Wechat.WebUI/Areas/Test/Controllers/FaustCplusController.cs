@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using YLP.Tookit.Component;
+using YLP.Tookit.Helper;
 
 namespace Wechat.WebUI.Areas.Test.Controllers
 {
@@ -31,11 +33,15 @@ namespace Wechat.WebUI.Areas.Test.Controllers
             byte[] ms_b = new byte[fh];
             System.Web.HttpContext.Current.Request.InputStream.Read(ms_b, 0, ms_b.Length);
 
-            string key = QiNiu.Upload("wechat", ms_b, "jpg");
+            string key = QiNiu.Upload(ConfigurationManager.AppSettings["PUBLIC_BUCKET"], ms_b, "jpg");
+
+            Log4NetHelper.Error(ConfigurationManager.AppSettings["PUBLIC_BUCKET"]);
+            Log4NetHelper.Error(ConfigurationManager.AppSettings["DN_HOST"]);
+
             if (string.IsNullOrEmpty(key))
                 throw new Exception("上传失败");
 
-            header = QiNiu.GetDownloadUrl("7xsmp7.com2.z0.glb.clouddn.com", "wechat", key);
+            header = QiNiu.GetDownloadUrl(ConfigurationManager.AppSettings["DN_HOST"], ConfigurationManager.AppSettings["PUBLIC_BUCKET"], key);
             #endregion
 
             #region 上传到本地-可用
