@@ -1,4 +1,5 @@
 ﻿using Qiniu.IO;
+using Qiniu.RPC;
 using Qiniu.RS;
 using System;
 using System.Collections.Generic;
@@ -223,6 +224,17 @@ namespace YLP.Tookit.Component
         {
             string baseUrl = string.Format(GetPolicy.MakeBaseUrl(domain, key), bucket_name) + "?imageView2/1/w/50/h/50/q/75";
             return GetPolicy.MakeRequest(baseUrl, 3600u, null);
+        }
+
+
+
+        public static bool Delete(string bucket_name, string key)
+        {
+            //实例化一个RSClient对象，用于操作BucketManager里面的方法
+            RSClient client = new RSClient();
+            CallRet ret = client.Delete(new EntryPath(bucket_name, key));
+
+            return ret.OK;
         }
     }
 }
