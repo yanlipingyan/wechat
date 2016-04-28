@@ -147,6 +147,7 @@
     <Compile Include="Areas\Test\Controllers\ServerController.cs" />
     <Compile Include="Areas\Test\Controllers\ShakeAroundController.cs" />
     <Compile Include="Areas\Test\Controllers\UEditorController.cs" />
+    <Compile Include="Areas\Test\Controllers\WebUploaderController.cs" />
     <Compile Include="Areas\Test\Controllers\YLPAutorizeController.cs" />
     <Compile Include="Areas\Test\TestAreaRegistration.cs" />
     <Compile Include="Content\lib\ueditor\net\App_Code\Config.cs" />
@@ -1038,6 +1039,7 @@
     <Content Include="Content\lib\webuploader\webuploader-0.1.5\_draft\flash_cpp\makefile" />
     <Content Include="Content\lib\webuploader\webuploader-0.1.5\_draft\flash_cpp\Test.swc" />
     <Content Include="Content\lib\webuploader\webuploader-0.1.5\_draft\music\server\fileupload.php" />
+    <Content Include="Areas\Test\Views\WebUploader\Index.cshtml" />
     <None Include="Properties\PublishProfiles\wechat.pubxml" />
   </ItemGroup>
   <PropertyGroup>
