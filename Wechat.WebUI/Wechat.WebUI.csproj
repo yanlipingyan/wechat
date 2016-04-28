@@ -128,6 +128,7 @@
     <Compile Include="ApiControllers\TestController.cs" />
     <Compile Include="ApiFilters\Test.cs" />
     <Compile Include="Areas\Test\Controllers\AccessTokenController.cs" />
+    <Compile Include="Areas\Test\Controllers\AjaxSumbitController.cs" />
     <Compile Include="Areas\Test\Controllers\AllowAnonymousController.cs" />
     <Compile Include="Areas\Test\Controllers\ApiController.cs" />
     <Compile Include="Areas\Test\Controllers\CardController.cs" />
@@ -309,9 +310,18 @@
     <Content Include="Content\js\FaustCplus\headUpload.js" />
     <Content Include="Content\js\FaustCplus\swfobject.js" />
     <Content Include="Content\js\FaustCplus\使用说明.txt" />
+    <Content Include="Content\js\jquery.ajaxsumbit.extend.js" />
+    <Content Include="Content\js\jquery.validate.extend.js" />
     <Content Include="Content\lib\google\google.sha1.js" />
     <Content Include="Content\lib\jquery.mobile\jquery.mobile-1.3.2.min.css" />
     <Content Include="Content\lib\jquery.mobile\jquery.mobile-1.3.2.min.js" />
+    <Content Include="Content\lib\jquery.validate\additional-methods.js" />
+    <Content Include="Content\lib\jquery.validate\additional-methods.min.js" />
+    <Content Include="Content\lib\jquery.validate\jquery.validate-1.14.0.js" />
+    <Content Include="Content\lib\jquery.validate\jquery.validate-1.14.0.min.js" />
+    <Content Include="Content\lib\jquery.validate\messages_zh.js" />
+    <Content Include="Content\lib\jquery.validate\messages_zh.min.js" />
+    <Content Include="Content\lib\jquery\jquery-1.8.3.js" />
     <Content Include="Content\lib\jquery\jquery-1.8.3.min.js" />
     <Content Include="Content\lib\layer\laycode-v1.1\laycode-v1.1\laycode\laycode.css" />
     <Content Include="Content\lib\layer\laycode-v1.1\laycode-v1.1\laycode\laycode.js" />
@@ -1040,6 +1050,7 @@
     <Content Include="Content\lib\webuploader\webuploader-0.1.5\_draft\flash_cpp\Test.swc" />
     <Content Include="Content\lib\webuploader\webuploader-0.1.5\_draft\music\server\fileupload.php" />
     <Content Include="Areas\Test\Views\WebUploader\Index.cshtml" />
+    <Content Include="Areas\Test\Views\AjaxSumbit\Index.cshtml" />
     <None Include="Properties\PublishProfiles\wechat.pubxml" />
   </ItemGroup>
   <PropertyGroup>
