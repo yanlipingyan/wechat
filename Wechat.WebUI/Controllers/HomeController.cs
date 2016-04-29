@@ -16,7 +16,8 @@ namespace Wechat.WebUI.Controllers
         public ActionResult Index()
         {
             YLPAuthorize.SetCookie(new YLPMember() { Id = IDHelper.Id32, Role = "ylp", Account = "yanliping", Name = "闫丽平", Enduring = false });
-            return Content("设置登录cookie");
+            //return Content("设置登录cookie");
+            return View();
         }
 
         public ActionResult Test()
