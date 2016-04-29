@@ -127,6 +127,7 @@
     <Compile Include="ApiControllers\ApiBasicController.cs" />
     <Compile Include="ApiControllers\TestController.cs" />
     <Compile Include="ApiFilters\Test.cs" />
+    <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
     <Compile Include="Areas\Test\Controllers\AccessTokenController.cs" />
     <Compile Include="Areas\Test\Controllers\AjaxSumbitController.cs" />
     <Compile Include="Areas\Test\Controllers\AllowAnonymousController.cs" />
@@ -840,6 +841,8 @@
   <ItemGroup>
     <Folder Include="ApiModels\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Manager\Controllers\" />
+    <Folder Include="Areas\Manager\Models\" />
     <Folder Include="Areas\Test\Models\" />
     <Folder Include="Areas\Test\Views\Shared\" />
   </ItemGroup>
@@ -1051,6 +1054,12 @@
     <Content Include="Content\lib\webuploader\webuploader-0.1.5\_draft\music\server\fileupload.php" />
     <Content Include="Areas\Test\Views\WebUploader\Index.cshtml" />
     <Content Include="Areas\Test\Views\AjaxSumbit\Index.cshtml" />
+    <Content Include="Areas\Manager\Views\Web.config" />
+    <Content Include="Areas\Manager\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Manager\Views\Shared\_PartialBreadcrums.cshtml" />
+    <Content Include="Areas\Manager\Views\Shared\_PartialNavbar.cshtml" />
+    <Content Include="Areas\Manager\Views\Shared\_PartialSetting.cshtml" />
+    <Content Include="Areas\Manager\Views\Shared\_PartialSidebar.cshtml" />
     <None Include="Properties\PublishProfiles\wechat.pubxml" />
   </ItemGroup>
   <PropertyGroup>

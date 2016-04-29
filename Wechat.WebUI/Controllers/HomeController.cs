@@ -19,10 +19,5 @@ namespace Wechat.WebUI.Controllers
             //return Content("设置登录cookie");
             return View();
         }
-
-        public ActionResult Test()
-        {
-            return Content("测试");
-        }
     }
 }
