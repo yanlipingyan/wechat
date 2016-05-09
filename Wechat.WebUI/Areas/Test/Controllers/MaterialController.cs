@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -49,7 +49,7 @@ namespace Wechat.WebUI.Areas.Test.Controllers
                     //保存到文件
                     var fileName = physicalPath + "/" + filename;
 
-                    using (FileStream fs = new FileStream(fileName, FileMode.Create))
+                    using (FileStream fs = new FileStream(fileName, FileMode.CreateNew))
                     {
                         ms.Position = 0;
                         byte[] buffer = new byte[1024];

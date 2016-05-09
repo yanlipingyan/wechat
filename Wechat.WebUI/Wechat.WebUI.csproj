@@ -502,9 +502,6 @@
     <Content Include="Content\lib\ueditor\lang\zh-cn\images\music.png" />
     <Content Include="Content\lib\ueditor\lang\zh-cn\images\upload.png" />
     <Content Include="Content\lib\ueditor\lang\zh-cn\zh-cn.js" />
-    <Content Include="Content\lib\ueditor\net\Bin\Newtonsoft.Json.dll" />
-    <Content Include="Content\lib\ueditor\net\Bin\Newtonsoft.Json.pdb" />
-    <Content Include="Content\lib\ueditor\net\Bin\Newtonsoft.Json.xml" />
     <Content Include="Content\lib\ueditor\net\net.sln" />
     <Content Include="Content\lib\ueditor\themes\default\css\ueditor.css" />
     <Content Include="Content\lib\ueditor\themes\default\css\ueditor.min.css" />
