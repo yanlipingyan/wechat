@@ -34,7 +34,7 @@ namespace Wechat.WebUI.Controllers
                 //错误处理
             }
 
-            if (YLP.Tookit.Helper.TouClickHelper.Check(public_key, private_key, check_key, check_address))
+            if (YLP.Tookit.Component.TouClick.Check(public_key, private_key, check_key, check_address))
             {
                 //二次验证通过,可以放行请求
                 Response.Write(true);

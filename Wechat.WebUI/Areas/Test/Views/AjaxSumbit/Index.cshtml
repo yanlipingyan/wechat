@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "ajax提交";
+    Layout = "~/Views/Shared/_LayoutTest.cshtml";
+}
+
+
+<form action="/test/ajaxsumbit/save" method="post" novalidate>
+    <h1>测试验证规则</h1>
+    <input type="text" required name="1" data-rule-maxlength="3" placeholder="测试email格式" />
+    <input type="text" required name="2" data-rule-url="true" placeholder="测试url格式" />
+    <input type="text" required name="3" data-rule-date="" placeholder="测试date格式" />
+    <input type="text" required name="4" data-rule-number="" placeholder="测试number格式" />
+    <input type="text" required name="5" data-rule-digits="" placeholder="测试digits格式" />
+    <input type="text" required name="6" data-rule-creditcard="" placeholder="测试creditcard格式" />
+    <input type="text" required name="7" data-rule-minlength="" placeholder="测试minlength格式" />
+    <input type="text" required name="8" data-rule-maxlength="2" placeholder="测试maxlength格式" />
+    <input type="text" required name="9" data-rule-rangelength="" placeholder="测试rangelength格式" />
+    <input type="text" required name="10" data-rule-min="" placeholder="测试min格式" />
+    <input type="text" required name="11" data-rule-max="" placeholder="测试max格式" />
+    <input type="text" required name="12" data-rule-range="" placeholder="测试range格式" />
+    <input type="text" required name="13" data-rule-equalto="" placeholder="测试equalTo格式" />
+    <input type="text" required name="14" data-rule-remote="" placeholder="测试remote格式" />
+
+    <br />
+
+    <h1>ajax提交</h1>
+    <input type="text" name="content" required placeholder="内容" />
+    <button type="submit">ajax提交</button>
+</form>
+
+
+
+@section scripts{
+
+    @*不用下面的两种js代码的话只有上面的是属于form提交*@
+    <script type="text/javascript">
+
+        //1、直接在页面上写ajax提交
+        var $form = $("form"),
+            $submit = $form.find("[type=submit]");
+
+        //jquery.validate
+        $form.validate({
+
+            //验证通过后 的js代码写在这里
+            submitHandler: function (form) {
+
+                console.log(form);
+                console.log(form.action);
+
+                //禁用按钮
+                $submit.prop("disabled", true);
+
+                //ajax提交
+                $.ajax({
+                    url: form.action,
+                    data: $form.serialize(),
+                    dataType: 'json',
+                    type: 'post'
+                }).done(function (res) {
+
+                    if (res.Flag) {
+
+                        //延时解除禁用按钮
+                        setTimeout(function () {
+                            $submit.prop("disabled", false).removeClass("disabled");
+                        }, 2000);
+
+                    } else {
+
+                        var error = typeof res.Content == "undefined" ? res : (res.Content[0][1] || res.Content || "抱歉！出错了，稍后重试");
+                        alert(error);
+                        $submit.prop("disabled", false);
+
+                    }
+
+                })
+            }
+
+        })
+
+
+        //2、将ajaxSumbit函数封装后的写法
+        //$("form").ajaxSumbit(function (res) {
+        //    alert("ajaxSumbit成功");
+        //})
+
+    </script>
+}
