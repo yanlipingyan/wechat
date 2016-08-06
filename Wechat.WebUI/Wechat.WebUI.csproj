@@ -136,6 +136,7 @@
     <Compile Include="Areas\Test\Controllers\CommonController.cs" />
     <Compile Include="Areas\Test\Controllers\CrossSiteController.cs" />
     <Compile Include="Areas\Test\Controllers\FaustCplusController.cs" />
+    <Compile Include="Areas\Test\Controllers\GaoDeMapController.cs" />
     <Compile Include="Areas\Test\Controllers\JsSdkController.cs" />
     <Compile Include="Areas\Test\Controllers\MaterialController.cs" />
     <Compile Include="Areas\Test\Controllers\MenuController.cs" />
@@ -1057,6 +1058,7 @@
     <Content Include="Areas\Manager\Views\Shared\_PartialNavbar.cshtml" />
     <Content Include="Areas\Manager\Views\Shared\_PartialSetting.cshtml" />
     <Content Include="Areas\Manager\Views\Shared\_PartialSidebar.cshtml" />
+    <Content Include="Areas\Test\Views\GaoDeMap\Index.cshtml" />
     <None Include="Properties\PublishProfiles\wechat.pubxml" />
   </ItemGroup>
   <PropertyGroup>
